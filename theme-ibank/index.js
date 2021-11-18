@@ -13,17 +13,6 @@ module.exports = (opts, ctx) => {
   ctx.options.templateDev = path.resolve(__dirname, "templates/dev.html");
   ctx.options.templateSSR = path.resolve(__dirname, "templates/ssr.html");
 
-  // const genDocTree = require("./nodeUtils/genDocTree");
-  // const root = genDocTree(opts, ctx, "/");
-  // const navbar = opts.navbar;
-  // if (navbar === undefined || navbar === "auto") navbarData = root.children;
-  // // console.log(navbarData);
-
-  // const generateSidebarData = require("./nodeUtils/generateSidebarData");
-  // const sidebar = opts.sidebar;
-  // if (sidebar == undefined || sidebar === "auto")
-  //   [sidebarData] = generateSidebarData("/", opts.sidebarSource || ctx.options.source, opts.sidebarExcludes);
-  // // console.log(sidebarData);
   const themeData = {};
 
   const options = {
@@ -67,8 +56,8 @@ module.exports = (opts, ctx) => {
     // onPrepared: ctx => {},
     // alias: null,
     // define: null,
-    // onWatched: () => {}, // dev server
-    // onGenerated: () => {}, // build
+    // onWatched: () => {}, // dev server only
+    // onGenerated: () => {}, // build only
   };
 
   return options;
