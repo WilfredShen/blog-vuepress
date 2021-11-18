@@ -1,0 +1,187 @@
+@use "./variables" as *;
+@use "sass:math";
+
+*,
+*::before,
+*::after {
+  transition: background-color 0.5s ease-in-out, border-color 0.5s ease-in-out;
+}
+
+a,
+span {
+  transition: color 0.3s ease-in-out;
+}
+
+a.header-anchor {
+  font-size: 0.85em;
+  float: left;
+  margin-left: -0.87em;
+  padding-right: 0.23em;
+  margin-top: 0.125em;
+  opacity: 0;
+  &:focus,
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.box-shadow {
+  box-shadow: 0 0 5px 2px var(--shadowColor);
+}
+
+.card {
+  @extend .box-shadow;
+  border-radius: 5px;
+  background: var(--mainBg);
+  transition: box-shadow 0.5s, color 0.3s ease-in-out, background-color 0.5s ease-in-out;
+  &:hover {
+    box-shadow: 0 0 8px 3px var(--accentShadowColor);
+  }
+}
+
+.underline-wrapper {
+  &:hover,
+  &:focus,
+  &:active {
+    & .accent-underline::after {
+      left: 0;
+      width: 100%;
+    }
+  }
+  .accent-underline {
+    position: relative;
+    padding-bottom: 0.2em;
+    &::after {
+      transition: all 0.2s ease-out;
+      display: block;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      content: "";
+      border-bottom: 0.2em solid var(--accentColor);
+    }
+    &.router-link-exact-active::after {
+      left: 0;
+      width: 100%;
+    }
+  }
+}
+
+.navbar {
+  @extend .box-shadow;
+  box-sizing: border-box;
+  height: $navbarHeight;
+  position: fixed;
+  width: 100%;
+  background-color: var(--mainBg);
+  z-index: 100;
+  padding: 0.8rem 1.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+
+  .nav-links {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    align-items: center;
+    justify-content: right;
+    .nav-item {
+      margin-left: 1.5rem;
+      span,
+      a {
+        color: var(--textColor);
+        &:hover,
+        &.router-link-exact-active {
+          color: var(--accentColor);
+        }
+      }
+    }
+  }
+}
+
+.main-wrapper {
+  margin: auto;
+  box-sizing: border-box;
+  padding: 1.5rem;
+  padding-top: $navbarHeight + 2rem;
+}
+
+.page-wrapper {
+  @extend .main-wrapper;
+  min-height: calc(100vh - $footerHeight);
+
+  .sidebar-open & {
+    padding-left: $sidebarWidth;
+  }
+
+  .plain-wrapper {
+    margin: auto;
+    padding: 1rem 2.5rem 2rem;
+    max-width: $contentWidth;
+  }
+
+  .content-wrapper {
+    @extend .box-shadow, .plain-wrapper;
+    border-radius: 1rem;
+    background-color: var(--mainBg);
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin-top: -$navbarHeight - 1rem;
+      padding-top: $navbarHeight + 1rem;
+    }
+
+    h1.article-title {
+      margin-top: 1rem;
+      padding-top: 0;
+    }
+  }
+
+  .categories-wrapper {
+    @extend .plain-wrapper;
+    padding: 0;
+    max-width: $contentWidthWide;
+  }
+
+  .tags-wrapper {
+    @extend .plain-wrapper;
+    padding: 0;
+    max-width: $contentWidthWide;
+  }
+
+  .archives-wrapper {
+    @extend .plain-wrapper;
+    padding: 0;
+    max-width: $contentWidthWide;
+  }
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  height: $footerHeight;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  color: var(--footerColor);
+  font-size: 0.8em;
+
+  .sidebar-open & {
+    padding-left: $sidebarWidth;
+  }
+}
+
+.disabled {
+  cursor: not-allowed !important;
+  color: var(--disabledColor) !important;
+}

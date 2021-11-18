@@ -1,0 +1,19 @@
+// responsive breakpoints
+$MQNarrow: 959px !default;
+$MQMobile: 719px !default;
+$MQMobileNarrow: 419px !default;
+
+// code languages
+$codeLang: "c" "cpp" "cs" "css" "dart" "docker" "fs" "go" "html" "java" "js" "json" "kt" "less" "makefile" "md" "php" "py" "rb" "rs" "sass"
+  "scss" "sh" "styl" "ts" "toml" "vue" "yml" !default;
+
+$contentClass: ".theme-container";
+
+// 布局
+$navbarHeight: 3.6rem;
+$sidebarWidth: 18rem;
+$contentWidth: 860px;
+$contentWidthWide: 980px;
+$homePageWidth: 1100px;
+$footerHeight: 6rem;
+$lineNumbersWrapperWidth: 2.5rem;

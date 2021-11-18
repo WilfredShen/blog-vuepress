@@ -1,0 +1,4 @@
+---
+type: archives
+permalink: /archives
+---

@@ -1,0 +1,18 @@
+// 规范化
+@use "./normalize.scss";
+
+// 系统配色
+@use "./palette.scss";
+
+// 代码样式
+@use "./code.scss";
+@use "./code-theme.scss";
+
+// 字体
+@use "./fonts.scss";
+
+// 组件样式
+@use "./arrow.scss";
+
+// 自定义样式
+@use "./custom.scss";

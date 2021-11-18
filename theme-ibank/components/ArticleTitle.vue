@@ -1,0 +1,11 @@
+<template>
+  <h1 class="article-title">{{ title }}</h1>
+</template>
+<script setup>
+defineProps({ title: String });
+</script>
+<style lang="scss">
+.article-title {
+  margin-bottom: 2.5rem;
+}
+</style>
