@@ -42,19 +42,16 @@ const allArchives = ref(null);
 
 const switchArchiveTo = year => router.push({ query: { year } });
 
-const updateQuery = () => {};
-
 const currentYears = computed(() => (route.query.year && route.query.year.toString().split(",")) || null);
-
 const currentArchives = computed(
   () => (currentYears.value && allArchives.value.filter(([year]) => currentYears.value.includes(year))) || allArchives.value,
 );
 
 allArchives.value = Object.entries(themeData.value.archives);
-updateQuery();
-// updateList();
 </script>
 <style lang="scss">
+@use "../styles/variables" as *;
+
 .archives-page {
   .right-menu {
     padding: 1rem 0;
@@ -92,15 +89,15 @@ updateQuery();
         transition: border-width 0.1s;
         border-left: 0 solid var(--accentColor);
 
+        &.active {
+          transition: border-width 0.1s, $transitionBgColor, $transitionColor;
+        }
+
         &.active,
         &:hover {
           background-color: var(--bodyBg);
           border-left: 5px solid var(--accentColor);
           color: var(--accentColor);
-        }
-
-        span {
-          transition: color 0.2s;
         }
       }
     }

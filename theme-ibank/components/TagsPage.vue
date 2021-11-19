@@ -13,9 +13,8 @@
             <div class="right-menu-list">
               <div
                 class="right-menu-item row"
-                v-for="([tag, pages], index) in allTags"
+                v-for="[tag, pages] in allTags"
                 :class="{ active: tag === route.query.tag }"
-                :key="index"
                 @click="switchTagTo(tag)"
               >
                 <span>{{ tag }}</span>
@@ -83,6 +82,8 @@ updateQuery();
 updateList();
 </script>
 <style lang="scss">
+@use "../styles/variables" as *;
+
 .tags-page {
   .right-menu {
     padding: 1rem 0;
@@ -120,15 +121,15 @@ updateList();
         transition: border-width 0.1s;
         border-left: 0 solid var(--accentColor);
 
+        &.active {
+          transition: border-width 0.1s, $transitionBgColor, $transitionColor;
+        }
+
         &.active,
         &:hover {
           background-color: var(--bodyBg);
           border-left: 5px solid var(--accentColor);
           color: var(--accentColor);
-        }
-
-        span {
-          transition: color 0.2s;
         }
       }
     }

@@ -21,4 +21,3 @@ import ArchivesPage from "../components/ArchivesPage.vue";
 
 const frontmatter = usePageFrontmatter();
 </script>
-<style lang="scss"></style>

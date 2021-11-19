@@ -4,12 +4,12 @@
 *,
 *::before,
 *::after {
-  transition: background-color 0.5s ease-in-out, border-color 0.5s ease-in-out;
+  transition: $transitionBgColor, $transitionBorder;
 }
 
 a,
 span {
-  transition: color 0.3s ease-in-out;
+  transition: $transitionColor;
 }
 
 a.header-anchor {
@@ -25,6 +25,24 @@ a.header-anchor {
   }
 }
 
+.flex {
+  display: flex;
+
+  &.align-center {
+    align-items: center;
+  }
+}
+
+.flex-row {
+  @extend .flex;
+  flex-direction: row;
+}
+
+.flex-column {
+  @extend .flex;
+  flex-direction: column;
+}
+
 .inline-block {
   display: inline-block;
 }
@@ -37,7 +55,7 @@ a.header-anchor {
   @extend .box-shadow;
   border-radius: 5px;
   background: var(--mainBg);
-  transition: box-shadow 0.5s, color 0.3s ease-in-out, background-color 0.5s ease-in-out;
+  transition: $transitionBoxShadow, $transitionColor, $transitionBgColor;
   &:hover {
     box-shadow: 0 0 8px 3px var(--accentShadowColor);
   }
@@ -83,9 +101,27 @@ a.header-anchor {
   padding: 0.8rem 1.5rem;
   display: flex;
   flex-direction: row;
-  justify-content: right;
+
+  .logo {
+    display: flex;
+    align-items: center;
+
+    img {
+      height: 2rem;
+      width: 2rem;
+      margin-right: 0.5rem;
+    }
+
+    a,
+    span {
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: var(--textColor);
+    }
+  }
 
   .nav-links {
+    flex: 1;
     display: flex;
     flex-direction: row;
     height: 100%;
@@ -130,6 +166,10 @@ a.header-anchor {
     @extend .box-shadow, .plain-wrapper;
     border-radius: 1rem;
     background-color: var(--mainBg);
+
+    img {
+      max-width: 100%;
+    }
 
     h1,
     h2,

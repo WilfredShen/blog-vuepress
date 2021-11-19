@@ -1,12 +1,6 @@
 <template>
   <div class="tags" title="标签">
-    <router-link
-      class="tag"
-      :style="getStyle(index)"
-      v-for="(item, index) in tags"
-      :key="index"
-      :to="{ path: '/tags', query: { tag: item } }"
-    >
+    <router-link class="tag" :style="getStyle(index)" v-for="(item, index) in tags" :to="{ path: '/tags', query: { tag: item } }">
       <i class="iconfont icon-tag"></i>{{ item }}
     </router-link>
   </div>

@@ -17,7 +17,5 @@
 <script setup>
 import { isExternal, isWebLink } from "../utils/validate";
 
-const props = defineProps({
-  item: Object,
-});
+defineProps({ item: Object });
 </script>

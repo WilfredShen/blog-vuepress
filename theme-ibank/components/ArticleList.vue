@@ -1,7 +1,7 @@
 <template>
   <div class="article-list">
-    <template v-for="(item, index) in articles">
-      <div v-if="item.$data" class="article-card card" :key="index">
+    <template v-for="item in articles">
+      <div v-if="item.$data" class="article-card card">
         <h2 class="title">
           <router-link :to="item.$data.path">{{ item.$data.title }}</router-link>
         </h2>
@@ -37,6 +37,8 @@ import Tags from "./Tags.vue";
 defineProps({ articles: Array });
 </script>
 <style lang="scss">
+@use "../styles/variables" as *;
+
 .article-card {
   padding: 1rem 1.5rem;
   &:not(:last-child) {
@@ -72,7 +74,7 @@ defineProps({ articles: Array });
 
     .readmore {
       text-align: right;
-      margin-right: 1.5rem;
+      margin-right: 0.5rem;
       display: flex;
       justify-content: right;
 
@@ -86,7 +88,7 @@ defineProps({ articles: Array });
         align-items: center;
         white-space: nowrap;
         overflow: hidden;
-        transition: max-width 0.5s;
+        transition: max-width 0.5s ease, $transitionBgColor, $transitionColor;
         max-width: 7rem;
 
         i {

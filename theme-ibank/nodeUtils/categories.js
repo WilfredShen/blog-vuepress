@@ -6,10 +6,11 @@ const newLeafNode = data => ({ $data: { ...data } });
 const buildCategories = pages => {
   const root = newNode({ count: 0, title: "首页" });
   pages.forEach(page => {
+    if (page.order) for (const order of page.order) if (/^_/.test(order)) return;
+
     const doIncrease = page.data.frontmatter.type === defaultType;
     if (page.data.frontmatter.categories) {
       let current = root;
-
       // 遍历categories，注册节点
       page.data.frontmatter.categories.forEach((e, i) => {
         // 已存在节点则直接递归
@@ -18,7 +19,6 @@ const buildCategories = pages => {
         else (current = current.$children[e] = newNode({ order: page.order[i], count: 0, title: e })), root.$data.count++;
         doIncrease && current.$data.count++;
       });
-
       /* 此时current指向当前 page 的父节点 */
 
       // 注册 page
@@ -29,8 +29,13 @@ const buildCategories = pages => {
         order: page.order[page.order.length - 1],
         ...current.$data,
       };
-    } else if (page.data.title && !root.$children[page.data.title]) {
-      root.$children[page.data.title] = { $data: { ...page.data, order: page.order[page.order.length - 1] || "" } };
+    } else if (page.data.title) {
+      if (!root.$children[page.data.title]) root.$children[page.data.title] = {};
+      root.$children[page.data.title].$data = {
+        ...page.data,
+        order: page.order[page.order.length - 1] || "",
+        ...root.$children[page.data.title].$data,
+      };
     }
   });
   return root;

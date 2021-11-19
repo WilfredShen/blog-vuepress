@@ -5,8 +5,7 @@
     </div>
     <div class="pagination-list">
       <div
-        v-for="(item, index) in paginationItems"
-        :key="index"
+        v-for="item in paginationItems"
         class="pagination-item card"
         :class="{ active: item.pageIndex === current }"
         :title="`第${item.pageIndex}页`"

@@ -1,7 +1,7 @@
 <template>
   <div class="breadcrumb">
     <router-link v-if="home" to="/" class="nav-link home iconfont icon-home" title="首页"></router-link>
-    <div class="breadcrumb-item" title="分类" v-for="(item, index) in navs" :key="index">
+    <div class="breadcrumb-item" title="分类" v-for="(item, index) in navs">
       <span v-if="home || index !== 0" class="separator">{{ separator }}</span>
       <router-link
         :to="{

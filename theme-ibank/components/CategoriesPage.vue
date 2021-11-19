@@ -11,16 +11,17 @@
               </h3>
             </template>
             <div class="right-menu-list">
-              <div
-                class="right-menu-item row"
-                v-for="(item, index) in allCategories"
-                :class="{ active: item.key === route.query.category }"
-                :key="index"
-                @click="switchCategoryTo(item.key)"
-              >
-                <span>{{ item.title }}</span>
-                <span class="number digital">{{ item.count }}</span>
-              </div>
+              <template v-for="item in allCategories">
+                <div
+                  v-if="item.count"
+                  class="right-menu-item row"
+                  :class="{ active: item.key === route.query.category }"
+                  @click="switchCategoryTo(item.key)"
+                >
+                  <span>{{ item.title }}</span>
+                  <span class="number digital">{{ item.count }}</span>
+                </div>
+              </template>
             </div>
           </RightMenu>
         </template>
@@ -102,6 +103,8 @@ updateQuery();
 updateList();
 </script>
 <style lang="scss">
+@use "../styles/variables" as *;
+
 .categories-page {
   .right-menu {
     padding: 1rem 0;
@@ -139,15 +142,15 @@ updateList();
         transition: border-width 0.1s;
         border-left: 0 solid var(--accentColor);
 
+        &.active {
+          transition: border-width 0.1s, $transitionBgColor, $transitionColor;
+        }
+
         &.active,
         &:hover {
           background-color: var(--bodyBg);
           border-left: 5px solid var(--accentColor);
           color: var(--accentColor);
-        }
-
-        span {
-          transition: color 0.2s;
         }
       }
     }

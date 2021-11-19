@@ -1,3 +1,7 @@
+## 预览
+
+[柒月流火's blog](https://wilfredshen.cn/)
+
 ## 快速上手
 
 ```shell
@@ -19,13 +23,15 @@ npm run dev # or yarn dev
 
 ```shell
 # shell
-npm install --save vuepress-theme-ibank # or yarn add vuepress-theme-ibank
+npm install vuepress-theme-ibank # or yarn add vuepress-theme-ibank
 
 # docs/.vuepress/config.js
 module.exports = {
   theme: "ibank"
 };
 ```
+
+[具体配置](https://github.com/WilfredShen/vuepress-theme-ibank/tree/master/theme-ibank/readme.md)
 
 ## 许可证
 

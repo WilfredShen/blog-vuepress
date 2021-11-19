@@ -6,15 +6,25 @@ const { buildCategories } = require("./nodeUtils/categories");
 const { buildNavbar } = require("./nodeUtils/navbar");
 const { buildTags } = require("./nodeUtils/tags");
 const { buildArchives } = require("./nodeUtils/archives");
+const { defaultConfig } = require("./nodeUtils/defaults");
+const { createPages } = require("./nodeUtils/pages");
 
 const log = console.log;
+// const log = () => {};
 
 module.exports = (opts, ctx) => {
   ctx.options.templateDev = path.resolve(__dirname, "templates/dev.html");
   ctx.options.templateSSR = path.resolve(__dirname, "templates/ssr.html");
+  opts = { ...defaultConfig, ...opts };
+  ctx.siteData.themeConfig = opts;
+
+  Object.values(createPages(ctx.options.source, opts)).forEach(v =>
+    v[0]
+      ? log(chalk.cyan("info"), "create page:", chalk.green("[success] "), chalk.green(v[1]))
+      : log(chalk.cyan("info"), "create page:", chalk.yellow("[already exists] "), chalk.yellow(v[1])),
+  );
 
   const themeData = {};
-
   const options = {
     name: "vuepress-theme-ibank",
     layouts: {
@@ -26,7 +36,7 @@ module.exports = (opts, ctx) => {
     // extendsMarkdown: () => {},
     extendsPageOptions: option => {
       if (option.filePath) {
-        const [filePath, status] = formatFile(option.filePath, ctx.options.source);
+        const [filePath, status] = formatFile(opts, option.filePath, ctx.options.source);
         if (status === "success") log(chalk.cyan("info"), "格式化frontmatter:", chalk.green("[success]  "), chalk.green(filePath));
         if (status === "fail") log(chalk.cyan("info"), "格式化frontmatter:", chalk.red("[fail]     "), chalk.red(filePath));
         if (status === "excluded") log(chalk.cyan("info"), "格式化frontmatter:", chalk.yellow("[excluded] "), chalk.yellow(filePath));
@@ -36,19 +46,20 @@ module.exports = (opts, ctx) => {
       if (page.filePathRelative) page.order = parseOrder(page.filePathRelative);
     },
     onInitialized: ctx => {
-      themeData.categories = buildCategories(ctx.pages);
-      themeData.tags = buildTags(ctx.pages);
-      themeData.archives = buildArchives(ctx.pages);
-      const list = buildNavbar(themeData.categories);
-      list.push({
-        text: "索引",
-        children: [
-          { text: "分类", link: "/categories/" },
-          { text: "标签", link: "/tags/" },
-          { text: "归档", link: "/archives/" },
-        ],
-      });
-      themeData.navbar = list;
+      const filteredPages = ctx.pages.filter(page => !page.order || !page.order.filter(o => /^_/.test(o)).length);
+      filteredPages.forEach(page => page.order && (page.order = page.order.map(o => o.replace(/^@/, ""))));
+
+      themeData.categories = buildCategories(filteredPages);
+      themeData.tags = buildTags(filteredPages);
+      themeData.archives = buildArchives(filteredPages);
+      const navbar = buildNavbar(themeData.categories);
+      const indexes = { text: "索引", children: [] };
+      opts.categories && indexes.children.push({ text: "分类", link: "/categories/" });
+      opts.tags && indexes.children.push({ text: "标签", link: "/tags/" });
+      opts.archives && indexes.children.push({ text: "归档", link: "/archives/" });
+      navbar.push(indexes);
+      navbar.push({ text: "GitHub", link: "https://github.com/WilfredShen/vuepress-theme-ibank" });
+      themeData.navbar = navbar;
     },
     // clientAppSetupFiles: null,
     // clientAppRootComponentFiles: null,

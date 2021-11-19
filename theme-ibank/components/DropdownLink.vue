@@ -3,16 +3,17 @@
     <NavLink :item="item" class="link-title accent-underline" />
     <span class="arrow" :class="open ? 'down' : 'right'"></span>
     <ul class="dropdown-list box-shadow">
-      <li class="dropdown-group" v-for="(child, index) in item.children" :key="index">
+      <li class="dropdown-group" v-for="child in item.children">
         <template v-if="child.children">
           <h4>
             <NavLink v-if="child.link" class="dropdown-item" :item="child" />
             <span v-else>{{ child.text }}</span>
           </h4>
           <ul v-if="child.children.length" class="dropdown-sub-group">
-            <li class="dropdown-sub-item" v-for="(subItem, index) in child.children" :key="index">
-              <NavLink :item="subItem" />
-            </li>
+            <template v-for="subItem in child.children">
+              <li class="dropdown-sub-item" v-if="subItem.link">
+                <NavLink :item="subItem" /></li
+            ></template>
           </ul>
         </template>
         <NavLink v-else class="dropdown-item" :item="child" />

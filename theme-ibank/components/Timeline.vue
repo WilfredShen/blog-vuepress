@@ -1,11 +1,11 @@
 <template>
   <div class="timeline card">
-    <template v-for="[year, archive] in archives" :key="year">
+    <template v-for="[year, archive] in archives">
       <h2 class="year bold">{{ year }}</h2>
       <div class="timeline-list">
-        <template class="item" v-for="[month, monthData] in Object.entries(archive)" :key="month">
-          <template v-for="[day, list] in Object.entries(monthData)" :key="day">
-            <template v-for="item in list" :key="item.$data.title">
+        <template class="item" v-for="[month, monthData] in Object.entries(archive)">
+          <template v-for="[day, list] in Object.entries(monthData)">
+            <template v-for="item in list">
               <router-link class="item link" :to="item.$data.path">
                 <span class="date bold">{{ `${month.padStart(2, "0")}-${day.padStart(2, "0")}` }}</span>
                 <span class="title">{{ item.$data.title }}</span>

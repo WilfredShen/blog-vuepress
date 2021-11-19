@@ -13,9 +13,7 @@ const buildTags = pages => {
         });
     }
   });
-  Object.values(tags).forEach(list =>
-    list.sort((a, b) => b.$data.frontmatter.date.toString().localeCompare(a.$data.frontmatter.date.toString())),
-  );
+  Object.values(tags).forEach(l => l.sort(({ $data: { frontmatter: a } }, { $data: { frontmatter: b } }) => b.date.localeCompare(a.date)));
   return tags;
 };
 
