@@ -74,7 +74,6 @@ const switchCategoryTo = category => router.push({ query: { ...route.query, cate
 
 const updateQuery = () => {
   let t = themeData.value.categories.$children;
-  console.log(route.query.category);
   if (route.query.category)
     route.query.category
       .toString()

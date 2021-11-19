@@ -13,7 +13,6 @@ import { useThemeData } from "@vuepress/plugin-theme-data/lib/client";
 
 const themeData = useThemeData();
 const links = themeData.value.navbar;
-console.log(links);
 </script>
 <style lang="scss">
 .nav-links {

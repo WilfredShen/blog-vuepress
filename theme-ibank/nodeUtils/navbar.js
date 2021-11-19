@@ -5,9 +5,7 @@ const buildNavbar = node => {
   if (!node.$children) return list;
   Object.entries(node.$children).forEach(
     ([k, v]) =>
-      (v.$data && v.$data.frontmatter && v.$data.frontmatter.navbar !== undefined
-        ? v.$data.frontmatter.navbar
-        : true) /*console.log(v.$data.title, Object.keys(v.$children || {})) ||*/ &&
+      (v.$data && v.$data.frontmatter && v.$data.frontmatter.navbar !== undefined ? v.$data.frontmatter.navbar : true) &&
       list.push({
         text: k,
         link: v.$data.frontmatter && v.$data.frontmatter.permalink,
