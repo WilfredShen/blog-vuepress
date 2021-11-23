@@ -5,10 +5,10 @@
     </router-link>
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import { shuffle } from "../utils/random";
 
-const props = defineProps({ tags: Array, gutter: { type: String, default: "0" } });
+const props = defineProps({ tags: Array as () => string[], gutter: { type: String, default: "0" } });
 const colorList = shuffle([
   ["#bc9c03", "white"],
   ["#38a894", "white"],
@@ -19,8 +19,8 @@ const colorList = shuffle([
   ["#d2f5a6", "black"],
   ["#76f2f2", "black"],
 ]);
-const wrapIndex = index => index % colorList.length;
-const getStyle = index => {
+const wrapIndex = (index: number) => index % colorList.length;
+const getStyle = (index: number) => {
   const c = colorList[wrapIndex(index)];
   return { backgroundColor: c[0], color: c[1], marginLeft: index && props.gutter };
 };

@@ -26,7 +26,7 @@
     </div>
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import { ref, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useThemeData } from "@vuepress/plugin-theme-data/lib/client";
@@ -38,13 +38,13 @@ const route = useRoute();
 const router = useRouter();
 const themeData = useThemeData();
 
-const allArchives = ref(null);
+const allArchives = ref<Entry<ArchiveYear>[]>([]);
 
-const switchArchiveTo = year => router.push({ query: { year } });
+const switchArchiveTo = (year: string | undefined) => router.push({ query: { year } });
 
-const currentYears = computed(() => (route.query.year && route.query.year.toString().split(",")) || null);
-const currentArchives = computed(
-  () => (currentYears.value && allArchives.value.filter(([year]) => currentYears.value.includes(year))) || allArchives.value,
+const currentYears = computed(() => route.query.year && route.query.year.toString().split(","));
+const currentArchives = computed<Entry<ArchiveYear>[]>(
+  () => (currentYears.value && allArchives.value.filter(([year]) => currentYears.value?.includes(year))) || allArchives.value,
 );
 
 allArchives.value = Object.entries(themeData.value.archives);

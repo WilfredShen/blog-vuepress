@@ -7,12 +7,12 @@
         <i class="iconfont icon-user"></i>{{ frontmatter.author.name }}
       </a>
       <span title="作者" v-else><i class="iconfont icon-user"></i>{{ frontmatter.author.name }}</span>
-      <span title="创建日期"><i class="iconfont icon-calendar"></i>{{ frontmatter.date.slice(0, 10) }}</span>
+      <span title="创建日期"><i class="iconfont icon-calendar"></i>{{ frontmatter.date?.toString().slice(0, 10) }}</span>
     </div>
   </div>
   <ArticleTitle :title="frontmatter.title" />
 </template>
-<script setup>
+<script setup lang="ts">
 import { watch, ref } from "vue";
 import { useRoute } from "vue-router";
 import { usePageData } from "@vuepress/client";
@@ -24,13 +24,13 @@ import Tags from "./Tags.vue";
 const route = useRoute();
 const themeData = useThemeData();
 
-const page = ref(null);
-const navs = ref(null);
-const frontmatter = ref(null);
+const page = ref<Record<string, any>>(usePageData().value);
+const navs = ref<LinkRaw[] | undefined>([]);
+const frontmatter = ref<FrontMatter>(page.value.frontmatter);
 
-const getBreadcrumb = (node, keys) => {
+const getBreadcrumb = (node: any, keys: string[]): LinkRaw[] | undefined => {
   if (!keys) return;
-  const list = [];
+  const list: LinkRaw[] = [];
   for (let i = 0, e = node.$children[keys[i]]; i < keys.length; i++, e = e.$children[keys[i]])
     list.push({ text: keys[i], link: e.$data.frontmatter && e.$data.frontmatter.permalink });
   return list;

@@ -6,13 +6,13 @@
     </div>
   </nav>
 </template>
-<script setup>
+<script setup lang="ts">
 import NavLink from "./NavLink.vue";
 import DropdownLink from "./DropdownLink.vue";
 import { useThemeData } from "@vuepress/plugin-theme-data/lib/client";
 
 const themeData = useThemeData();
-const links = themeData.value.navbar;
+const links: NavLink[] = themeData.value.navbar;
 </script>
 <style lang="scss">
 .nav-links {

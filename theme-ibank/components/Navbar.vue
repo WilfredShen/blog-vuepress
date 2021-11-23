@@ -10,13 +10,15 @@
     <ToggleThemeButton />
   </header>
 </template>
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue";
+import type { Ref } from "vue";
 import { useSiteData } from "@vuepress/client";
+import type { SiteData } from "@vuepress/client";
 import NavLinks from "./NavLinks.vue";
 import ToggleThemeButton from "./ToggleThemeButton.vue";
 
-const siteData = useSiteData();
+const siteData: Ref<SiteData & { themeConfig?: ThemeConfig }> = useSiteData();
 
-const navbar = ref(null);
+const navbar = ref();
 </script>

@@ -2,7 +2,7 @@
   <div class="dropdown-link underline-wrapper">
     <NavLink :item="item" class="link-title accent-underline" />
     <span class="arrow" :class="open ? 'down' : 'right'"></span>
-    <ul class="dropdown-list box-shadow">
+    <ul class="dropdown-list box-shadow" v-if="item">
       <li class="dropdown-group" v-for="child in item.children">
         <template v-if="child.children">
           <h4>
@@ -12,8 +12,9 @@
           <ul v-if="child.children.length" class="dropdown-sub-group">
             <template v-for="subItem in child.children">
               <li class="dropdown-sub-item" v-if="subItem.link">
-                <NavLink :item="subItem" /></li
-            ></template>
+                <NavLink :item="subItem" />
+              </li>
+            </template>
           </ul>
         </template>
         <NavLink v-else class="dropdown-item" :item="child" />
@@ -21,13 +22,11 @@
     </ul>
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue";
 import NavLink from "./NavLink.vue";
 
-defineProps({
-  item: Object,
-});
+defineProps({ item: { type: Object as () => LinkRaw, required: true } });
 
 const open = ref(false);
 </script>

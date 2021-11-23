@@ -1,4 +1,4 @@
-export const get = name => {
+export const get = (name: string): any => {
   const data = window.localStorage.getItem(name);
   try {
     return JSON.parse(data);
@@ -7,11 +7,11 @@ export const get = name => {
   }
 };
 
-export const set = (name, value) => {
+export const set = (name: string, value: any): void => {
   if (typeof value === "object") value = JSON.stringify(value);
   window.localStorage.setItem(name, value);
 };
 
-export const remove = name => {
+export const remove = (name: string): void => {
   window.localStorage.removeItem(name);
 };

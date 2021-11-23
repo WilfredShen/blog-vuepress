@@ -10,15 +10,17 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted } from "vue";
 import ToggleThemeButton from "../components/ToggleThemeButton.vue";
 import * as storage from "../utils/storage";
+
 const msgs = ["🌵这里一片荒芜🌵，去别的地方看看吧", "这个页面进隧道🚇了", "芜湖🚀这个页面上天了！", "人在火星👽，刚下🛸"];
 let msg = ref("");
+
 onMounted(() => {
-  let prev = storage.get("current-404-msg"),
-    current;
+  let prev: number = parseInt(storage.get("current-404-msg"));
+  let current: number;
   if (prev !== 0 && !prev) prev = -1;
   while ((current = Math.floor(Math.random() * msgs.length)) === prev);
   storage.set("current-404-msg", current);

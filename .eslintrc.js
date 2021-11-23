@@ -1,8 +1,8 @@
 module.exports = {
   parser: "vue-eslint-parser",
-  plugins: ["prettier"],
+  plugins: ["prettier", "@typescript-eslint"],
   parserOptions: {
-    // parser: "@typescript-eslint/parser",
+    parser: "@typescript-eslint/parser",
     ecmaVersion: 2020,
     sourceType: "module",
     ecmaFeatures: {
@@ -10,12 +10,15 @@ module.exports = {
     },
   },
   globals: {
-    BMapGL: true,
+    defineProps: "readonly",
+    defineEmits: "readonly",
+    defineExpose: "readonly",
+    withDefaults: "readonly",
   },
   extends: [
     "plugin:vue/vue3-recommended",
-    // "plugin:@typescript-eslint/recommended",
-    // "prettier/@typescript-eslint",
+    "plugin:@typescript-eslint/recommended",
+    "prettier/@typescript-eslint",
     "plugin:prettier/recommended",
   ],
   rules: {

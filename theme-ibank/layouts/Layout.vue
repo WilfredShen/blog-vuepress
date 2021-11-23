@@ -9,8 +9,7 @@
     <Footer />
   </div>
 </template>
-
-<script setup>
+<script setup lang="ts">
 import { usePageFrontmatter } from "@vuepress/client";
 import Navbar from "../components/Navbar.vue";
 import Page from "../components/Page.vue";

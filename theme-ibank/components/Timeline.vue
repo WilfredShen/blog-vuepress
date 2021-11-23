@@ -4,8 +4,8 @@
       <h2 class="year bold">{{ year }}</h2>
       <div class="timeline-list">
         <template class="item" v-for="[month, monthData] in Object.entries(archive)">
-          <template v-for="[day, list] in Object.entries(monthData)">
-            <template v-for="item in list">
+          <template v-for="[day, dayData] in Object.entries(monthData)">
+            <template v-for="item in dayData">
               <router-link class="item link" :to="item.$data.path">
                 <span class="date bold">{{ `${month.padStart(2, "0")}-${day.padStart(2, "0")}` }}</span>
                 <span class="title">{{ item.$data.title }}</span>
@@ -17,8 +17,8 @@
     </template>
   </div>
 </template>
-<script setup>
-defineProps({ archives: Object });
+<script setup lang="ts">
+defineProps({ archives: Array as () => Entry<ArchiveYear>[] });
 </script>
 <style lang="scss">
 @use "../styles/variables" as *;

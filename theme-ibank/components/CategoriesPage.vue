@@ -32,7 +32,7 @@
     </div>
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import { ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useThemeData } from "@vuepress/plugin-theme-data/lib/client";
@@ -46,48 +46,48 @@ const route = useRoute();
 const router = useRouter();
 const themeData = useThemeData();
 
-const allCategories = ref(null);
-const articles = ref(null);
-const currentArticles = ref(null);
+const allCategories = ref<NodeData[]>();
+const articles = ref<Node[]>();
+const currentArticles = ref<Node[]>();
 const total = ref(0);
 const pageSize = ref(10);
 const currentPage = ref(1);
-const currentCategory = ref(null);
+const currentCategory = ref<Node>();
 
-const getAllCategories = (node, prefix = "", ignoreSelf = true) => {
+const getAllCategories = (node: Node, prefix = "", ignoreSelf = true) => {
   const list = [];
   if (node && node.$children) {
     const key = prefix ? `${prefix},${node.$data.title}` : node.$data.title;
     !ignoreSelf && list.push({ ...node.$data, key });
-    sotrPagesByOrder(parsePages(node.$children)).forEach(p => list.push(...getAllCategories(p, ignoreSelf ? "" : key, false)));
+    sotrPagesByOrder(parsePages(node) || []).forEach(p => list.push(...getAllCategories(p, ignoreSelf ? "" : key, false)));
   }
   return list;
 };
 
-const switchPagingTo = index =>
+const switchPagingTo = (index: number) =>
   index !== currentPage.value &&
   index >= 1 &&
   index <= Math.ceil(total.value / pageSize.value) &&
   router.push({ query: { ...route.query, page: index } });
 
-const switchCategoryTo = category => router.push({ query: { ...route.query, category, page: undefined } });
+const switchCategoryTo = (category: string | undefined) => router.push({ query: { ...route.query, category, page: undefined } });
 
 const updateQuery = () => {
-  let t = themeData.value.categories.$children;
+  let t = themeData.value.categories;
   if (route.query.category)
     route.query.category
       .toString()
       .split(",")
-      .forEach(k => (t = t[k].$children));
+      .forEach(k => (t = t.$children[k]));
   currentCategory.value = t;
 
-  currentPage.value = parseInt(route.query.page) || 1;
+  currentPage.value = parseInt(route.query.page?.toString() || "1");
 };
 
 const updateList = () => {
   const list = parsePages(currentCategory.value) || [];
   let i = -1;
-  while (++i < list.length) list[i] && list[i].$children && list.push(...parsePages(list[i].$children));
+  while (++i < list.length) list.push(...(parsePages(list[i]) || []));
   articles.value = sortPagesByDateDesc(filterArticles(list));
   total.value = articles.value.length;
   currentArticles.value = articles.value.slice(pageSize.value * (currentPage.value - 1), pageSize.value * currentPage.value);
@@ -98,6 +98,8 @@ watch(currentCategory, updateList);
 watch(currentPage, updateList);
 
 allCategories.value = getAllCategories(themeData.value.categories);
+console.log(allCategories.value);
+
 updateQuery();
 updateList();
 </script>

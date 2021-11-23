@@ -7,15 +7,15 @@
     v-else
     :href="item.link"
     class="nav-link external"
-    :target="(isWebLink(item.link) && '_blank') || null"
-    :rel="(isWebLink(item.link) && 'noopener noreferrer') || null"
+    :target="(isWebLink(item.link) && '_blank') || undefined"
+    :rel="(isWebLink(item.link) && 'noopener noreferrer') || undefined"
   >
     {{ item.text }}
     <OutboundLink />
   </a>
 </template>
-<script setup>
+<script setup lang="ts">
 import { isExternal, isWebLink } from "../utils/validate";
 
-defineProps({ item: Object });
+defineProps({ item: { type: Object as () => LinkRaw, required: true } });
 </script>

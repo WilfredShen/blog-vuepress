@@ -19,7 +19,7 @@
     </div>
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import { computed, ref, onMounted, onUnmounted } from "vue";
 
 const props = defineProps({
@@ -31,11 +31,13 @@ const props = defineProps({
 const itemSize = 58; // (48 + 5 * 2) px
 const nextSize = 120;
 const buttonNum = ref(0);
-const pagination = ref(null);
+const pagination = ref<Element>();
 
 const fn = () => {
-  const t = Math.floor((pagination.value.clientWidth - 2 * nextSize) / itemSize);
-  buttonNum.value = t > 1 ? t : 1;
+  if (pagination.value) {
+    const t = Math.floor((pagination.value.clientWidth - 2 * nextSize) / itemSize);
+    buttonNum.value = t > 1 ? t : 1;
+  }
 };
 
 const pageCount = computed(() => Math.ceil(props.total / props.pageSize));
@@ -90,7 +92,7 @@ const paginationItems = computed(() => {
 });
 
 const emit = defineEmits(["switchPaging"]);
-const goTo = index => index >= 1 && index <= pageCount.value && emit("switchPaging", index);
+const goTo = (index: number) => index >= 1 && index <= pageCount.value && emit("switchPaging", index);
 const goPrev = () => goTo(props.current - 1);
 const goNext = () => goTo(props.current + 1);
 

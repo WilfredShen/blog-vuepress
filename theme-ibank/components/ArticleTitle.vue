@@ -1,7 +1,7 @@
 <template>
   <h1 class="article-title">{{ title }}</h1>
 </template>
-<script setup>
+<script setup lang="ts">
 defineProps({ title: String });
 </script>
 <style lang="scss">

@@ -16,7 +16,7 @@
             <i class="iconfont icon-user"></i>{{ item.$data.frontmatter.author.name }}
           </a>
           <span title="作者" v-else><i class="iconfont icon-user"></i>{{ item.$data.frontmatter.author.name }}</span>
-          <span title="创建日期"><i class="iconfont icon-calendar"></i>{{ item.$data.frontmatter.date.slice(0, 10) }}</span>
+          <span title="创建日期"><i class="iconfont icon-calendar"></i>{{ item.$data.frontmatter.date?.toString().slice(0, 10) }}</span>
           <Tags :tags="item.$data.frontmatter.tags" gutter="0.5em" />
         </div>
         <div class="excerpt-wrapper" v-if="item.$data.excerpt">
@@ -31,10 +31,10 @@
     </template>
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import Tags from "./Tags.vue";
 
-defineProps({ articles: Array });
+defineProps({ articles: Array as () => Node[] });
 </script>
 <style lang="scss">
 @use "../styles/variables" as *;

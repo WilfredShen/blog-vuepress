@@ -6,12 +6,12 @@
   ></a>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted } from "vue";
 import * as storage from "../utils/storage";
 
 const regex = /(?<!\w)theme-mode-(\w*)(?!=\w)/i;
-const themeMode = ref(null);
+const themeMode = ref<string>();
 
 const parseThemeMode = () => {
   const className = document.body.className;
@@ -19,7 +19,7 @@ const parseThemeMode = () => {
   return (res && res[1]) || "light";
 };
 
-const toggleThemeMode = mode => {
+const toggleThemeMode = (mode: string) => {
   let className = document.body.className;
   className = className.replace(regex, `theme-mode-${mode}`);
   document.body.setAttribute("class", className);

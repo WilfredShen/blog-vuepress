@@ -9,16 +9,17 @@
     </MainLayout>
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import { onMounted } from "vue";
 import $ from "jquery";
 import MainLayout from "./MainLayout.vue";
 import ArticleInfo from "./ArticleInfo.vue";
 import Sidebar from "./SideBar.vue";
 
-const scrollTo = el => {
+const scrollTo = (el: any) => {
   const hash = decodeURIComponent(el.target.hash);
-  $([document.documentElement, document.body]).animate({ scrollTop: $(hash).offset().top - 4.6 * 16 }, 400);
+  const offset = $(hash).offset();
+  offset && $([document.documentElement, document.body]).animate({ scrollTop: offset.top - 4.6 * 16 }, 400);
 };
 onMounted(() => $("a[href*='#'][href!='#']").on("click", scrollTo));
 </script>

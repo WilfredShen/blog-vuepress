@@ -12,7 +12,7 @@
     </template>
   </aside>
 </template>
-<script setup>
+<script setup lang="ts">
 import { usePageData } from "@vuepress/client";
 
 const pageData = usePageData();
