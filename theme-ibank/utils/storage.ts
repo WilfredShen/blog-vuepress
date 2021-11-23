@@ -1,10 +1,12 @@
 export const get = (name: string): any => {
   const data = window.localStorage.getItem(name);
-  try {
-    return JSON.parse(data);
-  } catch (_) {
-    return data;
-  }
+  if (data)
+    try {
+      return JSON.parse(data);
+    } catch (_) {
+      return data;
+    }
+  return data;
 };
 
 export const set = (name: string, value: any): void => {

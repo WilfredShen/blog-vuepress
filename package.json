@@ -16,7 +16,6 @@
     "vuepress-vite": "^2.0.0-beta.27"
   },
   "dependencies": {
-    "jquery": "^3.6.0",
     "vuepress-theme-ibank": "^1.0.0"
   }
 }
