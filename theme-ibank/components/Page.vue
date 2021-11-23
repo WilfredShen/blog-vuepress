@@ -10,30 +10,32 @@
   </div>
 </template>
 <script setup lang="ts">
-import { onBeforeMount, onMounted, onBeforeUnmount, watch } from "vue";
-import { onBeforeRouteLeave, useRoute } from "vue-router";
-import $ from "jquery";
+import { onMounted, onBeforeUnmount, watch } from "vue";
+import { useRoute } from "vue-router";
 import MainLayout from "./MainLayout.vue";
 import ArticleInfo from "./ArticleInfo.vue";
 import Sidebar from "./SideBar.vue";
 
 const route = useRoute();
 
-onBeforeMount(() => {
-  const scrollToPos = (top: number) => $([document.documentElement, document.body]).animate({ scrollTop: top - 4.6 * 16 }, 400) && void 0;
-  const scrollToEl = (el: any) => {
-    const hash = decodeURIComponent(el.target.hash);
-    const offset = $(hash).offset();
-    offset && scrollToPos(offset.top);
-  };
-  const addListener = () => $("a[href^='#'][href!='#']").on("click", scrollToEl) && void 0;
-  const removeListener = () => $("a[href^='#'][href!='#']").on("click", scrollToEl) && void 0;
+const selector = "a[href*='#']:not([href='#'])";
 
-  onMounted(addListener);
-  watch(() => route.path, addListener);
-  onBeforeRouteLeave(removeListener);
-  onBeforeUnmount(removeListener);
-});
+const scrollToPos = (top: number) => window.scrollTo({ top, behavior: "smooth" });
+const scrollToEl = (event: Event) => {
+  const hash = (event.target as HTMLAnchorElement).hash;
+  const el = document.getElementById(decodeURIComponent(hash.slice(1)));
+  if (el) {
+    scrollToPos(el.offsetTop - 4.6 * 16);
+    event.preventDefault();
+    if (history && history.pushState) history.pushState({}, document.title, location.pathname + hash);
+  }
+};
+const addListener: () => void = () => document.querySelectorAll(selector).forEach(e => e.addEventListener("click", scrollToEl));
+const removeListener: () => void = () => document.querySelectorAll(selector).forEach(e => e.removeEventListener("click", scrollToEl));
+
+onMounted(addListener);
+watch(() => route.path, addListener);
+onBeforeUnmount(removeListener);
 </script>
 <style lang="scss">
 .content-wrapper > :not(.article-info) {

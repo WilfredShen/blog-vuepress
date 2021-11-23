@@ -1,6 +1,6 @@
 {
   "name": "vuepress-theme-ibank",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "main": "index.js",
   "author": "Wilfred Shen",
   "license": "MIT",
@@ -11,15 +11,11 @@
     "vuepress-theme"
   ],
   "devDependencies": {
-    "@types/jquery": "^3.5.9",
     "@types/node": "^16.11.9",
     "@vuepress/plugin-active-header-links": "^2.0.0-beta.27",
     "@vuepress/plugin-back-to-top": "^2.0.0-beta.27",
     "@vuepress/plugin-prismjs": "^2.0.0-beta.27",
     "@vuepress/plugin-theme-data": "^2.0.0-beta.27",
     "crypto": "^1.0.1"
-  },
-  "dependencies": {
-    "jquery": "^3.6.0"
   }
 }

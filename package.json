@@ -1,6 +1,6 @@
 {
   "name": "blog-vuepress",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "main": "index.js",
   "author": "Wilfred Shen",
   "license": "MIT",
@@ -9,7 +9,6 @@
     "build": "vuepress build docs"
   },
   "devDependencies": {
-    "@types/jquery": "^3.5.9",
     "eslint": "^8.2.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
