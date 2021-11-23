@@ -98,7 +98,6 @@ watch(currentCategory, updateList);
 watch(currentPage, updateList);
 
 allCategories.value = getAllCategories(themeData.value.categories);
-console.log(allCategories.value);
 
 updateQuery();
 updateList();

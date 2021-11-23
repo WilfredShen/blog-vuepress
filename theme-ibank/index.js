@@ -67,7 +67,7 @@ module.exports = (opts, ctx) => {
     },
     // clientAppSetupFiles: null,
     // clientAppRootComponentFiles: null,
-    clientAppEnhanceFiles: path.resolve(__dirname, "enhanceApp.js"),
+    clientAppEnhanceFiles: path.resolve(__dirname, "enhanceApp.ts"),
     // onPrepared: ctx => {},
     // alias: null,
     // define: null,
