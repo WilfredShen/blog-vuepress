@@ -3,7 +3,7 @@
     <div class="archives-wrapper">
       <MainLayout>
         <Timeline :archives="currentArchives" />
-        <template #right>
+        <template #inner-right>
           <RightMenu>
             <template #title>
               <h3 class="right-menu-title row" @click="switchArchiveTo(undefined)">

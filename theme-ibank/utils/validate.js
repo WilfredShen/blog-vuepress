@@ -20,27 +20,6 @@ export function validURL(url) {
   return reg.test(url);
 }
 
-export function validLowerCase(str) {
-  const reg = /^[a-z]+$/;
-  return reg.test(str);
-}
-
-export function validUpperCase(str) {
-  const reg = /^[A-Z]+$/;
-  return reg.test(str);
-}
-
-export function validAlphabets(str) {
-  const reg = /^[A-Za-z]+$/;
-  return reg.test(str);
-}
-
-export function validEmail(email) {
-  const reg =
-    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return reg.test(email);
-}
-
 export function isString(str) {
   return typeof str === "string" || str instanceof String;
 }

@@ -20,7 +20,7 @@ module.exports = (opts, ctx) => {
 
   Object.values(createPages(ctx.options.source, opts)).forEach(v =>
     v[0]
-      ? log(chalk.cyan("info"), "create page:", chalk.green("[success] "), chalk.green(v[1]))
+      ? log(chalk.cyan("info"), "create page:", chalk.green("[success]        "), chalk.green(v[1]))
       : log(chalk.cyan("info"), "create page:", chalk.yellow("[already exists] "), chalk.yellow(v[1])),
   );
 
@@ -31,7 +31,11 @@ module.exports = (opts, ctx) => {
       Layout: path.resolve(__dirname, "layouts/Layout.vue"),
       404: path.resolve(__dirname, "layouts/404.vue"),
     },
-    plugins: [["@vuepress/plugin-prismjs"], ["@vuepress/plugin-theme-data", { themeData }]],
+    plugins: [
+      ["@vuepress/plugin-prismjs"],
+      ["@vuepress/plugin-theme-data", { themeData }],
+      // ["@vuepress/plugin-active-header-links", { offset: 4.6 * 16 }],
+    ],
     // 以下为 Hooks，按调用顺序排列
     // extendsMarkdown: () => {},
     extendsPageOptions: option => {

@@ -3,7 +3,7 @@
     <div class="tags-wrapper">
       <MainLayout>
         <ArticleList :articles="currentArticles" />
-        <template #right>
+        <template #inner-right>
           <RightMenu>
             <template #title>
               <h3 class="right-menu-title row" @click="switchTagTo(undefined)">

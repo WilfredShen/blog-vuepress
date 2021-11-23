@@ -157,6 +157,7 @@ a.header-anchor {
   }
 
   .plain-wrapper {
+    box-sizing: border-box;
     margin: auto;
     padding: 1rem 2.5rem 2rem;
     max-width: $contentWidth;
@@ -171,20 +172,17 @@ a.header-anchor {
       max-width: 100%;
     }
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      margin-top: -$navbarHeight - 1rem;
-      padding-top: $navbarHeight + 1rem;
-    }
-
-    h1.article-title {
-      margin-top: 1rem;
-      padding-top: 0;
-    }
+    // h1,
+    // h2,
+    // h3,
+    // h4,
+    // h5,
+    // h6 {
+    //   &:target {
+    //     margin-top: -$navbarHeight - 1rem;
+    //     padding-top: $navbarHeight + 1rem;
+    //   }
+    // }
   }
 
   .categories-wrapper {
@@ -215,10 +213,6 @@ a.header-anchor {
   justify-content: center;
   color: var(--footerColor);
   font-size: 0.8em;
-
-  .sidebar-open & {
-    padding-left: $sidebarWidth;
-  }
 }
 
 .disabled {

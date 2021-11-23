@@ -1,11 +1,11 @@
 ---
 title: 首页
+permalink: /
 date: '2021-11-19 15:26:31'
 type: readme
 author:
   name: 柒月流火
   link: 'https://github.com/WilfredShen'
-permalink: /article/65a6d9e4
 ---
 目录
 
