@@ -20,11 +20,11 @@ export function validURL(url: string) {
   return reg.test(url);
 }
 
-export function isString(str: any) {
+export function isString(str: unknown) {
   return typeof str === "string" || str instanceof String;
 }
 
-export function isArray(arg: any) {
+export function isArray(arg: unknown) {
   if (typeof Array.isArray === "undefined") return Object.prototype.toString.call(arg) === "[object Array]";
   return Array.isArray(arg);
 }

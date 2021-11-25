@@ -1,3 +1,4 @@
+/* eslint-disable */
 export {};
 
 declare global {
@@ -8,7 +9,7 @@ declare global {
   }
 
   interface NavLink extends LinkRaw {
-    $data: { [key: string]: any };
-    $children?: { [key: string]: Node };
+    $data: NodeData;
+    $children?: Record<string, Node>;
   }
 }

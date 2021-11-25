@@ -1,4 +1,5 @@
 module.exports = {
+  logEnable: true,
   excerptSeparator: "<!-- more -->", // 未使用
   defaultPrefix: "/article/",
   defaultType: "article",

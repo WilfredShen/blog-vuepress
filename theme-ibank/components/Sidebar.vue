@@ -1,10 +1,10 @@
 <template>
   <aside class="sidebar card">
-    <template v-for="header in headers">
+    <template v-for="header in headers" :key="header.slug">
       <h3 class="sidebar-title">
         <a :href="`#${header.slug}`" class="bold">{{ header.title }}</a>
       </h3>
-      <ul class="sidebar-list iconfont" v-for="item in header.children">
+      <ul v-for="item in header.children" :key="item.slug" class="sidebar-list iconfont">
         <li class="sidebar-item">
           <a :href="`#${item.slug}`">{{ item.title }}</a>
         </li>

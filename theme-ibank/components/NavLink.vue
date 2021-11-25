@@ -17,5 +17,5 @@
 <script setup lang="ts">
 import { isExternal, isWebLink } from "../utils/validate";
 
-defineProps({ item: { type: Object as () => LinkRaw, required: true } });
+defineProps<{ item: LinkRaw }>();
 </script>

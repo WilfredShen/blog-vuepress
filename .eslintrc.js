@@ -18,7 +18,7 @@ module.exports = {
   extends: [
     "plugin:vue/vue3-recommended",
     "plugin:@typescript-eslint/recommended",
-    "prettier/@typescript-eslint",
+    // "prettier/@typescript-eslint",
     "plugin:prettier/recommended",
   ],
   rules: {
@@ -30,7 +30,18 @@ module.exports = {
       },
     ],
     "space-before-function-paren": "off",
-    quotes: ["error", "single"],
-    "comma-dangle": ["error", "never"],
+    quotes: ["error", "double"],
+    // "comma-dangle": ["error", "always"],
+    "comma-dangle": [
+      "error",
+      {
+        arrays: "always-multiline",
+        objects: "always-multiline",
+        imports: "always-multiline",
+        exports: "always-multiline",
+        functions: "always-multiline",
+      },
+    ],
+    "vue/multi-word-component-names": "off",
   },
 };

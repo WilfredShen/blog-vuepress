@@ -1,6 +1,12 @@
 <template>
   <div class="tags" title="标签">
-    <router-link class="tag" :style="getStyle(index)" v-for="(item, index) in tags" :to="{ path: '/tags', query: { tag: item } }">
+    <router-link
+      v-for="(item, index) in tags"
+      :key="`tag-${item}`"
+      class="tag"
+      :style="getStyle(index)"
+      :to="{ path: '/tags', query: { tag: item } }"
+    >
       <i class="iconfont icon-tag"></i>{{ item }}
     </router-link>
   </div>
@@ -8,7 +14,15 @@
 <script setup lang="ts">
 import { shuffle } from "../utils/random";
 
-const props = defineProps({ tags: Array as () => string[], gutter: { type: String, default: "0" } });
+const props = withDefaults(
+  defineProps<{
+    tags: string[];
+    gutter: string;
+  }>(),
+  {
+    gutter: "0",
+  },
+);
 const colorList = shuffle([
   ["#bc9c03", "white"],
   ["#38a894", "white"],

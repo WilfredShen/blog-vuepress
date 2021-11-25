@@ -1,4 +1,4 @@
-export const parsePages = (node: Node | undefined) => node && node.$children && Object.values(node.$children);
+export const parsePages = (node: Node) => node.$children && Object.values(node.$children);
 export const filterArticles = (pages: Node[]) => pages.filter(e => e.$data.frontmatter && e.$data.frontmatter.type === "article");
 
 export const sotrPagesByOrder = (pages: Node[]) =>

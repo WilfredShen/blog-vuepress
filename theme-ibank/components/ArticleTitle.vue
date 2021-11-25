@@ -2,7 +2,7 @@
   <h1 class="article-title">{{ title }}</h1>
 </template>
 <script setup lang="ts">
-defineProps({ title: String });
+defineProps<{ title: string }>();
 </script>
 <style lang="scss">
 .article-title {

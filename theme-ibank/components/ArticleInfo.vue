@@ -3,10 +3,10 @@
     <Breadcrumb v-if="navs && navs.length" :navs="navs" :home="true" />
     <div class="meta-info">
       <Tags :tags="frontmatter.tags" gutter="0.5em" />
-      <a class="author" title="作者" v-if="frontmatter.author.link" :href="frontmatter.author.link" target="_blank">
+      <a v-if="frontmatter.author.link" class="author" title="作者" :href="frontmatter.author.link" target="_blank">
         <i class="iconfont icon-user"></i>{{ frontmatter.author.name }}
       </a>
-      <span title="作者" v-else><i class="iconfont icon-user"></i>{{ frontmatter.author.name }}</span>
+      <span v-else title="作者"><i class="iconfont icon-user"></i>{{ frontmatter.author.name }}</span>
       <span title="创建日期"><i class="iconfont icon-calendar"></i>{{ frontmatter.date?.toString().slice(0, 10) }}</span>
     </div>
   </div>
@@ -24,20 +24,20 @@ import Tags from "./Tags.vue";
 const route = useRoute();
 const themeData = useThemeData();
 
-const page = ref<Record<string, any>>(usePageData().value);
-const navs = ref<LinkRaw[] | undefined>([]);
+const page = ref<NodeData>(usePageData().value as NodeData);
+const navs = ref<LinkRaw[]>([]);
 const frontmatter = ref<FrontMatter>(page.value.frontmatter);
 
-const getBreadcrumb = (node: any, keys: string[]): LinkRaw[] | undefined => {
-  if (!keys) return;
+const getBreadcrumb = (node: Node, keys: string[]): LinkRaw[] => {
+  if (!keys || !node.$children) return [];
   const list: LinkRaw[] = [];
-  for (let i = 0, e = node.$children[keys[i]]; i < keys.length; i++, e = e.$children[keys[i]])
+  for (let i = 0, e: Node | undefined = node.$children[keys[i]]; e && i < keys.length; i++, e = e.$children && e.$children[keys[i]])
     list.push({ text: keys[i], link: e.$data.frontmatter && e.$data.frontmatter.permalink });
   return list;
 };
 
 const updateData = () => {
-  page.value = usePageData().value;
+  page.value = usePageData().value as NodeData;
   navs.value = getBreadcrumb(themeData.value.categories, page.value.frontmatter.categories);
   frontmatter.value = page.value.frontmatter;
 };

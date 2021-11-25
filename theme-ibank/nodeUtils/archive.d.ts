@@ -1,3 +1,4 @@
+/* eslint-disable */
 export {};
 declare global {
   type ArchiveDay = Node[];

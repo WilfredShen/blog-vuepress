@@ -2,16 +2,16 @@
   <div class="categories-page page-wrapper">
     <div class="categories-wrapper">
       <MainLayout>
-        <ArticleList :articles="currentArticles" />
+        <ArticleList v-if="currentArticles" :articles="currentArticles" />
         <template #inner-right>
           <RightMenu>
             <template #title>
-              <h3 class="right-menu-title row" @click="switchCategoryTo(undefined)">
+              <h3 class="right-menu-title row" @click="switchCategoryTo()">
                 <span class="bold">全部分类</span><span class="number digital">{{ themeData.categories.$data.count }}</span>
               </h3>
             </template>
             <div class="right-menu-list">
-              <template v-for="item in allCategories">
+              <template v-for="item in allCategories" :key="item.key">
                 <div
                   v-if="item.count"
                   class="right-menu-item row"
@@ -70,7 +70,7 @@ const switchPagingTo = (index: number) =>
   index <= Math.ceil(total.value / pageSize.value) &&
   router.push({ query: { ...route.query, page: index } });
 
-const switchCategoryTo = (category: string | undefined) => router.push({ query: { ...route.query, category, page: undefined } });
+const switchCategoryTo = (category?: string) => router.push({ query: { ...route.query, category, page: undefined } });
 
 const updateQuery = () => {
   let t = themeData.value.categories;
@@ -85,7 +85,7 @@ const updateQuery = () => {
 };
 
 const updateList = () => {
-  const list = parsePages(currentCategory.value) || [];
+  const list = (currentCategory.value && parsePages(currentCategory.value)) || [];
   let i = -1;
   while (++i < list.length) list.push(...(parsePages(list[i]) || []));
   articles.value = sortPagesByDateDesc(filterArticles(list));

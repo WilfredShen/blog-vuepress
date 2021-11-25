@@ -1,25 +1,26 @@
 <template>
   <div class="article-list">
-    <template v-for="item in articles">
+    <template v-for="item in articles" :key="item.$data.key">
       <div v-if="item.$data" class="article-card card">
         <h2 class="title">
           <router-link :to="item.$data.path">{{ item.$data.title }}</router-link>
         </h2>
         <div class="meta-info">
           <a
+            v-if="item.$data.frontmatter.author.link"
             class="author"
             title="作者"
-            v-if="item.$data.frontmatter.author.link"
             :href="item.$data.frontmatter.author.link"
             target="_blank"
           >
             <i class="iconfont icon-user"></i>{{ item.$data.frontmatter.author.name }}
           </a>
-          <span title="作者" v-else><i class="iconfont icon-user"></i>{{ item.$data.frontmatter.author.name }}</span>
+          <span v-else title="作者"><i class="iconfont icon-user"></i>{{ item.$data.frontmatter.author.name }}</span>
           <span title="创建日期"><i class="iconfont icon-calendar"></i>{{ item.$data.frontmatter.date?.toString().slice(0, 10) }}</span>
           <Tags :tags="item.$data.frontmatter.tags" gutter="0.5em" />
         </div>
-        <div class="excerpt-wrapper" v-if="item.$data.excerpt">
+        <div v-if="item.$data.excerpt" class="excerpt-wrapper">
+          <!-- eslint-disable-next-line -->
           <div class="excerpt" v-html="item.$data.excerpt"></div>
           <div class="readmore">
             <div class="card">
@@ -34,7 +35,7 @@
 <script setup lang="ts">
 import Tags from "./Tags.vue";
 
-defineProps({ articles: Array as () => Node[] });
+defineProps<{ articles: Node[] }>();
 </script>
 <style lang="scss">
 @use "../styles/variables" as *;

@@ -1,4 +1,4 @@
-export const shuffle = (list: any[]) => {
+export const shuffle = <T>(list: T[]) => {
   if (!list.length) return list;
   let currentIndex = list.length;
   while (currentIndex--) {

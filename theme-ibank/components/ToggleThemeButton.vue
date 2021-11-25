@@ -1,8 +1,8 @@
 <template>
   <a
     class="toggle-theme-button iconfont"
-    @click="toggleThemeMode(themeMode === 'dark' ? 'light' : 'dark')"
     :class="themeMode === 'light' ? 'icon-sun' : 'icon-moon'"
+    @click="toggleThemeMode(themeMode === 'dark' ? 'light' : 'dark')"
   ></a>
 </template>
 

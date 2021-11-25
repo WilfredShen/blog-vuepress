@@ -1,11 +1,12 @@
 <template>
-  <div class="pagination" ref="pagination">
+  <div ref="pagination" class="pagination">
     <div class="prev card" :class="{ disabled: current === 1 }" @click="goPrev">
       <i class="iconfont icon-arrow-left"></i><span>上一页</span>
     </div>
     <div class="pagination-list">
       <div
         v-for="item in paginationItems"
+        :key="item.pageIndex"
         class="pagination-item card"
         :class="{ active: item.pageIndex === current }"
         :title="`第${item.pageIndex}页`"
@@ -22,11 +23,18 @@
 <script setup lang="ts">
 import { computed, ref, onMounted, onUnmounted } from "vue";
 
-const props = defineProps({
-  total: { type: Number, default: 0 },
-  pageSize: { type: Number, default: 10 },
-  current: { type: Number, default: 1 },
-});
+const props = withDefaults(
+  defineProps<{
+    total: number;
+    pageSize: number;
+    current: number;
+  }>(),
+  {
+    total: 0,
+    pageSize: 10,
+    current: 1,
+  },
+);
 
 const itemSize = 58; // (48 + 5 * 2) px
 const nextSize = 120;
@@ -42,8 +50,8 @@ const fn = () => {
 
 const pageCount = computed(() => Math.ceil(props.total / props.pageSize));
 
-const paginationItems = computed(() => {
-  const list = [];
+const paginationItems = computed<PaginationItem[]>(() => {
+  const list: PaginationItem[] = [];
   if (pageCount.value <= buttonNum.value) for (let i = 1; i <= pageCount.value; i++) list.push({ text: i.toString(), pageIndex: i });
   else {
     let cur = props.current;

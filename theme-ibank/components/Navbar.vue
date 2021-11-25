@@ -1,5 +1,5 @@
 <template>
-  <header class="navbar" ref="navbar">
+  <header ref="navbar" class="navbar">
     <div class="logo">
       <router-link class="flex-row align-center" :to="siteData.base">
         <img v-if="siteData.themeConfig && siteData.themeConfig.logo" :src="siteData.themeConfig.logo" alt="" />

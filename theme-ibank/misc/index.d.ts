@@ -1,4 +1,5 @@
-import type { PageData } from "@vuepress/core";
+/* eslint-disable */
+import type { PageData } from "@vuepress/shared";
 export {};
 
 declare global {
@@ -12,7 +13,7 @@ declare global {
 
   interface Node {
     $data: NodeData;
-    $children?: { [key: string]: Node };
+    $children?: Record<string, Node>;
   }
 
   interface ThemeConfig {
@@ -21,5 +22,10 @@ declare global {
     categories: boolean;
     tags: boolean;
     archives: boolean;
+  }
+
+  interface PaginationItem {
+    text: string;
+    pageIndex: number;
   }
 }

@@ -1,10 +1,9 @@
 <template>
   <div class="breadcrumb">
     <router-link v-if="home" to="/" class="nav-link home iconfont icon-home" title="首页"></router-link>
-    <div class="breadcrumb-item" title="分类" v-for="(item, index) in navs">
+    <div v-for="(item, index) in navs" :key="item.text" class="breadcrumb-item" title="分类">
       <span v-if="home || index !== 0" class="separator">{{ separator }}</span>
       <router-link
-        v-if="navs"
         :to="{
           path: '/categories',
           query: {
@@ -17,22 +16,21 @@
       >
         {{ item.text }}
       </router-link>
-      <span v-else>{{ item.text }}</span>
     </div>
   </div>
 </template>
 <script setup lang="ts">
-defineProps({
-  navs: Array as () => LinkRaw[],
-  separator: {
-    type: String,
-    default: "/",
+withDefaults(
+  defineProps<{
+    navs: LinkRaw[];
+    separator: string;
+    home: boolean;
+  }>(),
+  {
+    separator: "/",
+    home: false,
   },
-  home: {
-    type: Boolean,
-    default: false,
-  },
-});
+);
 </script>
 <style lang="scss">
 .breadcrumb {

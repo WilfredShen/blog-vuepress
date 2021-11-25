@@ -9,8 +9,9 @@ const { buildArchives } = require("./nodeUtils/archives");
 const { defaultConfig } = require("./nodeUtils/defaults");
 const { createPages } = require("./nodeUtils/pages");
 
-const log = console.log;
-// const log = () => {};
+const LOG_ENABLE = true;
+
+const log = LOG_ENABLE ? console.log : () => {};
 
 module.exports = (opts, ctx) => {
   ctx.options.templateDev = path.resolve(__dirname, "templates/dev.html");

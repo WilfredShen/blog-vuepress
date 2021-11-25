@@ -6,14 +6,15 @@
         <template #inner-right>
           <RightMenu>
             <template #title>
-              <h3 class="right-menu-title row" @click="switchArchiveTo(undefined)">
+              <h3 class="right-menu-title row" @click="switchArchiveTo()">
                 <span class="bold">归档时间</span>
               </h3>
             </template>
             <div class="right-menu-list">
               <div
-                class="right-menu-item row"
                 v-for="[year] in allArchives"
+                :key="year"
+                class="right-menu-item row"
                 :class="{ active: currentYears && currentYears.includes(year) }"
                 @click="switchArchiveTo(year)"
               >
@@ -40,11 +41,11 @@ const themeData = useThemeData();
 
 const allArchives = ref<Entry<ArchiveYear>[]>([]);
 
-const switchArchiveTo = (year: string | undefined) => router.push({ query: { year } });
+const switchArchiveTo = (year?: string) => router.push({ query: { year } });
 
 const currentYears = computed(() => route.query.year && route.query.year.toString().split(","));
-const currentArchives = computed<Entry<ArchiveYear>[]>(
-  () => (currentYears.value && allArchives.value.filter(([year]) => currentYears.value?.includes(year))) || allArchives.value,
+const currentArchives = computed<Entry<ArchiveYear>[]>(() =>
+  currentYears.value ? allArchives.value.filter(([year]) => currentYears.value?.includes(year)) : allArchives.value,
 );
 
 allArchives.value = Object.entries(themeData.value.archives);

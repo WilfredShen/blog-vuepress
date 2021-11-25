@@ -2,18 +2,19 @@
   <div class="tags-page page-wrapper">
     <div class="tags-wrapper">
       <MainLayout>
-        <ArticleList :articles="currentArticles" />
+        <ArticleList v-if="currentArticles" :articles="currentArticles" />
         <template #inner-right>
           <RightMenu>
             <template #title>
-              <h3 class="right-menu-title row" @click="switchTagTo(undefined)">
+              <h3 class="right-menu-title row" @click="switchTagTo()">
                 <span class="bold">全部标签</span><span class="number digital">{{ allTags?.length }}</span>
               </h3>
             </template>
             <div class="right-menu-list">
               <div
-                class="right-menu-item row"
                 v-for="[tag, pages] in allTags"
+                :key="`tag-${tag}`"
+                class="right-menu-item row"
                 :class="{ active: tag === route.query.tag }"
                 @click="switchTagTo(tag)"
               >
@@ -50,7 +51,7 @@ const currentArticles = ref<Node[]>();
 const total = ref(0);
 const pageSize = ref(10);
 const currentPage = ref(1);
-const currentTag = ref<string | undefined>();
+const currentTag = ref<string>();
 
 const getAllTags = (tags: Tags) => Object.entries(tags).filter(([tag]) => tag !== "$all");
 
@@ -60,7 +61,7 @@ const switchPagingTo = (index: number) =>
   index <= Math.ceil(total.value / pageSize.value) &&
   router.push({ query: { ...route.query, page: index } });
 
-const switchTagTo = (tag: string | undefined) => router.push({ query: { ...route.query, tag, page: undefined } });
+const switchTagTo = (tag?: string) => router.push({ query: { ...route.query, tag, page: undefined } });
 
 const updateQuery = () => {
   currentTag.value = route.query.tag?.toString();

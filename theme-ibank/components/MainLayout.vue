@@ -1,9 +1,9 @@
 <template>
   <div class="main-layout" :class="{ 'sidebar-open': hasSidebar }">
-    <div class="sidebar" v-if="hasSidebar"><slot name="sidebar"></slot></div>
+    <div v-if="hasSidebar" class="sidebar"><slot name="sidebar"></slot></div>
     <div class="main">
       <div class="content"><slot /><slot name="footer" /></div>
-      <div class="inner-right" v-if="hasInnerRight"><slot name="inner-right" /></div>
+      <div v-if="hasInnerRight" class="inner-right"><slot name="inner-right" /></div>
     </div>
   </div>
 </template>

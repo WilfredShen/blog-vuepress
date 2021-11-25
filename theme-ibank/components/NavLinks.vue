@@ -1,6 +1,6 @@
 <template>
   <nav class="nav-links">
-    <div class="nav-item" v-for="item in links">
+    <div v-for="item in links" :key="item.text" class="nav-item">
       <DropdownLink v-if="item.children && item.children.length" :item="item" />
       <span v-else class="underline-wrapper"><NavLink :item="item" class="accent-underline" /></span>
     </div>
