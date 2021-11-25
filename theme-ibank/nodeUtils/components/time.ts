@@ -1,6 +1,6 @@
 const weekdays = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
 
-const currentTime = ({ dateSeparator = "-", timeSeparator = ":", datetimeSeparator = " " } = {}) => {
+export const currentTime = ({ dateSeparator = "-", timeSeparator = ":", datetimeSeparator = " " } = {}) => {
   const now = new Date();
   const year = now.getFullYear();
   const month = (now.getMonth() + 1).toString().padStart(2, "0");
@@ -19,8 +19,4 @@ const currentTime = ({ dateSeparator = "-", timeSeparator = ":", datetimeSeparat
     weekday: weekdays[weekday],
     data: { now, year, month, day, hour, minute, second, weekday },
   };
-};
-
-module.exports = {
-  currentTime,
 };

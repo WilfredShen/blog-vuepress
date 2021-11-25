@@ -1,10 +1,10 @@
-const fs = require("fs");
-const { path } = require("@vuepress/utils");
+import fs from "fs";
+import { path } from "@vuepress/utils";
 
-const createPages = (docsPath, cfg) => {
+export const createPages = (docsPath: string, cfg: ThemeConfig) => {
   if (!(docsPath && cfg)) return {};
   const dir = path.join(docsPath, "@pages");
-  const res = {};
+  const res: Record<string, [boolean, string]> = {};
 
   if (cfg.categories) {
     const content = ["---", "title: 分类", "type: categories", "permalink: /categories", "navbar: false", "---"].join("\n");
@@ -27,10 +27,8 @@ const createPages = (docsPath, cfg) => {
   return res;
 };
 
-const createPage = (fullPath, content) => {
+const createPage = (fullPath: string, content: string) => {
   if (fs.existsSync(fullPath)) return false;
   fs.writeFileSync(fullPath, content);
   return true;
 };
-
-module.exports = { createPages };

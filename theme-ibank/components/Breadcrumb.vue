@@ -23,8 +23,8 @@
 withDefaults(
   defineProps<{
     navs: LinkRaw[];
-    separator: string;
-    home: boolean;
+    separator?: string;
+    home?: boolean;
   }>(),
   {
     separator: "/",

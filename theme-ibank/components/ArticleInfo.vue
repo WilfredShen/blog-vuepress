@@ -2,11 +2,13 @@
   <div class="article-info">
     <Breadcrumb v-if="navs && navs.length" :navs="navs" :home="true" />
     <div class="meta-info">
-      <Tags :tags="frontmatter.tags" gutter="0.5em" />
-      <a v-if="frontmatter.author.link" class="author" title="作者" :href="frontmatter.author.link" target="_blank">
-        <i class="iconfont icon-user"></i>{{ frontmatter.author.name }}
-      </a>
-      <span v-else title="作者"><i class="iconfont icon-user"></i>{{ frontmatter.author.name }}</span>
+      <Tags v-if="frontmatter.tags" :tags="frontmatter.tags" gutter="0.5em" />
+      <template v-if="frontmatter.author">
+        <a v-if="frontmatter.author.link" class="author" title="作者" :href="frontmatter.author.link" target="_blank">
+          <i class="iconfont icon-user"></i>{{ frontmatter.author.name }}
+        </a>
+        <span v-else title="作者"><i class="iconfont icon-user"></i>{{ frontmatter.author.name }}</span>
+      </template>
       <span title="创建日期"><i class="iconfont icon-calendar"></i>{{ frontmatter.date?.toString().slice(0, 10) }}</span>
     </div>
   </div>
@@ -24,20 +26,20 @@ import Tags from "./Tags.vue";
 const route = useRoute();
 const themeData = useThemeData();
 
-const page = ref<NodeData>(usePageData().value as NodeData);
+const page = ref<PageNodeData>(usePageData().value as PageNodeData);
 const navs = ref<LinkRaw[]>([]);
 const frontmatter = ref<FrontMatter>(page.value.frontmatter);
 
-const getBreadcrumb = (node: Node, keys: string[]): LinkRaw[] => {
+const getBreadcrumb = (node: PageNode, keys: string[] | undefined): LinkRaw[] => {
   if (!keys || !node.$children) return [];
   const list: LinkRaw[] = [];
-  for (let i = 0, e: Node | undefined = node.$children[keys[i]]; e && i < keys.length; i++, e = e.$children && e.$children[keys[i]])
+  for (let i = 0, e: PageNode | undefined = node.$children[keys[i]]; e && i < keys.length; i++, e = e.$children && e.$children[keys[i]])
     list.push({ text: keys[i], link: e.$data.frontmatter && e.$data.frontmatter.permalink });
   return list;
 };
 
 const updateData = () => {
-  page.value = usePageData().value as NodeData;
+  page.value = usePageData().value as PageNodeData;
   navs.value = getBreadcrumb(themeData.value.categories, page.value.frontmatter.categories);
   frontmatter.value = page.value.frontmatter;
 };

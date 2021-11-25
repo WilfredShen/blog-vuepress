@@ -1,11 +1,11 @@
-const fs = require("fs");
-const matter = require("gray-matter");
-const { genPemaLink } = require("./components/hash");
-const { isReadme, ignoreFormatter, matchAny } = require("./components/regex");
-const { currentTime } = require("./components/time");
-const { defaultPrefix, defaultType, author } = require("./defaults");
+import fs from "fs";
+import matter from "gray-matter";
+import { genPemaLink } from "./components/hash";
+import { isReadme, ignoreFormatter, matchAny } from "./components/regex";
+import { currentTime } from "./components/time";
+import { defaultPrefix, defaultType } from "./defaults";
 
-const parseFile = filePath => {
+const parseFile = (filePath: string) => {
   const paths = filePath.split("/");
   if (isReadme.test(filePath)) paths.pop();
   const fileName = paths.pop() || ".首页";
@@ -14,7 +14,23 @@ const parseFile = filePath => {
   return { fileName, categories, name };
 };
 
-const formatFrontmatter = ({ content, frontmatter, categories, name, type = defaultType, permalinkPrefix = defaultPrefix, author }) => {
+const formatFrontmatter = ({
+  content,
+  frontmatter,
+  categories,
+  name,
+  type = defaultType,
+  permalinkPrefix = defaultPrefix,
+  author,
+}: {
+  content: string;
+  frontmatter: FrontMatter;
+  categories: string[];
+  name: string;
+  type?: string;
+  permalinkPrefix?: string;
+  author: ThemeConfig["author"];
+}) => {
   if (!frontmatter.title) frontmatter.title = name;
   if (!frontmatter.permalink) frontmatter.permalink = `${permalinkPrefix}${genPemaLink(content)}`;
   if (!frontmatter.date) frontmatter.date = currentTime().datetime;
@@ -24,14 +40,14 @@ const formatFrontmatter = ({ content, frontmatter, categories, name, type = defa
   return frontmatter;
 };
 
-const formatFile = (cfg, fullPath, docPath, excludes = [ignoreFormatter]) => {
+export const formatFile = (cfg: ThemeConfig, fullPath: string, docPath: string, excludes = [ignoreFormatter]) => {
   const filePath = fullPath.replace(docPath, "");
   if (matchAny(filePath, excludes)) return [filePath, "excluded"]; // 排除的文件
   const { content, data } = matter.read(fullPath);
   const { categories, name } = parseFile(filePath);
   const frontmatter = formatFrontmatter({
     content,
-    frontmatter: data,
+    frontmatter: data as FrontMatter,
     categories,
     type: isReadme.test(filePath) ? "readme" : defaultType,
     name,
@@ -40,5 +56,3 @@ const formatFile = (cfg, fullPath, docPath, excludes = [ignoreFormatter]) => {
   fs.writeFileSync(fullPath, matter.stringify(content, frontmatter));
   return [filePath, "success"];
 };
-
-module.exports = { formatFile };

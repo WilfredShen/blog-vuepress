@@ -27,7 +27,7 @@ const toggleThemeMode = (mode: string) => {
   storage.set("theme-mode", mode);
 };
 
-onMounted(() => toggleThemeMode(storage.get("theme-mode") || parseThemeMode()));
+onMounted(() => toggleThemeMode(storage.get("theme-mode")?.toString() || parseThemeMode()));
 </script>
 <style lang="scss">
 .toggle-theme-button {

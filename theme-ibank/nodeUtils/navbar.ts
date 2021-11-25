@@ -1,7 +1,7 @@
-const { defaultType } = require("./defaults");
+import { defaultType } from "./defaults";
 
-const buildNavbar = node => {
-  const list = [];
+export const buildNavbar = (node: PageNode) => {
+  const list: NavLink[] = [];
   if (!node.$children) return list;
   Object.entries(node.$children).forEach(
     ([k, v]) =>
@@ -14,7 +14,5 @@ const buildNavbar = node => {
         $children: v.$children,
       }),
   );
-  return list.sort(({ $data: { order: a } }, { $data: { order: b } }) => a.localeCompare(b));
+  return list.sort(({ $data: { order: a } }, { $data: { order: b } }) => (a && b ? a.localeCompare(b) : 0));
 };
-
-module.exports = { buildNavbar };

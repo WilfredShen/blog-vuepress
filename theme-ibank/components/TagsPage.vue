@@ -45,8 +45,8 @@ const router = useRouter();
 const themeData = useThemeData();
 
 const allTags = ref<Tag[]>();
-const articles = ref<Node[]>();
-const currentArticles = ref<Node[]>();
+const articles = ref<PageNode[]>();
+const currentArticles = ref<PageNode[]>();
 
 const total = ref(0);
 const pageSize = ref(10);

@@ -120,14 +120,14 @@ author:
 
 ### 自动生成
 
-| key          | 生成规则                                                     |
-| ------------ | ------------------------------------------------------------ |
+| key          | 生成规则                                                                 |
+| ------------ | ------------------------------------------------------------------------ |
 | `title`      | `[order].[name].[md]`中的`name`；若文件为`readme.md`，则取父目录的`name` |
-| `permalink`  | `"/article/[hash]"`：`hash`根据文件内容生成                  |
+| `permalink`  | `"/article/[hash]"`：`hash`根据文件内容生成                              |
 | `date`       | 执行格式化的时间，格式为`yyyy-MM-dd HH:mm:ss`，例：`2021-01-23 14:30:55` |
-| `type`       | `"article"`                                                  |
-| `categories` | `Array`：所有父目录（从一级目录开始）的`name`，依次排列      |
-| `author`     | `themeConfig.author`                                         |
+| `type`       | `"article"`                                                              |
+| `categories` | `Array`：所有父目录（从一级目录开始）的`name`，依次排列                  |
+| `author`     | `themeConfig.author`                                                     |
 
 ### 手动添加
 

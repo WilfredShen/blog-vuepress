@@ -46,15 +46,15 @@ const route = useRoute();
 const router = useRouter();
 const themeData = useThemeData();
 
-const allCategories = ref<NodeData[]>();
-const articles = ref<Node[]>();
-const currentArticles = ref<Node[]>();
+const allCategories = ref<PageNodeData[]>();
+const articles = ref<PageNode[]>();
+const currentArticles = ref<PageNode[]>();
 const total = ref(0);
 const pageSize = ref(10);
 const currentPage = ref(1);
-const currentCategory = ref<Node>();
+const currentCategory = ref<PageNode>();
 
-const getAllCategories = (node: Node, prefix = "", ignoreSelf = true) => {
+const getAllCategories = (node: PageNode, prefix = "", ignoreSelf = true) => {
   const list = [];
   if (node && node.$children) {
     const key = prefix ? `${prefix},${node.$data.title}` : node.$data.title;

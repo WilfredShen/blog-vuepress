@@ -6,18 +6,20 @@
           <router-link :to="item.$data.path">{{ item.$data.title }}</router-link>
         </h2>
         <div class="meta-info">
-          <a
-            v-if="item.$data.frontmatter.author.link"
-            class="author"
-            title="作者"
-            :href="item.$data.frontmatter.author.link"
-            target="_blank"
-          >
-            <i class="iconfont icon-user"></i>{{ item.$data.frontmatter.author.name }}
-          </a>
-          <span v-else title="作者"><i class="iconfont icon-user"></i>{{ item.$data.frontmatter.author.name }}</span>
+          <template v-if="item.$data.frontmatter.author">
+            <a
+              v-if="item.$data.frontmatter.author.link"
+              class="author"
+              title="作者"
+              :href="item.$data.frontmatter.author.link"
+              target="_blank"
+            >
+              <i class="iconfont icon-user"></i>{{ item.$data.frontmatter.author.name }}
+            </a>
+            <span v-else title="作者"><i class="iconfont icon-user"></i>{{ item.$data.frontmatter.author.name }}</span>
+          </template>
           <span title="创建日期"><i class="iconfont icon-calendar"></i>{{ item.$data.frontmatter.date?.toString().slice(0, 10) }}</span>
-          <Tags :tags="item.$data.frontmatter.tags" gutter="0.5em" />
+          <Tags v-if="item.$data.frontmatter.tags" :tags="item.$data.frontmatter.tags" gutter="0.5em" />
         </div>
         <div v-if="item.$data.excerpt" class="excerpt-wrapper">
           <!-- eslint-disable-next-line -->
@@ -35,7 +37,7 @@
 <script setup lang="ts">
 import Tags from "./Tags.vue";
 
-defineProps<{ articles: Node[] }>();
+defineProps<{ articles: PageNode[] }>();
 </script>
 <style lang="scss">
 @use "../styles/variables" as *;
