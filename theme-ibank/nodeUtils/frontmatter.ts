@@ -4,6 +4,7 @@ import { genPemaLink } from "./components/hash";
 import { isReadme, ignoreFormatter, matchAny } from "./components/regex";
 import { currentTime } from "./components/time";
 import { defaultPrefix, defaultType } from "./defaults";
+import { FrontMatter, ThemeConfig } from "types";
 
 const parseFile = (filePath: string) => {
   const paths = filePath.split("/");

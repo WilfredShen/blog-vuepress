@@ -1,4 +1,5 @@
 import { defaultType } from "./defaults";
+import { PageNode, Tags } from "types";
 
 export const buildTags = (pages: PageNode[]) => {
   const tags: Tags = { $all: [] };

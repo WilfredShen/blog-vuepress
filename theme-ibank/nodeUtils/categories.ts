@@ -1,4 +1,5 @@
 import { defaultType } from "./defaults";
+import type { PageNodeData, PageNode } from "types";
 
 const newNode = (data?: PageNodeData): PageNode => ({ $data: { ...data } } as PageNode);
 

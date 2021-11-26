@@ -1,3 +1,5 @@
+import type { PageNode } from "types";
+
 export const parsePages = (node: PageNode) => node.$children && Object.values(node.$children);
 export const filterArticles = (pages: PageNode[]) => pages.filter(e => e.$data.frontmatter && e.$data.frontmatter.type === "article");
 

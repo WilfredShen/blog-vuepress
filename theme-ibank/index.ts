@@ -1,4 +1,3 @@
-import type { ThemeFunction, ThemeObject } from "vuepress-vite";
 import { path } from "@vuepress/utils";
 // const { path }from("@vuepress/utils");
 import chalk from "chalk";
@@ -11,6 +10,8 @@ import { buildTags } from "./nodeUtils/tags";
 import { buildArchives } from "./nodeUtils/archives";
 import { defaultConfig } from "./nodeUtils/defaults";
 import { createPages } from "./nodeUtils/pages";
+import type { ThemeFunction, ThemeObject } from "vuepress-vite";
+import type { Archive, LinkRaw, NavLink, PageNode, SiteData, Tags, ThemeConfig } from "types";
 
 const LOG_ENABLE = true;
 

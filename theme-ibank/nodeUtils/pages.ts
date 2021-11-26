@@ -1,5 +1,6 @@
 import fs from "fs";
 import { path } from "@vuepress/utils";
+import { ThemeConfig } from "types";
 
 export const createPages = (docsPath: string, cfg: ThemeConfig) => {
   if (!(docsPath && cfg)) return {};

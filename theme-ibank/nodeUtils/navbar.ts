@@ -1,4 +1,5 @@
 import { defaultType } from "./defaults";
+import { PageNode, NavLink } from "types";
 
 export const buildNavbar = (node: PageNode) => {
   const list: NavLink[] = [];
