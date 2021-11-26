@@ -34,6 +34,7 @@ import { useThemeData } from "@vuepress/plugin-theme-data/lib/client";
 import Timeline from "./Timeline.vue";
 import RightMenu from "./RightMenu.vue";
 import MainLayout from "./MainLayout.vue";
+import type { Entry, ArchiveYear } from "types";
 
 const route = useRoute();
 const router = useRouter();

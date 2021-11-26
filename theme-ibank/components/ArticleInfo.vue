@@ -22,6 +22,7 @@ import { useThemeData } from "@vuepress/plugin-theme-data/lib/client";
 import Breadcrumb from "./Breadcrumb.vue";
 import ArticleTitle from "./ArticleTitle.vue";
 import Tags from "./Tags.vue";
+import type { FrontMatter, LinkRaw, PageNode, PageNodeData } from "types";
 
 const route = useRoute();
 const themeData = useThemeData();

@@ -16,6 +16,8 @@
   </div>
 </template>
 <script setup lang="ts">
+import type { Entry, ArchiveYear } from "types";
+
 defineProps<{ archives: Entry<ArchiveYear>[] }>();
 </script>
 <style lang="scss">

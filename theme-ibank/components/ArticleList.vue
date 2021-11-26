@@ -36,6 +36,7 @@
 </template>
 <script setup lang="ts">
 import Tags from "./Tags.vue";
+import type { PageNode } from "types";
 
 defineProps<{ articles: PageNode[] }>();
 </script>

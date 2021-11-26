@@ -20,6 +20,8 @@
   </div>
 </template>
 <script setup lang="ts">
+import type { LinkRaw } from "types";
+
 withDefaults(
   defineProps<{
     navs: LinkRaw[];

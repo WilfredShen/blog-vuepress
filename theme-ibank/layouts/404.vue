@@ -19,11 +19,11 @@ const msgs = ["🌵这里一片荒芜🌵，去别的地方看看吧", "这个�
 let msg = ref("");
 
 onMounted(() => {
-  let prev: number = parseInt(storage.get("current-404-msg"));
+  let prev: number = parseInt(storage.get("current-404-msg") as string);
   let current: number;
   if (prev !== 0 && !prev) prev = -1;
   while ((current = Math.floor(Math.random() * msgs.length)) === prev);
-  storage.set("current-404-msg", current);
+  storage.set("current-404-msg", current.toString());
   msg.value = msgs[(prev = current)];
 });
 </script>

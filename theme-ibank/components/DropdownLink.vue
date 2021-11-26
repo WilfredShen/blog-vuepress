@@ -25,6 +25,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import NavLink from "./NavLink.vue";
+import type { LinkRaw } from "types";
 
 defineProps<{ item: LinkRaw }>();
 

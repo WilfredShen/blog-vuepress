@@ -41,6 +41,7 @@ import Pagination from "./Pagination.vue";
 import ArticleList from "./ArticleList.vue";
 import RightMenu from "./RightMenu.vue";
 import MainLayout from "./MainLayout.vue";
+import type { PageNode, PageNodeData } from "types";
 
 const route = useRoute();
 const router = useRouter();

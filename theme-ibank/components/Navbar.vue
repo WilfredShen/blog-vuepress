@@ -17,6 +17,7 @@ import { useSiteData } from "@vuepress/client";
 import type { SiteData } from "@vuepress/client";
 import NavLinks from "./NavLinks.vue";
 import ToggleThemeButton from "./ToggleThemeButton.vue";
+import type { ThemeConfig } from "types";
 
 const siteData: Ref<SiteData & { themeConfig?: ThemeConfig }> = useSiteData();
 
