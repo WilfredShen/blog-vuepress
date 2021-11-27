@@ -6,9 +6,9 @@
 
 @font-face {
   font-family: "iconfont"; /* Project id 2934011 */
-  src: url("//at.alicdn.com/t/font_2934011_7kl2fqga9nu.woff2?t=1637570349858") format("woff2"),
-    url("//at.alicdn.com/t/font_2934011_7kl2fqga9nu.woff?t=1637570349858") format("woff"),
-    url("//at.alicdn.com/t/font_2934011_7kl2fqga9nu.ttf?t=1637570349858") format("truetype");
+  src: url("//at.alicdn.com/t/font_2934011_pniz8k4ls2f.woff2?t=1637913287042") format("woff2"),
+    url("//at.alicdn.com/t/font_2934011_pniz8k4ls2f.woff?t=1637913287042") format("woff"),
+    url("//at.alicdn.com/t/font_2934011_pniz8k4ls2f.ttf?t=1637913287042") format("truetype");
 }
 
 .iconfont {
@@ -17,6 +17,30 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-danger:before {
+  content: "\e605";
+}
+
+.icon-tip:before {
+  content: "\e604";
+}
+
+.icon-info:before {
+  content: "\e603";
+}
+
+.icon-warning:before {
+  content: "\e612";
+}
+
+.icon-success:before {
+  content: "\e60c";
+}
+
+.icon-right:before {
+  content: "\e71c";
 }
 
 .icon-more:before {
@@ -89,8 +113,4 @@
 
 .icon-home:before {
   content: "\e60a";
-}
-
-.icon-right:before {
-  content: "\e71c";
 }

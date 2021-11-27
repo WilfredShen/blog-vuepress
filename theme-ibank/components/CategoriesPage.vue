@@ -34,7 +34,7 @@
 </template>
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { useRoute, useRouter } from "@vuepress/client";
 import { useThemeData } from "@vuepress/plugin-theme-data/lib/client";
 import { parsePages, filterArticles, sortPagesByDateDesc, sotrPagesByOrder } from "../utils/articles";
 import Pagination from "./Pagination.vue";

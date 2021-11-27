@@ -16,8 +16,15 @@
   --footerColor: #888;
   --disabledColor: rgba(70, 70, 70, 0.5);
   --scrollbarColor: rgba(100, 100, 100, 0.5);
+  // 选中的文本
   --selectionBg: #b3d4fc;
   --selectionColor: #202020;
+}
+
+#nprogress {
+  // nprogress
+  --nprogress-color: #ff5722;
+  --nprogress-z-index: 1031;
 }
 
 .theme-mode-light {

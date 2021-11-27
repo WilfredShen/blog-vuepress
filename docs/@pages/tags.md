@@ -1,6 +1,6 @@
 ---
 title: 标签
 type: tags
-permalink: /tags
+permalink: /tags/
 navbar: false
 ---

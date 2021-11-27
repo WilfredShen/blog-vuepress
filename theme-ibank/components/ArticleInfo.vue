@@ -16,8 +16,7 @@
 </template>
 <script setup lang="ts">
 import { watch, ref } from "vue";
-import { useRoute } from "vue-router";
-import { usePageData } from "@vuepress/client";
+import { useRoute, usePageData } from "@vuepress/client";
 import { useThemeData } from "@vuepress/plugin-theme-data/lib/client";
 import Breadcrumb from "./Breadcrumb.vue";
 import ArticleTitle from "./ArticleTitle.vue";

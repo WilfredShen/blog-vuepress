@@ -20,7 +20,7 @@ export interface PageNodeData extends vt.PageData {
 }
 
 export interface PageNode extends vt.Page {
-  order: string[];
+  order?: string[];
   data: PageNodeData;
   $data: PageNodeData;
   $children?: Record<string, PageNode>;

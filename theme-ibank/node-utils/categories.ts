@@ -1,4 +1,4 @@
-import { defaultType } from "./defaults";
+import pt from "./pageTypes";
 import type { PageNodeData, PageNode } from "types";
 
 const newNode = (data?: PageNodeData): PageNode => ({ $data: { ...data } } as PageNode);
@@ -6,9 +6,10 @@ const newNode = (data?: PageNodeData): PageNode => ({ $data: { ...data } } as Pa
 export const buildCategories = (pages: PageNode[]) => {
   const root = newNode({ count: 0, title: "首页" } as PageNodeData);
   pages.forEach(page => {
-    if (page.order) for (const order of page.order) if (/^_/.test(order)) return;
+    if (!page.order) page.order = [];
+    for (const order of page.order) if (/^_/.test(order)) return;
 
-    const doIncrease = page.data.frontmatter.type === defaultType;
+    const doIncrease = page.data.frontmatter.type === pt.article;
     if (page.data.frontmatter.categories) {
       let current = root;
       // 遍历categories，注册节点
@@ -18,6 +19,7 @@ export const buildCategories = (pages: PageNode[]) => {
         if (current.$children[e]) current = current.$children[e];
         // 不存在节点则创建新的节点并递归
         else {
+          if (!page.order) page.order = [];
           current = current.$children[e] = newNode({ order: page.order[i], count: 0, title: e } as PageNodeData);
           root.$data.count !== undefined && root.$data.count++;
         }

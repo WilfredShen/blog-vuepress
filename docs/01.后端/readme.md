@@ -1,11 +1,11 @@
 ---
 title: 后端
-permalink: /article/be52093f
 date: '2021-11-16 14:52:45'
 type: readme
 author:
   name: 柒月流火
   link: 'https://github.com/WilfredShen'
+permalink: /readme/2344da4d/
 ---
 后端 readme
 

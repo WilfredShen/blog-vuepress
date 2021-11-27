@@ -2,14 +2,14 @@ import { path } from "@vuepress/utils";
 // const { path }from("@vuepress/utils");
 import chalk from "chalk";
 // const chalkfrom("chalk"); // 命令行打印美化
-import { formatFile } from "./nodeUtils/frontmatter";
-import { parseOrder } from "./nodeUtils/order";
-import { buildCategories } from "./nodeUtils/categories";
-import { buildNavbar } from "./nodeUtils/navbar";
-import { buildTags } from "./nodeUtils/tags";
-import { buildArchives } from "./nodeUtils/archives";
-import { defaultConfig } from "./nodeUtils/defaults";
-import { createPages } from "./nodeUtils/pages";
+import { formatFile } from "./node-utils/frontmatter";
+import { parseOrder } from "./node-utils/order";
+import { buildCategories } from "./node-utils/categories";
+import { buildNavbar } from "./node-utils/navbar";
+import { buildTags } from "./node-utils/tags";
+import { buildArchives } from "./node-utils/archives";
+import { defaultConfig } from "./node-utils/defaults";
+import { createPages } from "./node-utils/pages";
 import type { ThemeFunction, ThemeObject } from "vuepress-vite";
 import type { Archive, LinkRaw, NavLink, PageNode, SiteData, Tags, ThemeConfig } from "types";
 
@@ -29,7 +29,7 @@ const themeIbank: ThemeFunction = (options, ctx) => {
   Object.values(createPages(ctx.options.source, opts)).forEach(v =>
     v[0]
       ? log(chalk.cyan("info"), "create page:", chalk.green("[success]        "), chalk.green(v[1]))
-      : log(chalk.cyan("info"), "create page:", chalk.yellow("[already exists] "), chalk.yellow(v[1])),
+      : log(chalk.cyan("info"), "create page:", chalk.yellow("[already existed]"), chalk.yellow(v[1])),
   );
 
   const themeData: {
@@ -48,6 +48,53 @@ const themeIbank: ThemeFunction = (options, ctx) => {
     plugins: [
       ["@vuepress/plugin-prismjs"],
       ["@vuepress/plugin-theme-data", { themeData }],
+      // ["@vuepress/plugin-nprogress"],
+      [
+        "@vuepress/plugin-container",
+        {
+          type: "details",
+          before: (info: string) => `<div class="custom-container"><details class="details"><summary>${info}</summary>\n`,
+          after: () => "</details></div>\n",
+          locales: { "/": { defaultInfo: "点击查看" }, "/en/": { defaultInfo: "DETAILS" } },
+        },
+      ],
+      [
+        "@vuepress/plugin-container",
+        {
+          type: "info",
+          before: (info: string) => `<div class="custom-container"><div class="info"><p class="title iconfont icon-info">${info}</p>\n`,
+          after: () => "</div></div>\n",
+          locales: { "/": { defaultInfo: "普通信息" }, "/en/": { defaultInfo: "INFO" } },
+        },
+      ],
+      [
+        "@vuepress/plugin-container",
+        {
+          type: "tip",
+          before: (info: string) => `<div class="custom-container"><div class="tip"><p class="title iconfont icon-tip">${info}</p>\n`,
+          after: () => "</div></div>\n",
+          locales: { "/": { defaultInfo: "提示信息" }, "/en/": { defaultInfo: "TIP" } },
+        },
+      ],
+      [
+        "@vuepress/plugin-container",
+        {
+          type: "warning",
+          before: (info: string) =>
+            `<div class="custom-container"><div class="warning"><p class="title iconfont icon-warning">${info}</p>\n`,
+          after: () => "</div></div>\n",
+          locales: { "/": { defaultInfo: "警告信息" }, "/en/": { defaultInfo: "WARNING" } },
+        },
+      ],
+      [
+        "@vuepress/plugin-container",
+        {
+          type: "danger",
+          before: (info: string) => `<div class="custom-container"><div class="danger"><p class="title iconfont icon-danger">${info}</p>\n`,
+          after: () => "</div></div>\n",
+          locales: { "/": { defaultInfo: "危险信息" }, "/en/": { defaultInfo: "DANGER" } },
+        },
+      ],
       // ["@vuepress/plugin-active-header-links", { offset: 4.6 * 16 }],
     ],
     // 以下为 Hooks，按调用顺序排列
@@ -64,7 +111,7 @@ const themeIbank: ThemeFunction = (options, ctx) => {
     extendsPageData: page => {
       const p = page as PageNode;
       if (p.filePathRelative) p.order = parseOrder(p.filePathRelative);
-      return p;
+      return p.data;
     },
     onInitialized: ctx => {
       const filteredPages = (ctx.pages as PageNode[]).filter(page => !page.order || !page.order.filter(o => /^_/.test(o)).length);

@@ -1,10 +1,10 @@
 <template>
   <aside class="sidebar card">
     <template v-for="header in headers" :key="header.slug">
-      <h3 class="sidebar-title">
+      <div class="sidebar-title">
         <a :href="`#${header.slug}`" class="bold">{{ header.title }}</a>
-      </h3>
-      <ul v-for="item in header.children" :key="item.slug" class="sidebar-list iconfont">
+      </div>
+      <ul v-for="item in header.children" :key="item.slug" class="sidebar-list">
         <li class="sidebar-item">
           <a :href="`#${item.slug}`">{{ item.title }}</a>
         </li>
@@ -13,10 +13,16 @@
   </aside>
 </template>
 <script setup lang="ts">
-import { usePageData } from "@vuepress/client";
+import { ref, watch } from "vue";
+import { useRoute, usePageData } from "@vuepress/client";
 
-const pageData = usePageData();
-const headers = pageData.value.headers;
+const route = useRoute();
+
+const headers = ref(usePageData().value.headers);
+watch(
+  () => route.path,
+  () => (headers.value = usePageData().value.headers),
+);
 </script>
 <style lang="scss">
 .sidebar {
@@ -30,11 +36,12 @@ const headers = pageData.value.headers;
   .sidebar-title {
     margin: 0;
     border: none;
+    font-size: 1.2rem;
   }
 
   .sidebar-list {
     margin-top: 0.5rem;
-    list-style: "\e71c";
+    list-style: none;
 
     a {
       display: inline-block;

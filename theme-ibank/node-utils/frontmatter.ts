@@ -3,7 +3,8 @@ import matter from "gray-matter";
 import { genPemaLink } from "./components/hash";
 import { isReadme, ignoreFormatter, matchAny } from "./components/regex";
 import { currentTime } from "./components/time";
-import { defaultPrefix, defaultType } from "./defaults";
+import pt from "./pageTypes";
+import { defaultPrefix } from "./defaults";
 import { FrontMatter, ThemeConfig } from "types";
 
 const parseFile = (filePath: string) => {
@@ -20,7 +21,7 @@ const formatFrontmatter = ({
   frontmatter,
   categories,
   name,
-  type = defaultType,
+  type = pt.article,
   permalinkPrefix = defaultPrefix,
   author,
 }: {
@@ -33,7 +34,7 @@ const formatFrontmatter = ({
   author: ThemeConfig["author"];
 }) => {
   if (!frontmatter.title) frontmatter.title = name;
-  if (!frontmatter.permalink) frontmatter.permalink = `${permalinkPrefix}${genPemaLink(content)}`;
+  if (!frontmatter.permalink) frontmatter.permalink = `${permalinkPrefix}${genPemaLink(content)}/`;
   if (!frontmatter.date) frontmatter.date = currentTime().datetime;
   if (!frontmatter.type) frontmatter.type = type;
   if (!frontmatter.categories && categories && categories.length) frontmatter.categories = categories;
@@ -46,11 +47,13 @@ export const formatFile = (cfg: ThemeConfig, fullPath: string, docPath: string, 
   if (matchAny(filePath, excludes)) return [filePath, "excluded"]; // 排除的文件
   const { content, data } = matter.read(fullPath);
   const { categories, name } = parseFile(filePath);
+  const isr = isReadme.test(filePath);
   const frontmatter = formatFrontmatter({
     content,
     frontmatter: data as FrontMatter,
     categories,
-    type: isReadme.test(filePath) ? "readme" : defaultType,
+    type: isr ? pt.readme : pt.article,
+    permalinkPrefix: isr ? "/readme/" : defaultPrefix,
     name,
     author: cfg.author,
   });
