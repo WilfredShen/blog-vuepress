@@ -1,7 +1,9 @@
-import type { PageNode } from "types";
+import { PageType } from "../types";
+import type { PageNode } from "../types";
 
 export const parsePages = (node: PageNode) => node.$children && Object.values(node.$children);
-export const filterArticles = (pages: PageNode[]) => pages.filter(e => e.$data.frontmatter && e.$data.frontmatter.type === "article");
+export const filterArticles = (pages: PageNode[]) =>
+  pages.filter(e => e.$data.frontmatter && e.$data.frontmatter.type === PageType.article);
 
 export const sotrPagesByOrder = (pages: PageNode[]) =>
   pages.sort((a, b) => a.$data.order?.toString().localeCompare(b.$data.order?.toString() || "") || 0);

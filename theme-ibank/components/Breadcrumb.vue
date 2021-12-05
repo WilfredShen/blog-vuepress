@@ -1,9 +1,26 @@
+<script setup lang="ts">
+import type { LinkRaw } from "../types";
+
+withDefaults(
+  defineProps<{
+    navs: LinkRaw[];
+    separator?: string;
+    home?: boolean;
+  }>(),
+  {
+    separator: "/",
+    home: false,
+  },
+);
+</script>
+
 <template>
   <div class="breadcrumb">
-    <router-link v-if="home" to="/" class="nav-link home iconfont icon-home" title="首页"></router-link>
+    <router-link v-if="home" to="/" class="nav-link home is-link iconfont icon-home" title="首页"></router-link>
     <div v-for="(item, index) in navs" :key="item.text" class="breadcrumb-item" title="分类">
       <span v-if="home || index !== 0" class="separator">{{ separator }}</span>
       <router-link
+        class="is-link"
         :to="{
           path: '/categories',
           query: {
@@ -19,21 +36,7 @@
     </div>
   </div>
 </template>
-<script setup lang="ts">
-import type { LinkRaw } from "types";
 
-withDefaults(
-  defineProps<{
-    navs: LinkRaw[];
-    separator?: string;
-    home?: boolean;
-  }>(),
-  {
-    separator: "/",
-    home: false,
-  },
-);
-</script>
 <style lang="scss">
 .breadcrumb {
   display: flex;
@@ -41,14 +44,6 @@ withDefaults(
   cursor: default;
   align-items: center;
   font-size: 1em;
-
-  .home,
-  .breadcrumb-item a {
-    color: var(--textColor);
-    &:hover {
-      color: var(--accentColor);
-    }
-  }
 
   .separator {
     margin: 0 0.3em;

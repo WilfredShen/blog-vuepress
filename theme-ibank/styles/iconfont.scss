@@ -1,22 +1,51 @@
-// @font-face {
-//   font-family: "iconfont";
-//   src: url("iconfont.woff2?t=1637222240092") format("woff2"), url("iconfont.woff?t=1637222240092") format("woff"),
-//     url("iconfont.ttf?t=1637222240092") format("truetype");
-// }
-
 @font-face {
   font-family: "iconfont"; /* Project id 2934011 */
-  src: url("//at.alicdn.com/t/font_2934011_pniz8k4ls2f.woff2?t=1637913287042") format("woff2"),
-    url("//at.alicdn.com/t/font_2934011_pniz8k4ls2f.woff?t=1637913287042") format("woff"),
-    url("//at.alicdn.com/t/font_2934011_pniz8k4ls2f.ttf?t=1637913287042") format("truetype");
+  src: url("../fonts/iconfont.woff2") format("woff2"), url("../fonts/iconfont.woff") format("woff"),
+    url("../fonts/iconfont.ttf") format("truetype");
 }
 
 .iconfont {
-  font-family: iconfont !important;
+  font-family: "iconfont" !important;
   font-size: 16px;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-email:before {
+  content: "\e684";
+}
+
+.icon-qq:before {
+  content: "\e882";
+}
+
+.icon-twitter:before {
+  content: "\e883";
+}
+
+.icon-youtube:before {
+  content: "\e884";
+}
+
+.icon-wechat:before {
+  content: "\e885";
+}
+
+.icon-github:before {
+  content: "\e886";
+}
+
+.icon-facebook:before {
+  content: "\e88d";
+}
+
+.icon-bilibili:before {
+  content: "\e75d";
+}
+
+.icon-gitee:before {
+  content: "\e686";
 }
 
 .icon-danger:before {

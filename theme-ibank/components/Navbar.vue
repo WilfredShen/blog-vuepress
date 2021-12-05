@@ -1,3 +1,17 @@
+<script setup lang="ts">
+import { ref } from "vue";
+import type { Ref } from "vue";
+import { useSiteData } from "@vuepress/client";
+import type { SiteData } from "@vuepress/client";
+import NavLinks from "./NavLinks.vue";
+import ToggleThemeButton from "./ToggleThemeButton.vue";
+import type { ThemeConfig } from "../types";
+
+const siteData: Ref<SiteData & { themeConfig?: ThemeConfig }> = useSiteData();
+
+const navbar = ref();
+</script>
+
 <template>
   <header ref="navbar" class="navbar">
     <div class="logo">
@@ -10,16 +24,3 @@
     <ToggleThemeButton />
   </header>
 </template>
-<script setup lang="ts">
-import { ref } from "vue";
-import type { Ref } from "vue";
-import { useSiteData } from "@vuepress/client";
-import type { SiteData } from "@vuepress/client";
-import NavLinks from "./NavLinks.vue";
-import ToggleThemeButton from "./ToggleThemeButton.vue";
-import type { ThemeConfig } from "types";
-
-const siteData: Ref<SiteData & { themeConfig?: ThemeConfig }> = useSiteData();
-
-const navbar = ref();
-</script>

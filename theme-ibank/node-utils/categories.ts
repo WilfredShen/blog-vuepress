@@ -1,5 +1,5 @@
-import pt from "./pageTypes";
-import type { PageNodeData, PageNode } from "types";
+import { PageType } from "../types";
+import type { PageNodeData, PageNode } from "../types";
 
 const newNode = (data?: PageNodeData): PageNode => ({ $data: { ...data } } as PageNode);
 
@@ -9,7 +9,7 @@ export const buildCategories = (pages: PageNode[]) => {
     if (!page.order) page.order = [];
     for (const order of page.order) if (/^_/.test(order)) return;
 
-    const doIncrease = page.data.frontmatter.type === pt.article;
+    const doIncrease = page.data.frontmatter.type === PageType.article;
     if (page.data.frontmatter.categories) {
       let current = root;
       // 遍历categories，注册节点

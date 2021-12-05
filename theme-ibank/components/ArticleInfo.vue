@@ -1,19 +1,3 @@
-<template>
-  <div class="article-info">
-    <Breadcrumb v-if="navs && navs.length" :navs="navs" :home="true" />
-    <div class="meta-info">
-      <Tags v-if="frontmatter.tags" :tags="frontmatter.tags" gutter="0.5em" />
-      <template v-if="frontmatter.author">
-        <a v-if="frontmatter.author.link" class="author" title="作者" :href="frontmatter.author.link" target="_blank">
-          <i class="iconfont icon-user"></i>{{ frontmatter.author.name }}
-        </a>
-        <span v-else title="作者"><i class="iconfont icon-user"></i>{{ frontmatter.author.name }}</span>
-      </template>
-      <span title="创建日期"><i class="iconfont icon-calendar"></i>{{ frontmatter.date?.toString().slice(0, 10) }}</span>
-    </div>
-  </div>
-  <ArticleTitle :title="frontmatter.title" />
-</template>
 <script setup lang="ts">
 import { watch, ref } from "vue";
 import { useRoute, usePageData } from "@vuepress/client";
@@ -21,7 +5,7 @@ import { useThemeData } from "@vuepress/plugin-theme-data/lib/client";
 import Breadcrumb from "./Breadcrumb.vue";
 import ArticleTitle from "./ArticleTitle.vue";
 import Tags from "./Tags.vue";
-import type { FrontMatter, LinkRaw, PageNode, PageNodeData } from "types";
+import type { FrontMatter, LinkRaw, PageNode, PageNodeData } from "../types";
 
 const route = useRoute();
 const themeData = useThemeData();
@@ -46,6 +30,24 @@ const updateData = () => {
 watch(route, updateData);
 updateData();
 </script>
+
+<template>
+  <div class="article-info">
+    <Breadcrumb v-if="navs && navs.length" :navs="navs" :home="true" />
+    <div class="meta-info">
+      <Tags v-if="frontmatter.tags" :tags="frontmatter.tags" gutter="0.5em" />
+      <template v-if="frontmatter.author">
+        <a v-if="frontmatter.author.link" class="author" title="作者" :href="frontmatter.author.link" target="_blank">
+          <i class="iconfont icon-user"></i>{{ frontmatter.author.name }}
+        </a>
+        <span v-else title="作者"><i class="iconfont icon-user"></i>{{ frontmatter.author.name }}</span>
+      </template>
+      <span title="创建日期"><i class="iconfont icon-calendar"></i>{{ frontmatter.date?.toString().slice(0, 10) }}</span>
+    </div>
+  </div>
+  <ArticleTitle :title="frontmatter.title" />
+</template>
+
 <style lang="scss">
 .article-info {
   padding: 0.5rem 0;

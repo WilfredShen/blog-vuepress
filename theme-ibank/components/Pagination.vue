@@ -22,7 +22,7 @@
 </template>
 <script setup lang="ts">
 import { computed, ref, onMounted, onUnmounted } from "vue";
-import type { PaginationItem } from "types";
+import type { PaginationItem } from "../types";
 
 const props = withDefaults(
   defineProps<{
@@ -160,12 +160,14 @@ onUnmounted(() => window.removeEventListener("resize", fn));
     border-top-left-radius: 24px;
     border-bottom-left-radius: 24px;
     padding-left: 16px;
+    margin-left: 0;
   }
 
   .next {
     border-top-right-radius: 24px;
     border-bottom-right-radius: 24px;
     padding-right: 16px;
+    margin-right: 0;
   }
 }
 </style>

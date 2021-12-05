@@ -1,3 +1,11 @@
+<script setup lang="ts">
+import { computed, useSlots } from "vue";
+
+const slots = useSlots();
+const hasSidebar = computed(() => !!slots["sidebar"]);
+const hasInnerRight = computed(() => !!slots["inner-right"]);
+</script>
+
 <template>
   <div class="main-layout" :class="{ 'sidebar-open': hasSidebar }">
     <div v-if="hasSidebar" class="sidebar"><slot name="sidebar"></slot></div>
@@ -7,13 +15,7 @@
     </div>
   </div>
 </template>
-<script setup lang="ts">
-import { computed, useSlots } from "vue";
 
-const slots = useSlots();
-const hasSidebar = computed(() => !!slots["sidebar"]);
-const hasInnerRight = computed(() => !!slots["inner-right"]);
-</script>
 <style lang="scss">
 @use "../styles/variables" as *;
 
@@ -37,7 +39,7 @@ const hasInnerRight = computed(() => !!slots["inner-right"]);
     }
 
     .inner-right {
-      width: 200px;
+      width: 240px;
       margin-left: 1rem;
     }
   }

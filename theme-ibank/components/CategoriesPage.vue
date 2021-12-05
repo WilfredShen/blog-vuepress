@@ -1,37 +1,3 @@
-<template>
-  <div class="categories-page page-wrapper">
-    <div class="categories-wrapper">
-      <MainLayout>
-        <ArticleList v-if="currentArticles" :articles="currentArticles" />
-        <template #inner-right>
-          <RightMenu>
-            <template #title>
-              <h3 class="right-menu-title row" @click="switchCategoryTo()">
-                <span class="bold">全部分类</span><span class="number digital">{{ themeData.categories.$data.count }}</span>
-              </h3>
-            </template>
-            <div class="right-menu-list">
-              <template v-for="item in allCategories" :key="item.key">
-                <div
-                  v-if="item.count"
-                  class="right-menu-item row"
-                  :class="{ active: item.key === route.query.category }"
-                  @click="switchCategoryTo(item.key)"
-                >
-                  <span>{{ item.title }}</span>
-                  <span class="number digital">{{ item.count }}</span>
-                </div>
-              </template>
-            </div>
-          </RightMenu>
-        </template>
-        <template #footer>
-          <Pagination v-if="total > pageSize" :total="total" :page-size="pageSize" :current="currentPage" @switch-paging="switchPagingTo" />
-        </template>
-      </MainLayout>
-    </div>
-  </div>
-</template>
 <script setup lang="ts">
 import { ref, watch } from "vue";
 import { useRoute, useRouter } from "@vuepress/client";
@@ -41,7 +7,7 @@ import Pagination from "./Pagination.vue";
 import ArticleList from "./ArticleList.vue";
 import RightMenu from "./RightMenu.vue";
 import MainLayout from "./MainLayout.vue";
-import type { PageNode, PageNodeData } from "types";
+import type { PageNode, PageNodeData } from "../types";
 
 const route = useRoute();
 const router = useRouter();
@@ -103,13 +69,51 @@ allCategories.value = getAllCategories(themeData.value.categories);
 updateQuery();
 updateList();
 </script>
+
+<template>
+  <div class="categories-page page-wrapper">
+    <div class="categories-wrapper">
+      <MainLayout>
+        <ArticleList v-if="currentArticles" :articles="currentArticles" />
+        <template #inner-right>
+          <RightMenu>
+            <template #title>
+              <h3 class="right-menu-title is-link row" @click="switchCategoryTo()">
+                <span class="bold">全部分类</span><span class="number digital">{{ themeData.categories.$data.count }}</span>
+              </h3>
+            </template>
+            <div class="right-menu-list">
+              <template v-for="item in allCategories" :key="item.key">
+                <div
+                  v-if="item.count"
+                  class="right-menu-item is-link row"
+                  :class="{ active: item.key === route.query.category }"
+                  @click="switchCategoryTo(item.key)"
+                >
+                  <span>{{ item.title }}</span>
+                  <span class="number digital">{{ item.count }}</span>
+                </div>
+              </template>
+            </div>
+          </RightMenu>
+        </template>
+        <template #footer>
+          <Pagination v-if="total > pageSize" :total="total" :page-size="pageSize" :current="currentPage" @switch-paging="switchPagingTo" />
+        </template>
+      </MainLayout>
+    </div>
+  </div>
+</template>
+
 <style lang="scss">
 @use "../styles/variables" as *;
 
 .categories-page {
+  .pagination {
+    margin-top: 1rem;
+  }
   .right-menu {
     padding: 1rem 0;
-
     .row {
       display: flex;
       flex-direction: row;
@@ -117,41 +121,34 @@ updateList();
       align-items: center;
       cursor: pointer;
     }
-
     .number {
       font-size: 1rem;
       line-height: 1rem;
       font-weight: bold;
     }
-
     .right-menu-title {
       margin: 0;
       padding: 0.3rem 1.5rem;
       margin-bottom: 0.5em;
       font-weight: normal;
     }
-
     .right-menu-list {
       display: flex;
       flex-direction: column;
       max-height: 60vh;
       overflow-y: auto;
-
       .right-menu-item {
         box-sizing: border-box;
         padding: 0.3rem 1.5rem;
         transition: border-width 0.1s;
         border-left: 0 solid var(--accentColor);
-
         &.active {
           transition: border-width 0.1s, $transitionBgColor, $transitionColor;
         }
-
         &.active,
         &:hover {
           background-color: var(--bodyBg);
           border-left: 5px solid var(--accentColor);
-          color: var(--accentColor);
         }
       }
     }

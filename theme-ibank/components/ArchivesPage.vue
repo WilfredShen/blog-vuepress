@@ -1,32 +1,3 @@
-<template>
-  <div class="archives-page page-wrapper">
-    <div class="archives-wrapper">
-      <MainLayout>
-        <Timeline :archives="currentArchives" />
-        <template #inner-right>
-          <RightMenu>
-            <template #title>
-              <h3 class="right-menu-title row" @click="switchArchiveTo()">
-                <span class="bold">归档时间</span>
-              </h3>
-            </template>
-            <div class="right-menu-list">
-              <div
-                v-for="[year] in allArchives"
-                :key="year"
-                class="right-menu-item row"
-                :class="{ active: currentYears && currentYears.includes(year) }"
-                @click="switchArchiveTo(year)"
-              >
-                <span class="bold">{{ year }}</span>
-              </div>
-            </div>
-          </RightMenu>
-        </template>
-      </MainLayout>
-    </div>
-  </div>
-</template>
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import { useRoute, useRouter } from "@vuepress/client";
@@ -34,7 +5,7 @@ import { useThemeData } from "@vuepress/plugin-theme-data/lib/client";
 import Timeline from "./Timeline.vue";
 import RightMenu from "./RightMenu.vue";
 import MainLayout from "./MainLayout.vue";
-import type { Entry, ArchiveYear } from "types";
+import type { Entry, ArchiveYear } from "../types";
 
 const route = useRoute();
 const router = useRouter();
@@ -51,6 +22,37 @@ const currentArchives = computed<Entry<ArchiveYear>[]>(() =>
 
 allArchives.value = Object.entries(themeData.value.archives);
 </script>
+
+<template>
+  <div class="archives-page page-wrapper">
+    <div class="archives-wrapper">
+      <MainLayout>
+        <Timeline :archives="currentArchives" />
+        <template #inner-right>
+          <RightMenu>
+            <template #title>
+              <h3 class="right-menu-title is-link row" @click="switchArchiveTo()">
+                <span class="bold">归档时间</span>
+              </h3>
+            </template>
+            <div class="right-menu-list">
+              <div
+                v-for="[year] in allArchives"
+                :key="year"
+                class="right-menu-item is-link row"
+                :class="{ active: currentYears && currentYears.includes(year) }"
+                @click="switchArchiveTo(year)"
+              >
+                <span class="bold">{{ year }}</span>
+              </div>
+            </div>
+          </RightMenu>
+        </template>
+      </MainLayout>
+    </div>
+  </div>
+</template>
+
 <style lang="scss">
 @use "../styles/variables" as *;
 
@@ -99,7 +101,6 @@ allArchives.value = Object.entries(themeData.value.archives);
         &:hover {
           background-color: var(--bodyBg);
           border-left: 5px solid var(--accentColor);
-          color: var(--accentColor);
         }
       }
     }

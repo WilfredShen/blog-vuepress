@@ -3,9 +3,9 @@ import matter from "gray-matter";
 import { genPemaLink } from "./components/hash";
 import { isReadme, ignoreFormatter, matchAny } from "./components/regex";
 import { currentTime } from "./components/time";
-import pt from "./pageTypes";
 import { defaultPrefix } from "./defaults";
-import { FrontMatter, ThemeConfig } from "types";
+import { PageType } from "../types";
+import type { FrontMatter, ThemeConfig } from "../types";
 
 const parseFile = (filePath: string) => {
   const paths = filePath.split("/");
@@ -21,7 +21,7 @@ const formatFrontmatter = ({
   frontmatter,
   categories,
   name,
-  type = pt.article,
+  type = PageType.article,
   permalinkPrefix = defaultPrefix,
   author,
 }: {
@@ -52,7 +52,7 @@ export const formatFile = (cfg: ThemeConfig, fullPath: string, docPath: string, 
     content,
     frontmatter: data as FrontMatter,
     categories,
-    type: isr ? pt.readme : pt.article,
+    type: isr ? PageType.readme : PageType.article,
     permalinkPrefix: isr ? "/readme/" : defaultPrefix,
     name,
     author: cfg.author,

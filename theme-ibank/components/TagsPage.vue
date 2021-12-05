@@ -6,7 +6,7 @@
         <template #inner-right>
           <RightMenu>
             <template #title>
-              <h3 class="right-menu-title row" @click="switchTagTo()">
+              <h3 class="right-menu-title is-link row" @click="switchTagTo()">
                 <span class="bold">全部标签</span><span class="number digital">{{ allTags?.length }}</span>
               </h3>
             </template>
@@ -14,7 +14,7 @@
               <div
                 v-for="[tag, pages] in allTags"
                 :key="`tag-${tag}`"
-                class="right-menu-item row"
+                class="right-menu-item is-link row"
                 :class="{ active: tag === route.query.tag }"
                 @click="switchTagTo(tag)"
               >
@@ -39,7 +39,7 @@ import Pagination from "./Pagination.vue";
 import ArticleList from "./ArticleList.vue";
 import RightMenu from "./RightMenu.vue";
 import MainLayout from "./MainLayout.vue";
-import type { Tag, PageNode, Tags } from "types";
+import type { Tag, PageNode, Tags } from "../types";
 
 const route = useRoute();
 const router = useRouter();
@@ -131,7 +131,6 @@ updateList();
         &:hover {
           background-color: var(--bodyBg);
           border-left: 5px solid var(--accentColor);
-          color: var(--accentColor);
         }
       }
     }

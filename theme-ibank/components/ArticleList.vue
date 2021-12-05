@@ -1,8 +1,15 @@
+<script setup lang="ts">
+import Tags from "./Tags.vue";
+import type { PageNode } from "../types";
+
+defineProps<{ articles: PageNode[] }>();
+</script>
+
 <template>
   <div class="article-list">
     <template v-for="item in articles" :key="item.$data.key">
       <div v-if="item.$data" class="article-card card">
-        <h2 class="title">
+        <h2 class="title is-link">
           <router-link :to="item.$data.path">{{ item.$data.title }}</router-link>
         </h2>
         <div class="meta-info">
@@ -34,12 +41,7 @@
     </template>
   </div>
 </template>
-<script setup lang="ts">
-import Tags from "./Tags.vue";
-import type { PageNode } from "types";
 
-defineProps<{ articles: PageNode[] }>();
-</script>
 <style lang="scss">
 @use "../styles/variables" as *;
 
@@ -49,16 +51,13 @@ defineProps<{ articles: PageNode[] }>();
     margin-bottom: 1rem;
   }
 
-  a {
-    color: var(--textColor);
-  }
-
   .title {
     border: none;
     cursor: pointer;
     margin-top: 0.5rem;
-    a:hover {
-      color: var(--accentColor);
+    a {
+      display: inline-block;
+      width: 100%;
     }
   }
 
@@ -66,9 +65,11 @@ defineProps<{ articles: PageNode[] }>();
     font-size: 0.8em;
     display: flex;
     flex-direction: row;
-
     & > * {
       margin-right: 1em;
+    }
+    a {
+      color: var(--textColor);
     }
   }
 
@@ -103,6 +104,10 @@ defineProps<{ articles: PageNode[] }>();
           margin-left: 0.8rem;
           text-align: right;
           display: inline-block;
+        }
+
+        a {
+          color: var(--textColor);
         }
 
         &:not(:hover) {

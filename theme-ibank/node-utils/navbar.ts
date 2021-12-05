@@ -1,5 +1,5 @@
-import pt from "./pageTypes";
-import { PageNode, NavLink } from "types";
+import { PageType } from "../types";
+import type { PageNode, NavLink } from "../types";
 
 export const buildNavbar = (node: PageNode) => {
   const list: NavLink[] = [];
@@ -10,7 +10,7 @@ export const buildNavbar = (node: PageNode) => {
       list.push({
         text: k,
         link: v.$data.frontmatter && v.$data.frontmatter.permalink,
-        children: v.$data && v.$data.frontmatter && v.$data.frontmatter.type === pt.article ? undefined : buildNavbar(v),
+        children: v.$data && v.$data.frontmatter && v.$data.frontmatter.type === PageType.article ? undefined : buildNavbar(v),
         $data: v.$data,
         $children: v.$children,
       }),

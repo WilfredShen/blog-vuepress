@@ -1,11 +1,11 @@
 import { Page } from "vuepress-vite";
-import pt from "./pageTypes";
-import type { Archive, PageNode, PageNodeData } from "types";
+import { PageType } from "../types";
+import type { Archive, PageNode, PageNodeData } from "../types";
 
 export const buildArchives = (pages: Page[]) => {
   const archives: Archive = {};
   pages.forEach(page => {
-    if (page.data.frontmatter.type === pt.article) {
+    if (page.data.frontmatter.type === PageType.article) {
       const p = { $data: page.data as PageNodeData } as PageNode;
       const [year, month, day] =
         p.$data.frontmatter.date

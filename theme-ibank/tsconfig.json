@@ -11,8 +11,7 @@
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
     "isolatedModules": true,
-    "types": ["vite/client"],
-    "baseUrl": "."
+    "types": ["vite/client"]
   },
   "include": ["./**/*.ts", "./**/*.d.ts", "./**/*.tsx", "./**/*.vue", "index.js"]
 }

@@ -1,7 +1,5 @@
 import { path } from "@vuepress/utils";
-// const { path }from("@vuepress/utils");
 import chalk from "chalk";
-// const chalkfrom("chalk"); // 命令行打印美化
 import { formatFile } from "./node-utils/frontmatter";
 import { parseOrder } from "./node-utils/order";
 import { buildCategories } from "./node-utils/categories";
@@ -11,7 +9,7 @@ import { buildArchives } from "./node-utils/archives";
 import { defaultConfig } from "./node-utils/defaults";
 import { createPages } from "./node-utils/pages";
 import type { ThemeFunction, ThemeObject } from "vuepress-vite";
-import type { Archive, LinkRaw, NavLink, PageNode, SiteData, Tags, ThemeConfig } from "types";
+import type { Archive, LinkRaw, NavLink, PageNode, SiteData, Tags, ThemeConfig } from "./types";
 
 const LOG_ENABLE = true;
 
@@ -22,7 +20,6 @@ const themeIbank: ThemeFunction = (options, ctx) => {
   ctx.options.templateDev = path.resolve(__dirname, "templates/dev.html");
   ctx.options.templateSSR = path.resolve(__dirname, "templates/ssr.html");
   const opts: ThemeConfig = { ...defaultConfig, ...options } as ThemeConfig;
-
   const siteData: SiteData = ctx.siteData;
   siteData.themeConfig = opts;
 
@@ -125,6 +122,7 @@ const themeIbank: ThemeFunction = (options, ctx) => {
       opts.categories && indexes.children?.push({ text: "分类", link: "/categories/" });
       opts.tags && indexes.children?.push({ text: "标签", link: "/tags/" });
       opts.archives && indexes.children?.push({ text: "归档", link: "/archives/" });
+      navbar.unshift({ text: "首页", link: "/" });
       navbar.push(indexes);
       navbar.push({ text: "GitHub", link: "https://github.com/WilfredShen/vuepress-theme-ibank" });
       themeData.navbar = navbar;

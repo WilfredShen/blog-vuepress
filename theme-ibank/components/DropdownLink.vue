@@ -1,3 +1,13 @@
+<script setup lang="ts">
+import { ref } from "vue";
+import NavLink from "./NavLink.vue";
+import type { LinkRaw } from "../types";
+
+defineProps<{ item: LinkRaw }>();
+
+const open = ref(false);
+</script>
+
 <template>
   <div class="dropdown-link underline-wrapper">
     <NavLink :item="item" class="link-title accent-underline" />
@@ -11,8 +21,8 @@
           </h4>
           <ul v-if="child.children.length" class="dropdown-sub-group">
             <template v-for="subItem in child.children" :key="`sub-item-${subItem.text}`">
-              <li v-if="subItem.link" class="dropdown-sub-item">
-                <NavLink :item="subItem" />
+              <li v-if="subItem.link">
+                <NavLink class="dropdown-sub-item" :item="subItem" />
               </li>
             </template>
           </ul>
@@ -22,29 +32,18 @@
     </ul>
   </div>
 </template>
-<script setup lang="ts">
-import { ref } from "vue";
-import NavLink from "./NavLink.vue";
-import type { LinkRaw } from "types";
 
-defineProps<{ item: LinkRaw }>();
-
-const open = ref(false);
-</script>
 <style lang="scss">
 @use "../styles/_variables" as *;
 
 .dropdown-link {
-  cursor: pointer;
   position: relative;
   white-space: nowrap;
   height: fit-content;
-
   .arrow {
     margin-left: 0.6rem;
     vertical-align: middle;
     margin-top: -2px;
-
     @media (min-width: $MQMobile) {
       border-left: 4px solid transparent;
       border-right: 4px solid transparent;
@@ -52,16 +51,13 @@ const open = ref(false);
       border-bottom: 0;
     }
   }
-
   ul {
     padding: 0;
     margin: 0;
   }
-
   &:hover .dropdown-list {
     display: flex;
   }
-
   .dropdown-list {
     display: none;
     position: absolute;
@@ -71,27 +67,27 @@ const open = ref(false);
     border-radius: 5px;
     flex-direction: column;
     margin-top: 0.2em;
-
+    .dropdown-item,
+    .dropdown-sub-item {
+      display: inline-block;
+      width: 100%;
+    }
     li {
       list-style-type: none;
     }
-
     .dropdown-group {
       font-size: 0.9em;
       padding: 0.3rem 1.2rem;
       border-top: 1px solid var(--borderColor);
-
       &:first-child {
         border: none;
       }
-
       h4 {
         margin: 0 0 0.2em 0;
         & > * {
           font-weight: bold;
         }
       }
-
       .dropdown-sub-group {
         font-size: 0.9em;
       }

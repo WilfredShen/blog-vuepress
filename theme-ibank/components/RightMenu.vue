@@ -9,6 +9,6 @@
 
 .right-menu {
   position: sticky;
-  top: $navbarHeight + 0.5rem;
+  top: $navbarHeight + 1rem;
 }
 </style>

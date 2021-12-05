@@ -5,7 +5,7 @@
       <div class="timeline-list">
         <template v-for="[month, monthData] in Object.entries(archive)" :key="month">
           <template v-for="[day, dayData] in Object.entries(monthData)" :key="day">
-            <router-link v-for="item in dayData" :key="item.$data.key" class="item link" :to="item.$data.path">
+            <router-link v-for="item in dayData" :key="item.$data.key" class="item is-link" :to="item.$data.path">
               <span class="date bold">{{ `${month.padStart(2, "0")}-${day.padStart(2, "0")}` }}</span>
               <span class="title">{{ item.$data.title }}</span>
             </router-link>
@@ -16,7 +16,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import type { Entry, ArchiveYear } from "types";
+import type { Entry, ArchiveYear } from "../types";
 
 defineProps<{ archives: Entry<ArchiveYear>[] }>();
 </script>
@@ -46,11 +46,6 @@ defineProps<{ archives: Entry<ArchiveYear>[] }>();
       transition: color 0.2s, background-color 0.2s, border-width 0.1s;
       border-left: 0 solid var(--accentColor);
 
-      a,
-      span {
-        color: var(--textColor);
-      }
-
       .title {
         margin-left: 1rem;
       }
@@ -58,10 +53,6 @@ defineProps<{ archives: Entry<ArchiveYear>[] }>();
       &:hover {
         background-color: var(--bodyBg);
         border-left: 5px solid var(--accentColor);
-        a,
-        span {
-          color: var(--accentColor);
-        }
       }
     }
   }
