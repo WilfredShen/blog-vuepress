@@ -1,6 +1,7 @@
 ---
 title: 分类
-type: categories
 permalink: /categories/
+type: categories
+layout: CategoriesLayout
 navbar: false
 ---

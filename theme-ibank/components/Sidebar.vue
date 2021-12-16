@@ -28,7 +28,6 @@ watch(
 .sidebar {
   background-color: var(--mainBg);
   padding: 1.5rem;
-
   .sidebar-title {
     margin: 0;
     border: none;
@@ -38,11 +37,9 @@ watch(
       width: 100%;
     }
   }
-
   .sidebar-list {
     margin-top: 0.5rem;
     list-style: none;
-
     a {
       display: inline-block;
       width: 100%;

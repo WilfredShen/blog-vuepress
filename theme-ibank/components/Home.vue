@@ -8,6 +8,7 @@ import Pagination from "./Pagination.vue";
 import type { PageNode } from "../types";
 import { filterArticles, parsePages, sortPagesByDateDesc } from "../utils/articles";
 import AvatarCard from "../cards/AvatarCard.vue";
+import TagsCard from "../cards/TagsCard.vue";
 
 const route = useRoute();
 const router = useRouter();
@@ -56,6 +57,7 @@ updateArticles();
         <template #inner-right>
           <div class="card-list">
             <AvatarCard />
+            <TagsCard />
           </div>
         </template>
         <template #footer>
@@ -76,14 +78,11 @@ updateArticles();
 .pagination {
   margin-top: 1rem;
 }
+
 .card-list {
   & > * {
-    margin: 0.5rem 0;
-    &:first-child {
-      margin-top: 0;
-    }
-    &:last-child {
-      margin-bottom: 0;
+    &:not(:first-child) {
+      margin-top: 1rem;
     }
   }
 }

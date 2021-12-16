@@ -5,5 +5,4 @@ export type Tag = Entry<PageNode[]>;
 
 export interface Tags {
   [key: string]: PageNode[];
-  $all: PageNode[];
 }

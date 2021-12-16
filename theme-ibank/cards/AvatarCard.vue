@@ -26,6 +26,7 @@ const avatar: ThemeConfig["avatar"] = (useSiteData().value as SiteData).themeCon
 
 <style lang="scss">
 .avatar-card {
+  overflow: hidden;
   .avatar {
     width: 100%;
   }

@@ -8,6 +8,7 @@ export enum PageType {
   archives = "archives",
   categories = "categories",
   tags = "tags",
+  other = "other",
 }
 /* eslint-enable */
 
@@ -26,13 +27,16 @@ export interface FrontMatter extends vt.PageFrontmatter {
 
 export interface PageNodeData extends vt.PageData {
   order?: string;
+  categories?: string[];
   count?: number;
   frontmatter: FrontMatter;
 }
 
-export interface PageNode extends vt.Page {
+export interface Page extends vt.Page<PageNodeData> {
   order?: string[];
-  data: PageNodeData;
+}
+
+export interface PageNode {
   $data: PageNodeData;
   $children?: Record<string, PageNode>;
 }

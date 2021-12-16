@@ -24,7 +24,7 @@ const getBreadcrumb = (node: PageNode, keys: string[] | undefined): LinkRaw[] =>
 
 const updateData = () => {
   page.value = usePageData().value as PageNodeData;
-  navs.value = getBreadcrumb(themeData.value.categories, page.value.frontmatter.categories);
+  navs.value = getBreadcrumb(themeData.value.categories, page.value.frontmatter.categories || page.value.categories);
   frontmatter.value = page.value.frontmatter;
 };
 watch(route, updateData);
@@ -38,11 +38,11 @@ updateData();
       <Tags v-if="frontmatter.tags" :tags="frontmatter.tags" gutter="0.5em" />
       <template v-if="frontmatter.author">
         <a v-if="frontmatter.author.link" class="author" title="作者" :href="frontmatter.author.link" target="_blank">
-          <i class="iconfont icon-user"></i>{{ frontmatter.author.name }}
+          <i class="iconfont icon-user" />{{ frontmatter.author.name }}
         </a>
-        <span v-else title="作者"><i class="iconfont icon-user"></i>{{ frontmatter.author.name }}</span>
+        <span v-else title="作者"><i class="iconfont icon-user" />{{ frontmatter.author.name }}</span>
       </template>
-      <span title="创建日期"><i class="iconfont icon-calendar"></i>{{ frontmatter.date?.toString().slice(0, 10) }}</span>
+      <span class="font-time" title="创建日期"><i class="iconfont icon-calendar" />{{ frontmatter.date?.toString().slice(0, 10) }}</span>
     </div>
   </div>
   <ArticleTitle :title="frontmatter.title" />
@@ -54,16 +54,13 @@ updateData();
   display: flex;
   flex-direction: row;
   justify-content: right;
-
   .breadcrumb {
     flex: 1;
   }
-
   .meta-info {
     font-size: 0.8em;
     display: flex;
     flex-direction: row;
-
     & > span,
     & > a {
       margin-left: 1em;

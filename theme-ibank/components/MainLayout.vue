@@ -20,6 +20,9 @@ const hasInnerRight = computed(() => !!slots["inner-right"]);
 @use "../styles/variables" as *;
 
 .main-layout {
+  &.sidebar-open {
+    padding-left: $sidebarWidth;
+  }
   .sidebar {
     box-sizing: border-box;
     position: fixed;
@@ -28,24 +31,17 @@ const hasInnerRight = computed(() => !!slots["inner-right"]);
     height: calc(100vh - $navbarHeight);
     width: $sidebarWidth;
   }
-
   .main {
     display: flex;
     flex-direction: row;
     width: 100%;
-
     .content {
       flex: 1;
     }
-
     .inner-right {
       width: 240px;
       margin-left: 1rem;
     }
-  }
-
-  &.sidebar-open {
-    padding-left: $sidebarWidth;
   }
 }
 </style>

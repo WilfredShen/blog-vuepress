@@ -1,12 +1,11 @@
 import { PageType } from "../types";
-import type { PageNode, Tags } from "../types";
+import type { Page, PageNode, Tags } from "../types";
 
-export const buildTags = (pages: PageNode[]) => {
-  const tags: Tags = { $all: [] };
+export const buildTags = (pages: Page[]) => {
+  const tags: Tags = {};
   pages.forEach(page => {
     if (page.data.frontmatter.type === PageType.article) {
       const p = { $data: { order: page.order, ...page.data } } as PageNode;
-      tags.$all.push(p);
       page.data.frontmatter.tags &&
         page.data.frontmatter.tags.forEach(tag => {
           if (!tags[tag]) tags[tag] = [];

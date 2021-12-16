@@ -44,7 +44,6 @@ withDefaults(
   cursor: default;
   align-items: center;
   font-size: 1em;
-
   .separator {
     margin: 0 0.3em;
   }

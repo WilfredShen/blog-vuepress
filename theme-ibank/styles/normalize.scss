@@ -140,8 +140,8 @@ table {
 }
 tr {
   border-top: 1px solid var(--borderColor);
-  &:nth-child(2n) {
-    background-color: rgba(150, 150, 150, 0.1);
+  tbody > &:nth-child(2n + 1) {
+    background-color: rgba(127, 127, 127, 0.1);
   }
 }
 

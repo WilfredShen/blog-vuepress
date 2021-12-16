@@ -32,7 +32,7 @@ onBeforeUnmount(removeListener);
   <div class="page page-wrapper">
     <MainLayout>
       <template #sidebar><Sidebar /></template>
-      <div class="content-wrapper">
+      <div class="article-wrapper">
         <ArticleInfo />
         <Content />
       </div>

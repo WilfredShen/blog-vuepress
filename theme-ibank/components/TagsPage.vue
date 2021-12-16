@@ -7,7 +7,7 @@
           <RightMenu>
             <template #title>
               <h3 class="right-menu-title is-link row" @click="switchTagTo()">
-                <span class="bold">全部标签</span><span class="number digital">{{ allTags?.length }}</span>
+                <span class="bold">全部标签</span><span class="number font-digital">{{ allTags?.length }}</span>
               </h3>
             </template>
             <div class="right-menu-list">
@@ -19,7 +19,7 @@
                 @click="switchTagTo(tag)"
               >
                 <span>{{ tag }}</span>
-                <span class="number digital">{{ pages.length }}</span>
+                <span class="number font-digital">{{ pages.length }}</span>
               </div>
             </div>
           </RightMenu>
@@ -54,7 +54,7 @@ const pageSize = ref(10);
 const currentPage = ref(1);
 const currentTag = ref<string>();
 
-const getAllTags = (tags: Tags) => Object.entries(tags).filter(([tag]) => tag !== "$all");
+const getAllTags = (tags: Tags) => Object.entries(tags);
 
 const switchPagingTo = (index: number) =>
   index !== currentPage.value &&
@@ -70,7 +70,7 @@ const updateQuery = () => {
 };
 
 const updateList = () => {
-  articles.value = themeData.value.tags[currentTag.value || "$all"];
+  articles.value = currentTag.value ? themeData.value.tags[currentTag.value] : themeData.value.articles;
   total.value = articles.value?.length || 0;
   currentArticles.value = articles.value?.slice(pageSize.value * (currentPage.value - 1), pageSize.value * currentPage.value);
 };
@@ -89,13 +89,11 @@ updateList();
 .tags-page {
   .right-menu {
     padding: 1rem 0;
-
     .number {
       font-size: 1rem;
       line-height: 1rem;
-      font-weight: bold;
+      font-weight: 600;
     }
-
     .row {
       display: flex;
       flex-direction: row;
@@ -103,30 +101,25 @@ updateList();
       align-items: center;
       cursor: pointer;
     }
-
     .right-menu-title {
       margin: 0;
       padding: 0.3rem 1.5rem;
       margin-bottom: 0.5em;
-      font-weight: normal;
+      font-weight: 700;
     }
-
     .right-menu-list {
       display: flex;
       flex-direction: column;
       max-height: 60vh;
       overflow-y: auto;
-
       .right-menu-item {
         box-sizing: border-box;
         padding: 0.3rem 1.5rem;
         transition: border-width 0.1s;
         border-left: 0 solid var(--accentColor);
-
         &.active {
           transition: border-width 0.1s, $transitionBgColor, $transitionColor;
         }
-
         &.active,
         &:hover {
           background-color: var(--bodyBg);

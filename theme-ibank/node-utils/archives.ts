@@ -1,6 +1,5 @@
-import { Page } from "vuepress-vite";
 import { PageType } from "../types";
-import type { Archive, PageNode, PageNodeData } from "../types";
+import type { Archive, Page, PageNode, PageNodeData } from "../types";
 
 export const buildArchives = (pages: Page[]) => {
   const archives: Archive = {};

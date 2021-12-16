@@ -1,7 +1,8 @@
 import { defineUserConfig } from "vuepress-vite";
-import type { DefaultThemeOptions } from "vuepress-vite";
+import { IconType } from "vuepress-theme-ibank/types";
+import type { ThemeConfig } from "vuepress-theme-ibank/types";
 
-export default defineUserConfig<DefaultThemeOptions>({
+export default defineUserConfig<ThemeConfig>({
   lang: "zh-CN",
   title: "柒月流火's blog",
   description: "个人技术博客",
@@ -19,19 +20,19 @@ export default defineUserConfig<DefaultThemeOptions>({
       link: "https://github.com/WilfredShen",
     },
     avatar: {
-      img: "/img/logo-160.png",
+      img: "/img/avatar.png",
       name: "柒月流火",
-      slogan: "666",
+      slogan: "slogan",
       icons: [
         {
           title: "邮箱",
           link: "mailto:blog@wilfredshen.cn",
-          icon: "email",
+          icon: IconType.email,
         },
         {
           title: "GitHub",
           link: "https://github.com/WilfredShen",
-          icon: "github",
+          icon: IconType.github,
         },
       ],
     },

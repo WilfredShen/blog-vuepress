@@ -14,12 +14,12 @@ const open = ref(false);
     <span class="arrow" :class="open ? 'down' : 'right'"></span>
     <ul v-if="item" class="dropdown-list box-shadow">
       <li v-for="child in item.children" :key="`child-${child.text}`" class="dropdown-group">
-        <template v-if="child.children">
+        <template v-if="child.children && child.children.length">
           <h4>
             <NavLink v-if="child.link" class="dropdown-item" :item="child" />
             <span v-else>{{ child.text }}</span>
           </h4>
-          <ul v-if="child.children.length" class="dropdown-sub-group">
+          <ul class="dropdown-sub-group">
             <template v-for="subItem in child.children" :key="`sub-item-${subItem.text}`">
               <li v-if="subItem.link">
                 <NavLink class="dropdown-sub-item" :item="subItem" />
@@ -45,10 +45,10 @@ const open = ref(false);
     vertical-align: middle;
     margin-top: -2px;
     @media (min-width: $MQMobile) {
-      border-left: 4px solid transparent;
-      border-right: 4px solid transparent;
-      border-top: 6px solid var(--arrowBgColor);
-      border-bottom: 0;
+      border-left: 4px solid transparent !important;
+      border-right: 4px solid transparent !important;
+      border-top: 6px solid var(--arrowBgColor) !important;
+      border-bottom: 0 !important;
     }
   }
   ul {
@@ -85,7 +85,7 @@ const open = ref(false);
       h4 {
         margin: 0 0 0.2em 0;
         & > * {
-          font-weight: bold;
+          font-weight: 700;
         }
       }
       .dropdown-sub-group {

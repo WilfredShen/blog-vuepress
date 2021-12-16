@@ -21,11 +21,13 @@ defineProps<{ articles: PageNode[] }>();
               :href="item.$data.frontmatter.author.link"
               target="_blank"
             >
-              <i class="iconfont icon-user"></i>{{ item.$data.frontmatter.author.name }}
+              <i class="iconfont icon-user" />{{ item.$data.frontmatter.author.name }}
             </a>
-            <span v-else title="作者"><i class="iconfont icon-user"></i>{{ item.$data.frontmatter.author.name }}</span>
+            <span v-else title="作者"><i class="iconfont icon-user" />{{ item.$data.frontmatter.author.name }}</span>
           </template>
-          <span title="创建日期"><i class="iconfont icon-calendar"></i>{{ item.$data.frontmatter.date?.toString().slice(0, 10) }}</span>
+          <span class="font-time" title="创建日期">
+            <i class="iconfont icon-calendar" />{{ item.$data.frontmatter.date?.toString().slice(0, 10) }}
+          </span>
           <Tags v-if="item.$data.frontmatter.tags" :tags="item.$data.frontmatter.tags" gutter="0.5em" />
         </div>
         <div v-if="item.$data.excerpt" class="excerpt-wrapper">
@@ -50,7 +52,6 @@ defineProps<{ articles: PageNode[] }>();
   &:not(:last-child) {
     margin-bottom: 1rem;
   }
-
   .title {
     border: none;
     cursor: pointer;
@@ -60,7 +61,6 @@ defineProps<{ articles: PageNode[] }>();
       width: 100%;
     }
   }
-
   .meta-info {
     font-size: 0.8em;
     display: flex;
@@ -72,17 +72,14 @@ defineProps<{ articles: PageNode[] }>();
       color: var(--textColor);
     }
   }
-
   .excerpt-wrapper {
     margin-top: 1rem;
     border-top: 1px solid var(--borderColor);
-
     .readmore {
       text-align: right;
       margin-right: 0.5rem;
       display: flex;
       justify-content: right;
-
       .card {
         width: fit-content;
         padding: 0.4em 0;
@@ -93,23 +90,19 @@ defineProps<{ articles: PageNode[] }>();
         align-items: center;
         white-space: nowrap;
         overflow: hidden;
-        transition: max-width 0.5s ease, $transitionBgColor, $transitionColor;
+        transition: max-width 0.5s ease, box-shadow 0.5s, $transitionBgColor, $transitionColor;
         max-width: 7rem;
-
         i {
           padding: 0 0.5rem;
         }
-
         span {
           margin-left: 0.8rem;
           text-align: right;
           display: inline-block;
         }
-
         a {
           color: var(--textColor);
         }
-
         &:not(:hover) {
           max-width: 2rem;
         }

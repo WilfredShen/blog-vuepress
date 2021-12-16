@@ -1,19 +1,19 @@
 import { PageType } from "../types";
-import type { PageNodeData, PageNode } from "../types";
+import type { Page, PageNodeData, PageNode } from "../types";
 
 const newNode = (data?: PageNodeData): PageNode => ({ $data: { ...data } } as PageNode);
 
-export const buildCategories = (pages: PageNode[]) => {
+export const buildCategories = (pages: Page[]) => {
   const root = newNode({ count: 0, title: "首页" } as PageNodeData);
   pages.forEach(page => {
     if (!page.order) page.order = [];
     for (const order of page.order) if (/^_/.test(order)) return;
-
     const doIncrease = page.data.frontmatter.type === PageType.article;
-    if (page.data.frontmatter.categories) {
+    const categories = page.data.frontmatter.categories || page.data.categories;
+    if (categories) {
       let current = root;
       // 遍历categories，注册节点
-      page.data.frontmatter.categories.forEach((e, i) => {
+      categories.forEach((e, i) => {
         if (!current.$children) current.$children = {};
         // 已存在节点则直接递归
         if (current.$children[e]) current = current.$children[e];
@@ -23,7 +23,6 @@ export const buildCategories = (pages: PageNode[]) => {
           current = current.$children[e] = newNode({ order: page.order[i], count: 0, title: e } as PageNodeData);
           root.$data.count !== undefined && root.$data.count++;
         }
-
         doIncrease && current.$data.count !== undefined && current.$data.count++;
       });
       /* 此时current指向当前 page 的父节点 */

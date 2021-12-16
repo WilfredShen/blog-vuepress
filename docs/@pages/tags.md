@@ -1,6 +1,7 @@
 ---
 title: 标签
-type: tags
 permalink: /tags/
+type: tags
+layout: TagsLayout
 navbar: false
 ---

@@ -37,11 +37,9 @@ onMounted(() => toggleThemeMode((storage.get("theme-mode") as string) || parseTh
   cursor: pointer;
   align-items: center;
   font-weight: bold;
-
   &:hover {
     color: var(--accentColor);
   }
-
   .icon {
     width: 1.25rem;
     height: 1.25rem;

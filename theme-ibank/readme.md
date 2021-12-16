@@ -1,24 +1,90 @@
-[TOC]
+## 当前文档版本
+
+v1.0.12
 
 ## 主题配置
 
-本主题遵循**约定优于配置**原则，遵循以下约定，你完全可以做到零配置使用本主题。
+本主题遵循**约定优于配置**原则，遵循以下约定，你只需要配置你的个人信息即可使用该主题。
 
 在`config.js`中支持的配置项：
 
 ```js
 // config.js
 const config = {
-  title: "xxx's blog", // 博客名称，会出现在导航栏中
+  title: "柒月流火's blog", // 博客名称，会出现在导航栏中
   themeConfig: {
     logo: "/img/logo.png", // required: false // 你的logo，如果选择不设置，则导航栏中不会有logo
     title: "title", // required: false // 覆盖config.title
-    categories: false, // default: true // 是否生成目录索引
-    tags: false, // default: true // 是否生成标签索引
-    archives: false, // default: true // 是否生成时间索引
-  }
-}
+    // index: false, // default: true // 是否生成首页
+    // categories: false, // default: true // 是否生成目录索引
+    // tags: false, // default: true // 是否生成标签索引
+    // archives: false, // default: true // 是否生成时间索引
+    author: { // default: undefined
+      name: "柒月流火",
+      link: "https://github.com/WilfredShen",
+    },
+    avatar: { // default: undefined
+      img: "/img/avatar.png",
+      name: "柒月流火",
+      slogan: "slogan",
+      icons: [
+        {
+          title: "邮箱",
+          link: "mailto:blog@wilfredshen.cn",
+          icon: "email",
+        },
+        {
+          title: "GitHub",
+          link: "https://github.com/WilfredShen",
+          icon: "github",
+        },
+      ],
+    },
+  },
+};
 module.exports = config;
+```
+
+或者使用ts以获取更详细的类型提示：
+
+```ts
+import { defineUserConfig } from "vuepress-vite";
+import { IconType } from "vuepress-theme-ibank/types";
+import type { ThemeConfig } from "vuepress-theme-ibank/types";
+
+export default defineUserConfig<ThemeConfig>({
+  title: "柒月流火's blog", // 博客名称，会出现在导航栏中
+  themeConfig: {
+    logo: "/img/logo.png", // required: false // 你的logo，如果选择不设置，则导航栏中不会有logo
+    title: "title", // required: false // 覆盖config.title
+    // index: false, // default: true // 是否生成首页
+    // categories: false, // default: true // 是否生成目录索引
+    // tags: false, // default: true // 是否生成标签索引
+    // archives: false, // default: true // 是否生成时间索引
+    author: {
+      name: "柒月流火",
+      link: "https://github.com/WilfredShen",
+    },
+    avatar: {
+      img: "/img/avatar.png",
+      name: "柒月流火",
+      slogan: "slogan",
+      icons: [
+        {
+          title: "邮箱",
+          link: "mailto:blog@wilfredshen.cn",
+          icon: IconType.email,
+        },
+        {
+          title: "GitHub",
+          link: "https://github.com/WilfredShen",
+          icon: IconType.github,
+        },
+      ],
+    },
+  },
+});
+
 ```
 
 ### 目录约定
@@ -55,10 +121,10 @@ docs
 
 - `.`开头的文件/目录会被vuepress的引擎忽略，不会被解析，你可以借此存放草稿等文件。例：
   - 创建一个目录`.draft`，并在目录下撰写草稿，发布时移动到合适的目录下就会被解析
-  - 创建一个目录`.recyclebin`，将废弃的文章移动到此处，避免下次发布时被解析
+  - 创建一个目录`.recyclebin`，可以将废弃的文章移动到此处，避免下次发布时被解析
 - `_`开头的文件/目录会被本主题的格式化工具忽略，其下Markdown文件的frontmatter不会被格式化，也不会出现在导航栏和索引中，但它依旧会被引擎加载并渲染，因此你依旧可以直接输入其网址访问它。例：
   - 如果你有一些界面希望发布上去，但不希望任何人都能轻易访问它，你可以给它添加`_`前缀，这样只有知道这个网址的人才能够访问它
-- `@`开头的文件/目录仅会被本主题的格式化工具忽略，依旧会被引擎加载并渲染成网页，并出现在导航栏和索引中；其`order`值会去除开头的`@`，有多个则只会去除第一个。例：
+- `@`开头的文件/目录会被本主题的格式化工具忽略，但依旧会被引擎加载并渲染成网页，并出现在导航栏和索引中；其`order`值会去除开头的`@`，有多个则只会去除第一个。例：
   - 本主题在`@pages`目录下存放导航栏中“索引”栏的界面，不过我设置其`frontmatter.navbar=false`（[点击查看详情](#frontmatter格式)），导航栏中的“索引”是我手动添加的
 - `readme.md`不能添加`@`或`_`，否则不会被认为是`readme`文件
 

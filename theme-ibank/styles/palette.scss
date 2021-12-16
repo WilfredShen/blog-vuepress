@@ -4,8 +4,8 @@
   --bodyBg: #f4f4f4;
   --mainBg: rgba(255, 255, 255, 1);
   --sidebarBg: rgba(255, 255, 255, 0.8);
-  --shadowColor: rgba(0, 0, 0, 0.05);
-  --accentShadowColor: rgba(0, 0, 0, 0.1);
+  --shadowColor: rgba(127, 127, 127, 0.1);
+  --accentShadowColor: rgba(127, 127, 127, 0.15);
   --textColor: #00323c;
   --textLightenColor: #ff5722;
   --borderColor: #c4c4c4;
@@ -17,7 +17,7 @@
   --disabledColor: rgba(70, 70, 70, 0.5);
   --scrollbarColor: rgba(100, 100, 100, 0.5);
   // 选中的文本
-  --selectionBg: #b3d4fc;
+  --selectionBg: #ffe89e;
   --selectionColor: #202020;
 }
 
@@ -35,8 +35,6 @@
   --bodyBg: rgb(39, 39, 43);
   --mainBg: rgba(30, 30, 34, 1);
   --sidebarBg: rgba(30, 30, 34, 0.8);
-  --shadowColor: rgba(127, 127, 127, 0.05);
-  --accentShadowColor: rgba(127, 127, 127, 0.1);
   --textColor: rgb(155, 155, 170);
   --textLightenColor: #f08d49;
   --borderColor: #2c2c2c;

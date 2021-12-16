@@ -79,7 +79,7 @@ updateList();
           <RightMenu>
             <template #title>
               <h3 class="right-menu-title is-link row" @click="switchCategoryTo()">
-                <span class="bold">全部分类</span><span class="number digital">{{ themeData.categories.$data.count }}</span>
+                <span class="bold">全部分类</span><span class="number font-digital">{{ themeData.categories.$data.count }}</span>
               </h3>
             </template>
             <div class="right-menu-list">
@@ -91,7 +91,7 @@ updateList();
                   @click="switchCategoryTo(item.key)"
                 >
                   <span>{{ item.title }}</span>
-                  <span class="number digital">{{ item.count }}</span>
+                  <span class="number font-digital">{{ item.count }}</span>
                 </div>
               </template>
             </div>
@@ -124,13 +124,13 @@ updateList();
     .number {
       font-size: 1rem;
       line-height: 1rem;
-      font-weight: bold;
+      font-weight: 600;
     }
     .right-menu-title {
       margin: 0;
       padding: 0.3rem 1.5rem;
       margin-bottom: 0.5em;
-      font-weight: normal;
+      font-weight: 700;
     }
     .right-menu-list {
       display: flex;

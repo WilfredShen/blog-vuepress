@@ -1,6 +1,7 @@
 ---
 title: 首页
-type: index
 permalink: /
+type: index
+layout: HomeLayout
 navbar: false
 ---

@@ -1,15 +1,3 @@
-<template>
-  <div class="theme-container">
-    <div class="not-found-container">
-      <div class="code">404<ToggleThemeButton style="display: inline-block" /></div>
-      <div class="msg">{{ msg }}</div>
-      <div class="link">
-        <router-link to="/">返回首页</router-link>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import ToggleThemeButton from "../components/ToggleThemeButton.vue";
@@ -27,7 +15,20 @@ onMounted(() => {
   msg.value = msgs[(prev = current)];
 });
 </script>
-<style lang="scss" scoped>
+
+<template>
+  <div class="theme-container">
+    <div class="not-found-container">
+      <div class="code">404<ToggleThemeButton style="display: inline-block" /></div>
+      <div class="msg">{{ msg }}</div>
+      <div class="link">
+        <router-link to="/">返回首页</router-link>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style lang="scss">
 .not-found-container {
   box-sizing: border-box;
   padding-left: 30vw;

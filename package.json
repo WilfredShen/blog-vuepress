@@ -1,6 +1,6 @@
 {
   "name": "blog-vuepress",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "main": "index.js",
   "author": "Wilfred Shen",
   "license": "MIT",
@@ -11,6 +11,7 @@
     "lint:fix": "yarn lint --fix"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.178",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
     "@vuepress/plugin-container": "^2.0.0-beta.27",
@@ -19,6 +20,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^8.1.1",
+    "lodash": "^4.17.21",
     "prettier": "^2.4.1",
     "typescript": "^4.5.2",
     "vuepress-vite": "^2.0.0-beta.27"

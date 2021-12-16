@@ -1,15 +1,15 @@
 import { path } from "@vuepress/utils";
 import chalk from "chalk";
-import { formatFile } from "./node-utils/frontmatter";
+import { parseFile, formatFile } from "./node-utils/frontmatter";
 import { parseOrder } from "./node-utils/order";
 import { buildCategories } from "./node-utils/categories";
 import { buildNavbar } from "./node-utils/navbar";
 import { buildTags } from "./node-utils/tags";
 import { buildArchives } from "./node-utils/archives";
 import { defaultConfig } from "./node-utils/defaults";
-import { createPages } from "./node-utils/pages";
+import { converToPageNode, createIndexPages, filterPagesByType } from "./node-utils/pages";
+import { Archive, LinkRaw, NavLink, Page, PageNode, PageType, SiteData, Tags, ThemeConfig } from "./types";
 import type { ThemeFunction, ThemeObject } from "vuepress-vite";
-import type { Archive, LinkRaw, NavLink, PageNode, SiteData, Tags, ThemeConfig } from "./types";
 
 const LOG_ENABLE = true;
 
@@ -23,7 +23,7 @@ const themeIbank: ThemeFunction = (options, ctx) => {
   const siteData: SiteData = ctx.siteData;
   siteData.themeConfig = opts;
 
-  Object.values(createPages(ctx.options.source, opts)).forEach(v =>
+  Object.values(createIndexPages(ctx.options.source, opts)).forEach(v =>
     v[0]
       ? log(chalk.cyan("info"), "create page:", chalk.green("[success]        "), chalk.green(v[1]))
       : log(chalk.cyan("info"), "create page:", chalk.yellow("[already existed]"), chalk.yellow(v[1])),
@@ -34,6 +34,7 @@ const themeIbank: ThemeFunction = (options, ctx) => {
     tags?: Tags;
     archives?: Archive;
     navbar?: (NavLink | LinkRaw)[];
+    articles?: PageNode[];
   } = {};
 
   return <ThemeObject>{
@@ -99,21 +100,26 @@ const themeIbank: ThemeFunction = (options, ctx) => {
     extendsPageOptions: option => {
       if (option.filePath) {
         const [filePath, status] = formatFile(opts, option.filePath, ctx.options.source);
-        if (status === "success") log(chalk.cyan("info"), "格式化frontmatter:", chalk.green("[success]  "), chalk.green(filePath));
-        if (status === "fail") log(chalk.cyan("info"), "格式化frontmatter:", chalk.red("[fail]     "), chalk.red(filePath));
-        if (status === "excluded") log(chalk.cyan("info"), "格式化frontmatter:", chalk.yellow("[excluded] "), chalk.yellow(filePath));
+        if (status === "success") log(chalk.cyan("info"), "formatting frontmatter:", chalk.green("[success]  "), chalk.green(filePath));
+        if (status === "fail") log(chalk.cyan("info"), "formatting frontmatter:", chalk.red("[fail]     "), chalk.red(filePath));
+        if (status === "excluded") log(chalk.cyan("info"), "formatting frontmatter:", chalk.yellow("[excluded] "), chalk.yellow(filePath));
       }
       return option;
     },
     extendsPageData: page => {
-      const p = page as PageNode;
-      if (p.filePathRelative) p.order = parseOrder(p.filePathRelative);
-      return p.data;
+      const p = page as Page;
+      const filePath = p.filePathRelative;
+      const data: Record<string, unknown> = {};
+      if (filePath) {
+        p.order = parseOrder(filePath);
+        const { categories } = parseFile("/" + filePath);
+        data.categories = categories;
+      }
+      return data;
     },
     onInitialized: ctx => {
-      const filteredPages = (ctx.pages as PageNode[]).filter(page => !page.order || !page.order.filter(o => /^_/.test(o)).length);
+      const filteredPages = (ctx.pages as Page[]).filter(page => !page.order || !page.order.filter(o => /^_/.test(o)).length);
       filteredPages.forEach(page => page.order && (page.order = page.order.map(o => o.replace(/^@/, ""))));
-
       themeData.categories = buildCategories(filteredPages);
       themeData.tags = buildTags(filteredPages);
       themeData.archives = buildArchives(filteredPages);
@@ -126,6 +132,7 @@ const themeIbank: ThemeFunction = (options, ctx) => {
       navbar.push(indexes);
       navbar.push({ text: "GitHub", link: "https://github.com/WilfredShen/vuepress-theme-ibank" });
       themeData.navbar = navbar;
+      themeData.articles = converToPageNode(...filterPagesByType(filteredPages, PageType.article));
     },
     // clientAppSetupFiles: null,
     // clientAppRootComponentFiles: null,

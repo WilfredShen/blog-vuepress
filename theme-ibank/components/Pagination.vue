@@ -116,11 +116,9 @@ onUnmounted(() => window.removeEventListener("resize", fn));
   display: flex;
   flex-direction: row;
   width: 100%;
-
   .pagination-list {
     display: flex;
     flex-direction: row;
-
     .pagination-item {
       display: flex;
       justify-content: center;
@@ -131,13 +129,11 @@ onUnmounted(() => window.removeEventListener("resize", fn));
       margin: 5px;
       line-height: 48px;
     }
-
     .active {
       background-color: var(--accentColor);
       color: white;
     }
   }
-
   .prev,
   .next {
     display: flex;
@@ -150,19 +146,16 @@ onUnmounted(() => window.removeEventListener("resize", fn));
     margin: 5px;
     padding: 0 16px;
     line-height: 48px;
-
     i {
       font-size: 24px;
     }
   }
-
   .prev {
     border-top-left-radius: 24px;
     border-bottom-left-radius: 24px;
     padding-left: 16px;
     margin-left: 0;
   }
-
   .next {
     border-top-right-radius: 24px;
     border-bottom-right-radius: 24px;

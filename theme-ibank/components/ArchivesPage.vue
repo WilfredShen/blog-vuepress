@@ -32,7 +32,7 @@ allArchives.value = Object.entries(themeData.value.archives);
           <RightMenu>
             <template #title>
               <h3 class="right-menu-title is-link row" @click="switchArchiveTo()">
-                <span class="bold">归档时间</span>
+                <span class="fw-700">归档时间</span>
               </h3>
             </template>
             <div class="right-menu-list">
@@ -43,7 +43,7 @@ allArchives.value = Object.entries(themeData.value.archives);
                 :class="{ active: currentYears && currentYears.includes(year) }"
                 @click="switchArchiveTo(year)"
               >
-                <span class="bold">{{ year }}</span>
+                <span class="font-time fw-500">{{ year }}</span>
               </div>
             </div>
           </RightMenu>
@@ -59,13 +59,6 @@ allArchives.value = Object.entries(themeData.value.archives);
 .archives-page {
   .right-menu {
     padding: 1rem 0;
-
-    .number {
-      font-size: 1rem;
-      line-height: 1rem;
-      font-weight: bold;
-    }
-
     .row {
       display: flex;
       flex-direction: row;
@@ -73,30 +66,25 @@ allArchives.value = Object.entries(themeData.value.archives);
       align-items: center;
       cursor: pointer;
     }
-
     .right-menu-title {
       margin: 0;
       padding: 0.3rem 1.5rem;
       margin-bottom: 0.5em;
       font-weight: normal;
     }
-
     .right-menu-list {
       display: flex;
       flex-direction: column;
       max-height: 60vh;
       overflow-y: auto;
-
       .right-menu-item {
         box-sizing: border-box;
         padding: 0.3rem 1.5rem;
         transition: border-width 0.1s;
         border-left: 0 solid var(--accentColor);
-
         &.active {
           transition: border-width 0.1s, $transitionBgColor, $transitionColor;
         }
-
         &.active,
         &:hover {
           background-color: var(--bodyBg);

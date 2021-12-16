@@ -1,6 +1,7 @@
 ---
 title: 归档
-type: archives
 permalink: /archives/
+type: archives
+layout: ArchivesLayout
 navbar: false
 ---
