@@ -1,6 +1,6 @@
 {
   "name": "vuepress-theme-ibank",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "main": "index.ts",
   "author": "Wilfred Shen",
   "license": "MIT",

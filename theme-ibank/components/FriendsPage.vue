@@ -36,6 +36,8 @@ const useDefaultImg = (event: Event, index: number) => {
 </template>
 
 <style lang="scss">
+@use "../styles/_variables.scss" as *;
+
 .friends-wrapper {
   & > .friend-list {
     display: flex;
@@ -48,7 +50,7 @@ const useDefaultImg = (event: Event, index: number) => {
       width: 32%;
       padding: 1rem;
       margin-bottom: 1rem;
-      transition: transform 0.5s;
+      transition: $transitionBgColor, $transitionColor, transform 0.5s;
       &:hover {
         transform: scale(1.1);
       }
