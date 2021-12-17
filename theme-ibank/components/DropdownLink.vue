@@ -9,9 +9,9 @@ const open = ref(false);
 </script>
 
 <template>
-  <div class="dropdown-link underline-wrapper">
+  <div class="dropdown-link">
     <NavLink :item="item" class="link-title accent-underline" />
-    <span class="arrow" :class="open ? 'down' : 'right'"></span>
+    <span class="arrow" :class="open ? 'down' : 'right'" />
     <ul v-if="item" class="dropdown-list box-shadow">
       <li v-for="child in item.children" :key="`child-${child.text}`" class="dropdown-group">
         <template v-if="child.children && child.children.length">

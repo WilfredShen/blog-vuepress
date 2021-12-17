@@ -82,13 +82,15 @@ allArchives.value = Object.entries(themeData.value.archives);
         padding: 0.3rem 1.5rem;
         transition: border-width 0.1s;
         border-left: 0 solid var(--accentColor);
-        &.active {
-          transition: border-width 0.1s, $transitionBgColor, $transitionColor;
-        }
+        transition: border-width 0.1s, $transitionBgColor, $transitionColor;
         &.active,
         &:hover {
           background-color: var(--bodyBg);
           border-left: 5px solid var(--accentColor);
+          a,
+          span {
+            color: var(--accentColor);
+          }
         }
       }
     }

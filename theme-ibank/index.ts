@@ -46,7 +46,22 @@ const themeIbank: ThemeFunction = (options, ctx) => {
     plugins: [
       ["@vuepress/plugin-prismjs"],
       ["@vuepress/plugin-theme-data", { themeData }],
-      // ["@vuepress/plugin-nprogress"],
+      ["@vuepress/plugin-nprogress"],
+      ["@vuepress/plugin-medium-zoom", { selector: ".article-wrapper :not(a) img" }],
+      [
+        "@vuepress/register-components",
+        {
+          components: {
+            HomeLayout: path.resolve(__dirname, "./layouts/HomeLayout.vue"),
+            ArticleLayout: path.resolve(__dirname, "./layouts/ArticleLayout.vue"),
+            ReadmeLayout: path.resolve(__dirname, "./layouts/ReadmeLayout.vue"),
+            CategoriesLayout: path.resolve(__dirname, "./layouts/CategoriesLayout.vue"),
+            TagsLayout: path.resolve(__dirname, "./layouts/TagsLayout.vue"),
+            ArchivesLayout: path.resolve(__dirname, "./layouts/ArchivesLayout.vue"),
+            FriendsLayout: path.resolve(__dirname, "./layouts/FriendsLayout.vue"),
+          },
+        },
+      ],
       [
         "@vuepress/plugin-container",
         {

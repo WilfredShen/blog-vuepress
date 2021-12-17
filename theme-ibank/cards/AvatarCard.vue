@@ -19,8 +19,12 @@ const avatar: ThemeConfig["avatar"] = (useSiteData().value as SiteData).themeCon
         ></a>
       </div>
     </div>
-    <div class="name">{{ avatar.name }}</div>
-    <div v-if="avatar.slogan" class="slogan">{{ avatar.slogan }}</div>
+    <div class="name">
+      <span>{{ avatar.name }}</span>
+    </div>
+    <div v-if="avatar.slogan" class="slogan">
+      <span>{{ avatar.slogan }}</span>
+    </div>
   </div>
 </template>
 

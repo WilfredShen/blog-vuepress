@@ -12,7 +12,7 @@ const links: NavLink[] = themeData.value.navbar;
   <nav class="nav-links">
     <div v-for="item in links" :key="item.text" class="nav-item">
       <DropdownLink v-if="item.children && item.children.length" :item="item" />
-      <span v-else class="underline-wrapper"><NavLinkComp :item="item" class="accent-underline" /></span>
+      <NavLinkComp v-else :item="item" class="accent-underline" />
     </div>
   </nav>
 </template>
@@ -20,5 +20,8 @@ const links: NavLink[] = themeData.value.navbar;
 <style lang="scss">
 .nav-links {
   height: 100%;
+  .nav-item {
+    height: fit-content;
+  }
 }
 </style>

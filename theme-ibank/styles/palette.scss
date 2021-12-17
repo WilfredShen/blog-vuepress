@@ -2,7 +2,7 @@
 
 :root {
   --bodyBg: #f4f4f4;
-  --mainBg: rgba(255, 255, 255, 1);
+  --mainBg: #ffffff;
   --sidebarBg: rgba(255, 255, 255, 0.8);
   --shadowColor: rgba(127, 127, 127, 0.1);
   --accentShadowColor: rgba(127, 127, 127, 0.15);
@@ -21,10 +21,17 @@
   --selectionColor: #202020;
 }
 
+/* plugin-nprogress */
 #nprogress {
-  // nprogress
   --nprogress-color: #ff5722;
   --nprogress-z-index: 1031;
+}
+
+/* plugin-medium-zoom */
+.medium-zoom-overlay {
+  --medium-zoom-z-index: 100;
+  --medium-zoom-bg-color: #ffffff;
+  --medium-zoom-opacity: 0.9;
 }
 
 .theme-mode-light {
@@ -32,10 +39,10 @@
 }
 
 .theme-mode-dark {
-  --bodyBg: rgb(39, 39, 43);
-  --mainBg: rgba(30, 30, 34, 1);
+  --bodyBg: #27272b;
+  --mainBg: #1e1e22;
   --sidebarBg: rgba(30, 30, 34, 0.8);
-  --textColor: rgb(155, 155, 170);
+  --textColor: #9b9baa;
   --textLightenColor: #f08d49;
   --borderColor: #2c2c2c;
   --codeBg: #252526;
@@ -46,8 +53,8 @@
 }
 
 .theme-mode-read {
-  --bodyBg: rgb(236, 236, 204);
-  --mainBg: rgba(245, 245, 213, 1);
+  --bodyBg: #ececcc;
+  --mainBg: #f5f5d5;
   --sidebarBg: rgba(245, 245, 213, 0.8);
   --textColor: #704214;
   --textLightenColor: #996633;

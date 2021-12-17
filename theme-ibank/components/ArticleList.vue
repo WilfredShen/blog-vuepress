@@ -33,11 +33,10 @@ defineProps<{ articles: PageNode[] }>();
         <div v-if="item.$data.excerpt" class="excerpt-wrapper">
           <!-- eslint-disable-next-line -->
           <div class="excerpt" v-html="item.$data.excerpt"></div>
-          <div class="readmore">
-            <div class="card">
-              <router-link :to="item.$data.path"><span>阅读全文</span><i class="iconfont icon-more"></i></router-link>
-            </div>
-          </div>
+          <router-link class="readmore" :to="item.$data.path">
+            阅读全文
+            <i class="iconfont icon-more" />
+          </router-link>
         </div>
       </div>
     </template>
@@ -75,37 +74,32 @@ defineProps<{ articles: PageNode[] }>();
   .excerpt-wrapper {
     margin-top: 1rem;
     border-top: 1px solid var(--borderColor);
+    .excerpt {
+      user-select: text;
+      p,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      & > ul > li,
+      & > ol > li {
+        transition: $transitionColor, $transitionBorderColor;
+      }
+    }
     .readmore {
       text-align: right;
-      margin-right: 0.5rem;
       display: flex;
       justify-content: right;
-      .card {
-        width: fit-content;
-        padding: 0.4em 0;
-        cursor: pointer;
+      font-size: 0.9em;
+      color: var(--textColor);
+      &:hover {
+        color: var(--accentColor);
+      }
+      i {
         display: flex;
-        flex-direction: row;
-        justify-content: right;
         align-items: center;
-        white-space: nowrap;
-        overflow: hidden;
-        transition: max-width 0.5s ease, box-shadow 0.5s, $transitionBgColor, $transitionColor;
-        max-width: 7rem;
-        i {
-          padding: 0 0.5rem;
-        }
-        span {
-          margin-left: 0.8rem;
-          text-align: right;
-          display: inline-block;
-        }
-        a {
-          color: var(--textColor);
-        }
-        &:not(:hover) {
-          max-width: 2rem;
-        }
       }
     }
   }

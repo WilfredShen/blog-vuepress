@@ -4,7 +4,7 @@
 *,
 *::before,
 *::after {
-  transition: $transitionBgColor, $transitionBorder;
+  transition: $transitionBgColor, $transitionBorderColor;
 }
 
 a,
@@ -61,7 +61,7 @@ a.header-anchor {
   @extend .box-shadow;
   border-radius: 5px;
   background: var(--mainBg);
-  transition: $transitionBoxShadow, $transitionColor, $transitionBgColor;
+  transition: $transitionBoxShadow, $transitionBgColor;
   &:hover {
     box-shadow: 0 0 10px 3px var(--accentShadowColor);
   }
@@ -81,29 +81,33 @@ a.header-anchor {
   }
 }
 
-.underline-wrapper {
-  &:hover,
-  &:focus,
-  &:active {
-    & .accent-underline::after {
+.accent-underline {
+  position: relative;
+  padding-bottom: 0.2em;
+  &::after {
+    content: "";
+    transition: all 0.2s ease-out;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    border-bottom: 0.2em solid var(--accentColor);
+  }
+  &.router-link-exact-active::after {
+    left: 0;
+    width: 100%;
+  }
+  &:has(.router-link-exact-active) {
+    &::after {
       left: 0;
       width: 100%;
     }
   }
-  .accent-underline {
-    position: relative;
-    padding-bottom: 0.2em;
+  &:hover,
+  &:focus,
+  &:active {
     &::after {
-      transition: all 0.2s ease-out;
-      display: block;
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      width: 0;
-      content: "";
-      border-bottom: 0.2em solid var(--accentColor);
-    }
-    &.router-link-exact-active::after {
       left: 0;
       width: 100%;
     }
@@ -179,11 +183,22 @@ a.header-anchor {
     padding: 1rem 2.5rem 2rem;
     border-radius: 1rem;
     background-color: var(--mainBg);
+    & > :not(.article-info) {
+      user-select: text;
+    }
     img {
       max-width: 100%;
     }
-    & > :not(.article-info) {
-      user-select: text;
+    p,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    & > ul > li,
+    & > ol > li {
+      transition: $transitionColor, $transitionBorderColor;
     }
   }
   .readme-wrapper {

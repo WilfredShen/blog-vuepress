@@ -9,7 +9,6 @@ const router = useRouter();
 const tags: [string, number][] = Object.entries(useThemeData().value.tags as Tags)
   .sort((a, b) => b[1].length - a[1].length) // 根据文章数排序
   .map(e => [e[0], e[1].length]);
-console.log(tags);
 
 const colorList = shuffle([
   { backgroundColor: "#bc9c03", color: "white" },
@@ -43,6 +42,7 @@ const getColor = (index: number) => colorList[index % colorList.length];
     font-size: 1.3rem;
     margin-top: 0;
     margin-bottom: 0.5em;
+    transition: $transitionColor;
   }
   .tags-list {
     display: flex;
