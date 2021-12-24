@@ -15,7 +15,7 @@ export enum PageType {
 export interface FrontMatter extends vt.PageFrontmatter {
   title: string;
   permalink: string;
-  date: string | Date;
+  date: string;
   type: PageType;
   categories?: string[];
   tags?: string[];

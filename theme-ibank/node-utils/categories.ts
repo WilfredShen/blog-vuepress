@@ -1,10 +1,10 @@
 import { PageType } from "../types";
 import type { Page, PageNodeData, PageNode } from "../types";
 
-const newNode = (data?: PageNodeData): PageNode => ({ $data: { ...data } } as PageNode);
+const newPageNode = (data: PageNodeData = {} as PageNodeData): PageNode => ({ $data: data } as PageNode);
 
 export const buildCategories = (pages: Page[]) => {
-  const root = newNode({ count: 0, title: "首页" } as PageNodeData);
+  const root = newPageNode({ count: 0, title: "首页" } as PageNodeData);
   pages.forEach(page => {
     if (!page.order) page.order = [];
     for (const order of page.order) if (/^_/.test(order)) return;
@@ -20,7 +20,7 @@ export const buildCategories = (pages: Page[]) => {
         // 不存在节点则创建新的节点并递归
         else {
           if (!page.order) page.order = [];
-          current = current.$children[e] = newNode({ order: page.order[i], count: 0, title: e } as PageNodeData);
+          current = current.$children[e] = newPageNode({ order: page.order[i], count: 0, title: e } as PageNodeData);
           root.$data.count !== undefined && root.$data.count++;
         }
         doIncrease && current.$data.count !== undefined && current.$data.count++;
@@ -29,7 +29,7 @@ export const buildCategories = (pages: Page[]) => {
 
       // 注册 page
       if (!current.$children) current.$children = {};
-      if (!current.$children[page.data.title]) current.$children[page.data.title] = newNode();
+      if (!current.$children[page.data.title]) current.$children[page.data.title] = newPageNode();
       current = current.$children[page.data.title];
       current.$data = {
         ...page.data,
@@ -38,7 +38,7 @@ export const buildCategories = (pages: Page[]) => {
       };
     } else if (page.data.title) {
       if (!root.$children) root.$children = {};
-      if (!root.$children[page.data.title]) root.$children[page.data.title] = newNode();
+      if (!root.$children[page.data.title]) root.$children[page.data.title] = newPageNode();
       root.$children[page.data.title].$data = {
         ...page.data,
         order: page.order[page.order.length - 1] || "",

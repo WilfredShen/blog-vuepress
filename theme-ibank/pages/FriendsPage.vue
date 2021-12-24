@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import { usePageFrontmatter } from "@vuepress/client";
 import { Friend } from "../types";
-import MainLayout from "./MainLayout.vue";
+import MainLayout from "../components/MainLayout.vue";
 const friends: Friend[] = usePageFrontmatter().value.links as Friend[];
 const flag = ref<boolean[]>([]); // 如果默认头像也加载失败，则会陷入死循环，使用flag避免进入死循环
 const useDefaultImg = (event: Event, index: number) => {

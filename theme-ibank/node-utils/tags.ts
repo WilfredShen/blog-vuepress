@@ -13,8 +13,6 @@ export const buildTags = (pages: Page[]) => {
         });
     }
   });
-  Object.values(tags).forEach(l =>
-    l.sort((a, b) => b.$data.frontmatter.date.toString().localeCompare(a.$data.frontmatter.date.toString())),
-  );
+  Object.values(tags).forEach(l => l.sort((a, b) => b.$data.frontmatter.date.localeCompare(a.$data.frontmatter.date)));
   return tags;
 };

@@ -1,33 +1,42 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { computed } from "vue";
 import { useRoute, useRouter } from "@vuepress/client";
 import { useThemeData } from "@vuepress/plugin-theme-data/lib/client";
-import Timeline from "./Timeline.vue";
-import RightMenu from "./RightMenu.vue";
-import MainLayout from "./MainLayout.vue";
-import type { Entry, ArchiveYear } from "../types";
+import Timeline from "../components/Timeline.vue";
+import RightMenu from "../components/RightMenu.vue";
+import MainLayout from "../components/MainLayout.vue";
+import type { Archive } from "../types";
 
 const route = useRoute();
 const router = useRouter();
 const themeData = useThemeData();
 
-const allArchives = ref<Entry<ArchiveYear>[]>([]);
-
+const isSelected = (year: string) => selectedYears.value.includes(year);
 const switchArchiveTo = (year?: string) => router.push({ query: { year } });
 
-const currentYears = computed(() => route.query.year && route.query.year.toString().split(","));
-const currentArchives = computed<Entry<ArchiveYear>[]>(() =>
-  currentYears.value ? allArchives.value.filter(([year]) => currentYears.value?.includes(year)) : allArchives.value,
-);
-
-allArchives.value = Object.entries(themeData.value.archives);
+const allArchives = Object.entries<Archive>(themeData.value.archives);
+const allYears = [...new Set(Object.keys(themeData.value.archives).map(date => date.slice(0, 4)))].sort();
+const groupedByYear = (() => {
+  const map: { [year: string]: Archive } = {};
+  allArchives.forEach(([date, archive]) => {
+    const year = date.slice(0, 4);
+    if (!map[year]) map[year] = [];
+    map[year].push(...archive);
+  });
+  // 降序
+  Object.values(map).forEach(archive => archive.sort((a, b) => b.$data.frontmatter.date.localeCompare(a.$data.frontmatter.date)));
+  return Object.entries(map).sort(([a], [b]) => b.localeCompare(a));
+})();
+const selectAll = computed(() => !route.query.year);
+const selectedYears = computed(() => route.query.year?.toString().split(",") || allYears);
+const selectedArchives = computed(() => (selectAll.value ? [...groupedByYear] : groupedByYear.filter(([year]) => isSelected(year))));
 </script>
 
 <template>
   <div class="archives-page page-wrapper">
     <div class="archives-wrapper">
       <MainLayout>
-        <Timeline :archives="currentArchives" />
+        <Timeline :archives="selectedArchives" />
         <template #inner-right>
           <RightMenu>
             <template #title>
@@ -37,10 +46,10 @@ allArchives.value = Object.entries(themeData.value.archives);
             </template>
             <div class="right-menu-list">
               <div
-                v-for="[year] in allArchives"
+                v-for="[year] in groupedByYear"
                 :key="year"
                 class="right-menu-item is-link row"
-                :class="{ active: currentYears && currentYears.includes(year) }"
+                :class="{ active: !selectAll && isSelected(year) }"
                 @click="switchArchiveTo(year)"
               >
                 <span class="font-time fw-500">{{ year }}</span>

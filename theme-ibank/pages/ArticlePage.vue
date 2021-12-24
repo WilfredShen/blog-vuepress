@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { onMounted, onBeforeUnmount, watch } from "vue";
 import { useRoute } from "@vuepress/client";
-import MainLayout from "./MainLayout.vue";
-import ArticleInfo from "./ArticleInfo.vue";
-import Sidebar from "./Sidebar.vue";
+import MainLayout from "../components/MainLayout.vue";
+import ArticleInfo from "../components/ArticleInfo.vue";
+import Sidebar from "../components/Sidebar.vue";
 
 const route = useRoute();
 

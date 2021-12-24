@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Navbar from "../components/Navbar.vue";
-import ArchivesPage from "../components/ArchivesPage.vue";
+import ArchivesPage from "../pages/ArchivesPage.vue";
 import Footer from "../components/Footer.vue";
 import BackToTop from "../components/BackToTop.vue";
 </script>

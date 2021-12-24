@@ -8,7 +8,7 @@ import { buildTags } from "./node-utils/tags";
 import { buildArchives } from "./node-utils/archives";
 import { defaultConfig } from "./node-utils/defaults";
 import { converToPageNode, createIndexPages, filterPagesByType } from "./node-utils/pages";
-import { Archive, LinkRaw, NavLink, Page, PageNode, PageType, SiteData, Tags, ThemeConfig } from "./types";
+import { Archives, LinkRaw, NavLink, Page, PageNode, PageType, SiteData, Tags, ThemeConfig } from "./types";
 import type { ThemeFunction, ThemeObject } from "vuepress-vite";
 
 const LOG_ENABLE = true;
@@ -32,7 +32,7 @@ const themeIbank: ThemeFunction = (options, ctx) => {
   const themeData: {
     categories?: PageNode;
     tags?: Tags;
-    archives?: Archive;
+    archives?: Archives;
     navbar?: (NavLink | LinkRaw)[];
     articles?: PageNode[];
   } = {};
@@ -140,9 +140,9 @@ const themeIbank: ThemeFunction = (options, ctx) => {
       themeData.archives = buildArchives(filteredPages);
       const navbar: (NavLink | LinkRaw)[] = buildNavbar(themeData.categories);
       const indexes: LinkRaw = { text: "索引", children: [] };
-      opts.categories && indexes.children?.push({ text: "分类", link: "/categories/" });
-      opts.tags && indexes.children?.push({ text: "标签", link: "/tags/" });
-      opts.archives && indexes.children?.push({ text: "归档", link: "/archives/" });
+      opts.categories && indexes.children?.push({ text: "分类", link: `/${PageType.categories}/` });
+      opts.tags && indexes.children?.push({ text: "标签", link: `/${PageType.tags}/` });
+      opts.archives && indexes.children?.push({ text: "归档", link: `/${PageType.archives}/` });
       navbar.unshift({ text: "首页", link: "/" });
       navbar.push(indexes);
       navbar.push({ text: "GitHub", link: "https://github.com/WilfredShen/vuepress-theme-ibank" });

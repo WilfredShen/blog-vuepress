@@ -3,10 +3,10 @@ import { ref, watch } from "vue";
 import { useRoute, useRouter } from "@vuepress/client";
 import { useThemeData } from "@vuepress/plugin-theme-data/lib/client";
 import { parsePages, filterArticles, sortPagesByDateDesc, sotrPagesByOrder } from "../utils/articles";
-import Pagination from "./Pagination.vue";
-import ArticleList from "./ArticleList.vue";
-import RightMenu from "./RightMenu.vue";
-import MainLayout from "./MainLayout.vue";
+import Pagination from "../components/Pagination.vue";
+import ArticleList from "../components/ArticleList.vue";
+import RightMenu from "../components/RightMenu.vue";
+import MainLayout from "../components/MainLayout.vue";
 import type { PageNode, PageNodeData } from "../types";
 
 const route = useRoute();

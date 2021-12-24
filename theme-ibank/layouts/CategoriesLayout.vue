@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Navbar from "../components/Navbar.vue";
-import CategoriesPage from "../components/CategoriesPage.vue";
+import CategoriesPage from "../pages/CategoriesPage.vue";
 import Footer from "../components/Footer.vue";
 import BackToTop from "../components/BackToTop.vue";
 </script>

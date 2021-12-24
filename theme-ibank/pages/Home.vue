@@ -2,9 +2,9 @@
 import { reactive, computed } from "vue";
 import { useRoute, useRouter } from "@vuepress/client";
 import { useThemeData } from "@vuepress/plugin-theme-data/lib/client";
-import ArticleList from "./ArticleList.vue";
-import MainLayout from "./MainLayout.vue";
-import Pagination from "./Pagination.vue";
+import ArticleList from "../components/ArticleList.vue";
+import MainLayout from "../components/MainLayout.vue";
+import Pagination from "../components/Pagination.vue";
 import type { PageNode } from "../types";
 import { filterArticles, parsePages, sortPagesByDateDesc } from "../utils/articles";
 import AvatarCard from "../cards/AvatarCard.vue";

@@ -1,4 +1,4 @@
-import { ThemeConfig } from "types";
+import type { ThemeConfig } from "../types";
 export const logEnable = true;
 export const excerptSeparator = "<!-- more -->";
 export const defaultPrefix = "/article/";

@@ -3,22 +3,18 @@
     <template v-for="[year, archive] in archives" :key="year">
       <h2 class="year fw-700">{{ year }}</h2>
       <div class="timeline-list">
-        <template v-for="[month, monthData] in Object.entries(archive)" :key="month">
-          <template v-for="[day, dayData] in Object.entries(monthData)" :key="day">
-            <router-link v-for="item in dayData" :key="item.$data.key" class="item is-link" :to="item.$data.path">
-              <span class="date font-time fw-500">{{ `${month.padStart(2, "0")}-${day.padStart(2, "0")}` }}</span>
-              <span class="title">{{ item.$data.title }}</span>
-            </router-link>
-          </template>
-        </template>
+        <router-link v-for="item in archive" :key="item.$data.key" class="item is-link" :to="item.$data.path">
+          <span class="date font-time fw-500">{{ item.$data.frontmatter.date.slice(5, 10) }}</span>
+          <span class="title">{{ item.$data.title }}</span>
+        </router-link>
       </div>
     </template>
   </div>
 </template>
 <script setup lang="ts">
-import type { Entry, ArchiveYear } from "../types";
+import type { Entry, Archive } from "../types";
 
-defineProps<{ archives: Entry<ArchiveYear>[] }>();
+defineProps<{ archives: Entry<Archive>[] }>();
 </script>
 <style lang="scss">
 @use "../styles/variables" as *;

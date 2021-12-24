@@ -3,8 +3,8 @@ import { computed } from "vue";
 import { usePageFrontmatter } from "@vuepress/client";
 import Navbar from "../components/Navbar.vue";
 import Footer from "../components/Footer.vue";
-import ArticlePage from "../components/ArticlePage.vue";
-import ReadmePage from "../components/ReadmePage.vue";
+import ArticlePage from "../pages/ArticlePage.vue";
+import ReadmePage from "../pages/ReadmePage.vue";
 import BackToTop from "../components/BackToTop.vue";
 import { PageType } from "../types";
 
