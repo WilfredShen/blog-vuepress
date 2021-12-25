@@ -42,6 +42,7 @@ const themeIbank: ThemeFunction = (options, ctx) => {
       ["@vuepress/plugin-theme-data", { themeData }],
       ["@vuepress/plugin-nprogress"],
       ["@vuepress/plugin-medium-zoom", { selector: ".article-wrapper :not(a) img" }],
+      ["@vuepress/plugin-external-link-icon"],
       [
         "@vuepress/register-components",
         {
@@ -113,18 +114,15 @@ const themeIbank: ThemeFunction = (options, ctx) => {
         if (status === "fail") log(chalk.cyan("info"), "formatting frontmatter:", chalk.red("[fail]     "), chalk.red(filePath));
         if (status === "excluded") log(chalk.cyan("info"), "formatting frontmatter:", chalk.yellow("[excluded] "), chalk.yellow(filePath));
       }
-      return option;
     },
-    extendsPageData: page => {
+    extendsPage: page => {
       const p = page as Page;
       const filePath = p.filePathRelative;
-      const data: Record<string, unknown> = {};
       if (filePath) {
         p.order = parseOrder(filePath);
         const { categories } = parseFile("/" + filePath);
-        data.categories = categories;
+        p.data.categories = categories;
       }
-      return data;
     },
     onInitialized: ctx => {
       const filteredPages = (ctx.pages as Page[]).filter(page => !page.order || !page.order.filter(o => /^_/.test(o)).length);

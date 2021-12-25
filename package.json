@@ -1,6 +1,6 @@
 {
   "name": "blog-vuepress",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "main": "index.js",
   "author": "Wilfred Shen",
   "license": "MIT",
@@ -15,6 +15,7 @@
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
     "@vuepress/plugin-container": "^2.0.0-beta.27",
+    "@vuepress/plugin-external-link-icon": "^2.0.0-beta.29",
     "@vuepress/plugin-medium-zoom": "^2.0.0-beta.27",
     "@vuepress/plugin-nprogress": "^2.0.0-beta.27",
     "@vuepress/plugin-register-components": "^2.0.0-beta.27",

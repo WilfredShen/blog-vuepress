@@ -18,6 +18,6 @@ defineProps<{ item: LinkRaw }>();
     :rel="(isWebLink(item.link) && 'noopener noreferrer') || undefined"
   >
     {{ item.text }}
-    <OutboundLink />
+    <ExternalLinkIcon />
   </a>
 </template>

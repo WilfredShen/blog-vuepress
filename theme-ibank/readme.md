@@ -45,7 +45,7 @@ const config = {
 module.exports = config;
 ```
 
-或者使用ts以获取更详细的类型提示：
+或者使用typescript以获取更详细的类型提示：
 
 ```ts
 import { defineUserConfig } from "vuepress-vite";
