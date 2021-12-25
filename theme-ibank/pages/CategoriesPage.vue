@@ -28,18 +28,19 @@ const allCategories = (() => {
   handler(themeData.categories);
   return list.filter(e => e.count).sort((a, b) => a.order.localeCompare(b.order));
 })();
-const selectedCategory = computed(() => (typeof route.params.categories !== "string" && route.params.categories?.join(",")) || "");
 const allArticles = themeData.articles;
+
+const selectedCategory = computed(() => (typeof route.params.categories !== "string" && route.params.categories?.join(",")) || "");
 const articles = computed(() => allArticles.filter(p => p.$data.categories?.join(",").startsWith(selectedCategory.value)));
 const selectedArticles = computed(() =>
   articles.value.slice(pageSize.value * (selectedPage.value - 1), pageSize.value * selectedPage.value),
 );
-const total = computed(() => articles.value?.length || 0);
+
+const total = computed(() => articles.value.length || 0);
 const pageSize = ref(10);
 const selectedPage = computed(() => +(route.query.page || 1));
 
 const switchPagingTo = (index: number) => router.push({ query: { page: index } });
-
 const switchCategoryTo = (categories?: string) => router.push({ params: { categories: categories?.split(",") } });
 </script>
 
