@@ -22,4 +22,13 @@ export default defineClientAppEnhance(({ app, router, siteData }) => {
       component: tagsRoute.components.default,
     });
   }
+  const archivesRoute = routes.find(r => r.path === `/${PageType.archives}/`);
+  if (archivesRoute) {
+    archivesRoute.name && router.removeRoute(archivesRoute.name);
+    router.addRoute({
+      name: archivesRoute.name,
+      path: "/archives/:year?/",
+      component: archivesRoute.components.default,
+    });
+  }
 });

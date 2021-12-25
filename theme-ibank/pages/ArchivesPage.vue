@@ -11,11 +11,10 @@ const route = useRoute();
 const router = useRouter();
 const themeData = useThemeData<ThemeData>().value;
 
-const isSelected = (year: string) => selectedYears.value.includes(year);
-const switchArchiveTo = (year?: string) => router.push({ query: { year } });
+const isSelected = (year: string) => !selectedYear.value || year === selectedYear.value;
+const switchArchiveTo = (year?: string) => router.push({ params: { year } });
 
 const allArchives = Object.entries<Archive>(themeData.archives);
-const allYears = [...new Set(Object.keys(themeData.archives).map(date => date.slice(0, 4)))].sort();
 const groupedByYear = (() => {
   const map: { [year: string]: Archive } = {};
   allArchives.forEach(([date, archive]) => {
@@ -27,9 +26,8 @@ const groupedByYear = (() => {
   Object.values(map).forEach(archive => archive.sort((a, b) => b.$data.frontmatter.date.localeCompare(a.$data.frontmatter.date)));
   return Object.entries(map).sort(([a], [b]) => b.localeCompare(a));
 })();
-const selectAll = computed(() => !route.query.year);
-const selectedYears = computed(() => route.query.year?.toString().split(",") || allYears);
-const selectedArchives = computed(() => (selectAll.value ? [...groupedByYear] : groupedByYear.filter(([year]) => isSelected(year))));
+const selectedYear = computed(() => (typeof route.params.year === "string" && route.params.year) || "");
+const selectedArchives = computed(() => groupedByYear.filter(([year]) => isSelected(year)));
 </script>
 
 <template>
@@ -49,7 +47,7 @@ const selectedArchives = computed(() => (selectAll.value ? [...groupedByYear] : 
                 v-for="[year] in groupedByYear"
                 :key="year"
                 class="right-menu-item is-link row"
-                :class="{ active: !selectAll && isSelected(year) }"
+                :class="{ active: selectedYear && isSelected(year) }"
                 @click="switchArchiveTo(year)"
               >
                 <span class="font-time fw-500">{{ year }}</span>
