@@ -16,6 +16,7 @@ const avatar: ThemeConfig["avatar"] = (useSiteData().value as SiteData).themeCon
           :class="`icon-${item.icon}`"
           :href="item.link"
           :target="isWebLink(item.link) ? '_blank' : undefined"
+          :title="item.desc || item.link || item.title"
         ></a>
       </div>
     </div>

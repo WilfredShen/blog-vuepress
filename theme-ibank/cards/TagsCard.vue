@@ -6,9 +6,9 @@ import { shuffle } from "../utils/random";
 
 const router = useRouter();
 
-const tags: [string, number][] = Object.entries(useThemeData<ThemeData>().value.tags)
-  .sort((a, b) => b[1].length - a[1].length) // 根据文章数排序
-  .map(e => [e[0], e[1].length]);
+const tags = Object.entries(useThemeData<ThemeData>().value.tags)
+  .map<[string, number]>(e => [e[0], e[1].length])
+  .sort((a, b) => b[1] - a[1]); // 根据文章数排序
 
 const colorList = shuffle([
   { backgroundColor: "#bc9c03", color: "white" },
@@ -28,7 +28,15 @@ const getColor = (index: number) => colorList[index % colorList.length];
   <div class="tags-card card">
     <h3 class="title">标签</h3>
     <div class="tags-list">
-      <span v-for="([tag], index) in tags" :key="tag" class="tag-item" :style="getColor(index)" @click="selectTag(tag)">{{ tag }}</span>
+      <span
+        v-for="([tag, count], index) in tags"
+        :key="tag"
+        class="tag-item"
+        :title="`${count}篇文章`"
+        :style="getColor(index)"
+        @click="selectTag(tag)"
+        >{{ tag }}</span
+      >
     </div>
   </div>
 </template>

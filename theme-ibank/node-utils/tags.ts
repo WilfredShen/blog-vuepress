@@ -13,6 +13,7 @@ export const buildTags = (pages: Page[]) => {
         });
     }
   });
+  // 按时间降序
   Object.values(tags).forEach(l => l.sort((a, b) => b.$data.frontmatter.date.localeCompare(a.$data.frontmatter.date)));
   return tags;
 };

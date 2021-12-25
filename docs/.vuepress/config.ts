@@ -28,6 +28,7 @@ export default defineUserConfig<ThemeConfig>({
           title: "邮箱",
           link: "mailto:blog@wilfredshen.cn",
           icon: IconType.email,
+          desc: "发送邮件至：blog@wilfredshen.cn",
         },
         {
           title: "GitHub",

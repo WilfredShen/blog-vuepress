@@ -14,7 +14,7 @@ const themeData = useThemeData<ThemeData>().value;
 const isSelected = (year: string) => !selectedYear.value || year === selectedYear.value;
 const switchArchiveTo = (year?: string) => router.push({ params: { year } });
 
-const allArchives = Object.entries<Archive>(themeData.archives);
+const allArchives = Object.entries(themeData.archives);
 const groupedByYear = (() => {
   const map: { [year: string]: Archive } = {};
   allArchives.forEach(([date, archive]) => {
@@ -22,19 +22,19 @@ const groupedByYear = (() => {
     if (!map[year]) map[year] = [];
     map[year].push(...archive);
   });
-  // 降序
+  // 按时间降序
   Object.values(map).forEach(archive => archive.sort((a, b) => b.$data.frontmatter.date.localeCompare(a.$data.frontmatter.date)));
   return Object.entries(map).sort(([a], [b]) => b.localeCompare(a));
 })();
 const selectedYear = computed(() => (typeof route.params.year === "string" && route.params.year) || "");
-const selectedArchives = computed(() => groupedByYear.filter(([year]) => isSelected(year)));
+const selectedArchive = computed(() => groupedByYear.filter(([year]) => isSelected(year)));
 </script>
 
 <template>
   <div class="archives-page page-wrapper">
     <div class="archives-wrapper">
       <MainLayout>
-        <Timeline :archives="selectedArchives" />
+        <Timeline :archives="selectedArchive" />
         <template #inner-right>
           <RightMenu>
             <template #title>
