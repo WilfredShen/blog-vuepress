@@ -5,17 +5,17 @@ import { useThemeData } from "@vuepress/plugin-theme-data/lib/client";
 import Timeline from "../components/Timeline.vue";
 import RightMenu from "../components/RightMenu.vue";
 import MainLayout from "../components/MainLayout.vue";
-import type { Archive } from "../types";
+import type { Archive, ThemeData } from "../types";
 
 const route = useRoute();
 const router = useRouter();
-const themeData = useThemeData();
+const themeData = useThemeData<ThemeData>().value;
 
 const isSelected = (year: string) => selectedYears.value.includes(year);
 const switchArchiveTo = (year?: string) => router.push({ query: { year } });
 
-const allArchives = Object.entries<Archive>(themeData.value.archives);
-const allYears = [...new Set(Object.keys(themeData.value.archives).map(date => date.slice(0, 4)))].sort();
+const allArchives = Object.entries<Archive>(themeData.archives);
+const allYears = [...new Set(Object.keys(themeData.archives).map(date => date.slice(0, 4)))].sort();
 const groupedByYear = (() => {
   const map: { [year: string]: Archive } = {};
   allArchives.forEach(([date, archive]) => {

@@ -8,7 +8,7 @@ import { buildTags } from "./node-utils/tags";
 import { buildArchives } from "./node-utils/archives";
 import { defaultConfig } from "./node-utils/defaults";
 import { converToPageNode, createIndexPages, filterPagesByType } from "./node-utils/pages";
-import { Archives, LinkRaw, NavLink, Page, PageNode, PageType, SiteData, Tags, ThemeConfig } from "./types";
+import { LinkRaw, NavLink, Page, PageType, SiteData, ThemeConfig, ThemeData } from "./types";
 import type { ThemeFunction, ThemeObject } from "vuepress-vite";
 
 const LOG_ENABLE = true;
@@ -29,13 +29,7 @@ const themeIbank: ThemeFunction = (options, ctx) => {
       : log(chalk.cyan("info"), "create page:", chalk.yellow("[already existed]"), chalk.yellow(v[1])),
   );
 
-  const themeData: {
-    categories?: PageNode;
-    tags?: Tags;
-    archives?: Archives;
-    navbar?: (NavLink | LinkRaw)[];
-    articles?: PageNode[];
-  } = {};
+  const themeData: ThemeData = {} as ThemeData;
 
   return <ThemeObject>{
     name: "vuepress-theme-ibank",
@@ -147,7 +141,9 @@ const themeIbank: ThemeFunction = (options, ctx) => {
       navbar.push(indexes);
       navbar.push({ text: "GitHub", link: "https://github.com/WilfredShen/vuepress-theme-ibank" });
       themeData.navbar = navbar;
-      themeData.articles = converToPageNode(...filterPagesByType(filteredPages, PageType.article));
+      themeData.articles = converToPageNode(...filterPagesByType(filteredPages, PageType.article)).sort((a, b) =>
+        b.$data.frontmatter.date.localeCompare(a.$data.frontmatter.date),
+      );
     },
     // clientAppSetupFiles: null,
     // clientAppRootComponentFiles: null,

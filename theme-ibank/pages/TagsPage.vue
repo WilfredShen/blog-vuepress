@@ -39,11 +39,11 @@ import Pagination from "../components/Pagination.vue";
 import ArticleList from "../components/ArticleList.vue";
 import RightMenu from "../components/RightMenu.vue";
 import MainLayout from "../components/MainLayout.vue";
-import type { Tag, PageNode, Tags } from "../types";
+import type { Tag, PageNode, Tags, ThemeData } from "../types";
 
 const route = useRoute();
 const router = useRouter();
-const themeData = useThemeData();
+const themeData = useThemeData<ThemeData>().value;
 
 const allTags = ref<Tag[]>();
 const articles = ref<PageNode[]>();
@@ -70,7 +70,7 @@ const updateQuery = () => {
 };
 
 const updateList = () => {
-  articles.value = currentTag.value ? themeData.value.tags[currentTag.value] : themeData.value.articles;
+  articles.value = currentTag.value ? themeData.tags[currentTag.value] : themeData.articles;
   total.value = articles.value?.length || 0;
   currentArticles.value = articles.value?.slice(pageSize.value * (currentPage.value - 1), pageSize.value * currentPage.value);
 };
@@ -79,7 +79,7 @@ watch(() => route.query, updateQuery);
 watch(currentTag, updateList);
 watch(currentPage, updateList);
 
-allTags.value = getAllTags(themeData.value.tags);
+allTags.value = getAllTags(themeData.tags);
 updateQuery();
 updateList();
 </script>

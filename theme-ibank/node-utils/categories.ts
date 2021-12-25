@@ -20,7 +20,12 @@ export const buildCategories = (pages: Page[]) => {
         // 不存在节点则创建新的节点并递归
         else {
           if (!page.order) page.order = [];
-          current = current.$children[e] = newPageNode({ order: page.order[i], count: 0, title: e } as PageNodeData);
+          current = current.$children[e] = newPageNode({
+            order: page.order[i],
+            count: 0,
+            title: e,
+            categories: categories.slice(0, i),
+          } as PageNodeData);
           root.$data.count !== undefined && root.$data.count++;
         }
         doIncrease && current.$data.count !== undefined && current.$data.count++;

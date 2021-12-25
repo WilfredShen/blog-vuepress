@@ -1,4 +1,8 @@
 import type vt from "vuepress-vite";
+import { Archives } from "./archive";
+import { LinkRaw, NavLink } from "./navbar";
+import { PageNode } from "./page";
+import { Tags } from "./tag";
 
 export type SiteData = vt.SiteData & { themeConfig?: ThemeConfig };
 
@@ -37,4 +41,12 @@ export interface ThemeConfig {
       icon: IconType;
     }[];
   };
+}
+
+export interface ThemeData extends Record<string, unknown> {
+  categories: PageNode;
+  tags: Tags;
+  archives: Archives;
+  navbar: (NavLink | LinkRaw)[];
+  articles: PageNode[];
 }

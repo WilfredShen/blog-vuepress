@@ -2,10 +2,10 @@
 import NavLinkComp from "./NavLink.vue";
 import DropdownLink from "./DropdownLink.vue";
 import { useThemeData } from "@vuepress/plugin-theme-data/lib/client";
-import type { NavLink } from "../types";
+import type { LinkRaw, NavLink, ThemeData } from "../types";
 
-const themeData = useThemeData();
-const links: NavLink[] = themeData.value.navbar;
+const themeData = useThemeData<ThemeData>().value;
+const links: (NavLink | LinkRaw)[] = themeData.navbar;
 </script>
 
 <template>

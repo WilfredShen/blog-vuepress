@@ -5,14 +5,14 @@ import { useThemeData } from "@vuepress/plugin-theme-data/lib/client";
 import ArticleList from "../components/ArticleList.vue";
 import MainLayout from "../components/MainLayout.vue";
 import Pagination from "../components/Pagination.vue";
-import type { PageNode } from "../types";
+import type { PageNode, ThemeData } from "../types";
 import { filterArticles, parsePages, sortPagesByDateDesc } from "../utils/articles";
 import AvatarCard from "../cards/AvatarCard.vue";
 import TagsCard from "../cards/TagsCard.vue";
 
 const route = useRoute();
 const router = useRouter();
-const themeData = useThemeData();
+const themeData = useThemeData<ThemeData>().value;
 
 const state = reactive<{
   allArticles: PageNode[];
@@ -39,7 +39,7 @@ const switchPagingTo = (index: number) =>
   router.push({ query: { ...route.query, page: index } });
 
 const updateArticles = () => {
-  const list = parsePages(themeData.value.categories) || [];
+  const list = parsePages(themeData.categories) || [];
   let i = -1;
   while (++i < list.length) list.push(...(parsePages(list[i]) || []));
   state.allArticles = sortPagesByDateDesc(filterArticles(list));

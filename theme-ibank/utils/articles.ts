@@ -5,9 +5,9 @@ export const parsePages = (node: PageNode) => node.$children && Object.values(no
 export const filterArticles = (pages: PageNode[]) =>
   pages.filter(e => e.$data.frontmatter && e.$data.frontmatter.type === PageType.article);
 
-export const sotrPagesByOrder = (pages: PageNode[]) =>
+export const sortPagesByOrder = (pages: PageNode[]) =>
   pages.sort((a, b) => a.$data.order?.toString().localeCompare(b.$data.order?.toString() || "") || 0);
-export const sotrPagesByOrderDesc = (pages: PageNode[]) =>
+export const sortPagesByOrderDesc = (pages: PageNode[]) =>
   pages.sort((a, b) => b.$data.order?.toString().localeCompare(a.$data.order?.toString() || "") || 0);
 
 export const sortPagesByDate = (pages: PageNode[]) =>

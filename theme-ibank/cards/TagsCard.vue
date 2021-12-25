@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { useRouter } from "vue-router";
 import { useThemeData } from "@vuepress/plugin-theme-data/lib/client";
-import { Tags } from "../types";
+import { ThemeData } from "../types";
 import { shuffle } from "../utils/random";
 
 const router = useRouter();
 
-const tags: [string, number][] = Object.entries(useThemeData().value.tags as Tags)
+const tags: [string, number][] = Object.entries(useThemeData<ThemeData>().value.tags)
   .sort((a, b) => b[1].length - a[1].length) // 根据文章数排序
   .map(e => [e[0], e[1].length]);
 

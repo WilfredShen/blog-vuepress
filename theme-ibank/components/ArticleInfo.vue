@@ -5,10 +5,10 @@ import { useThemeData } from "@vuepress/plugin-theme-data/lib/client";
 import Breadcrumb from "./Breadcrumb.vue";
 import ArticleTitle from "./ArticleTitle.vue";
 import Tags from "./Tags.vue";
-import type { FrontMatter, LinkRaw, PageNode, PageNodeData } from "../types";
+import type { FrontMatter, LinkRaw, PageNode, PageNodeData, ThemeData } from "../types";
 
 const route = useRoute();
-const themeData = useThemeData();
+const themeData = useThemeData<ThemeData>().value;
 
 const page = ref<PageNodeData>(usePageData().value as PageNodeData);
 const navs = ref<LinkRaw[]>([]);
@@ -24,7 +24,7 @@ const getBreadcrumb = (node: PageNode, keys: string[] | undefined): LinkRaw[] =>
 
 const updateData = () => {
   page.value = usePageData().value as PageNodeData;
-  navs.value = getBreadcrumb(themeData.value.categories, page.value.frontmatter.categories || page.value.categories);
+  navs.value = getBreadcrumb(themeData.categories, page.value.frontmatter.categories || page.value.categories);
   frontmatter.value = page.value.frontmatter;
 };
 watch(route, updateData);
