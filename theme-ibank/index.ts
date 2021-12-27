@@ -120,8 +120,7 @@ const themeIbank: ThemeFunction = (options, ctx) => {
       const filePath = p.filePathRelative;
       if (filePath) {
         p.order = parseOrder(filePath);
-        const { categories } = parseFile("/" + filePath);
-        p.data.categories = categories;
+        p.data.categories = parseFile("/" + filePath).categories;
       }
     },
     onInitialized: ctx => {

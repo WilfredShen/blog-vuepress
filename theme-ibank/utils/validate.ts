@@ -1,30 +1,7 @@
-export function isExternal(str: string) {
-  return /^(https?:|mailto:|tel:)/.test(str);
-}
-
-export function isWebLink(str: string) {
-  return /^(https?:)/.test(str);
-}
-
-export function isMailto(str: string) {
-  return /^(mailto:)/.test(str);
-}
-
-export function isTel(str: string) {
-  return /^(tel:)/.test(str);
-}
-
-export function validURL(url: string) {
-  const reg =
-    /^(https?|ftp):\/\/([a-zA-Z0-9.-]+(:[a-zA-Z0-9.&%$-]+)*@)*((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])){3}|([a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(:[0-9]+)*(\/($|[a-zA-Z0-9.,?'\\+&%$#=~_-]+))*$/;
-  return reg.test(url);
-}
-
-export function isString(str: unknown) {
-  return typeof str === "string" || str instanceof String;
-}
-
-export function isArray(arg: unknown) {
-  if (typeof Array.isArray === "undefined") return Object.prototype.toString.call(arg) === "[object Array]";
-  return Array.isArray(arg);
-}
+export const isExternal = (str: string) => /^(https?:\/\/|mailto:|tel:)/.test(str);
+export const isWebLink = (str: string) => /^(https?:\/\/)/.test(str);
+export const isMailto = (str: string) => /^(mailto:)/.test(str);
+export const isTel = (str: string) => /^(tel:)/.test(str);
+export const isURL = (str: string) => /^(https?|ftp):\/\/$/.test(str);
+export const isString = (str: unknown) => typeof str === "string" || str instanceof String;
+export const isArray = (arg: unknown) => (Array.isArray ? Array.isArray(arg) : Object.prototype.toString.call(arg) === "[object Array]");

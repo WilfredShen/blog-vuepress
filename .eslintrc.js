@@ -25,7 +25,6 @@ module.exports = {
     "no-unused-vars": ["error"],
     "space-before-function-paren": "off",
     quotes: ["error", "double"],
-    // "comma-dangle": ["error", "always"],
     "comma-dangle": [
       "error",
       {

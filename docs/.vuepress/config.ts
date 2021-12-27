@@ -22,7 +22,7 @@ export default defineUserConfig<ThemeConfig>({
     avatar: {
       img: "/img/avatar.png",
       name: "柒月流火",
-      slogan: "slogan",
+      slogan: "不要在酒吧点炒饭！",
       icons: [
         {
           title: "邮箱",
@@ -34,6 +34,7 @@ export default defineUserConfig<ThemeConfig>({
           title: "GitHub",
           link: "https://github.com/WilfredShen",
           icon: IconType.github,
+          desc: "GitHub",
         },
       ],
     },

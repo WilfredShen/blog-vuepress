@@ -39,7 +39,7 @@ export interface ThemeConfig {
       title: string;
       link: string;
       icon: IconType;
-      desc: string;
+      desc?: string;
     }[];
   };
 }
