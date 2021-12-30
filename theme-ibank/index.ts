@@ -54,6 +54,7 @@ const themeIbank: ThemeFunction = (options, ctx) => {
             TagsLayout: path.resolve(__dirname, "./layouts/TagsLayout.vue"),
             ArchivesLayout: path.resolve(__dirname, "./layouts/ArchivesLayout.vue"),
             FriendsLayout: path.resolve(__dirname, "./layouts/FriendsLayout.vue"),
+            ImgIcon: path.resolve(__dirname, "./global/ImgIcon.vue"),
           },
         },
       ],

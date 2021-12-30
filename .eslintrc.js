@@ -22,8 +22,6 @@ module.exports = {
     "plugin:prettier/recommended",
   ],
   rules: {
-    "no-unused-vars": ["error"],
-    "space-before-function-paren": "off",
     quotes: ["error", "double"],
     "comma-dangle": [
       "error",

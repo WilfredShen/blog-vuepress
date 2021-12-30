@@ -2,10 +2,10 @@
 import { computed } from "vue";
 const props = defineProps<{
   img: string;
+  defaultImg?: string;
   size?: number;
   name?: string;
   radius?: number;
-  defaultImg?: string;
 }>();
 
 const iconStyle = computed(() => {

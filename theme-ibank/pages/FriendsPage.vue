@@ -2,7 +2,6 @@
 import { usePageFrontmatter } from "@vuepress/client";
 import { Friend } from "../types";
 import MainLayout from "../components/MainLayout.vue";
-import ImgIcon from "../global/ImgIcon.vue";
 
 const friends: Friend[] = usePageFrontmatter().value.links as Friend[];
 </script>
